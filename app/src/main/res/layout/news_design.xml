@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textViewLatestNews"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="4dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:onClick="mainClicked"
+            android:text="News &amp; Alerts"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/buttonViewallNews"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableRight="@drawable/ic_navigate_next_black_24dp"
+            android:onClick="mainClicked"
+            android:text="VIEW ALL"
+            android:gravity="right|center_vertical"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="#000" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/my_progressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:indeterminate="true"
+        android:progressDrawable="@drawable/prog_color" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_margin="10dp"
+        android:id="@+id/recyclerListNews"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/card_background" />
+
+
+</LinearLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/myWhite"
+    android:orientation="vertical"
+    android:padding="40dp"
+    tools:context=".TermsAndConditionsActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/impactpooltrans" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/abouttext"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:textColor="@color/myBlack"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/textviewExpore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_margin="25dp"
+        android:background="@drawable/roundbt"
+        android:gravity="center"
+        android:padding="7dp"
+        android:text="  Angaza Terms and Conditions   "
+        android:textAppearance="?android:textAppearanceSmall"
+        android:textColor="@color/myWhite" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+</LinearLayout>

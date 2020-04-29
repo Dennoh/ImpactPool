@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#244242</color>
+    <color name="colorPrimaryDark">#244242</color>
+    <color name="colorAccent">#244242</color>
+    <color name="white">#ffffff</color>
+
+    <color name="gray">#C8C8C8</color>
+    <color name="tab_indicator_gray">#c0c0c0</color>
+    <color name="intro_title_color">#000000</color>
+    <color name="intro_description_color">#656565</color>
+    <color name="colorTabLayoutDivide">#E4E4E4</color>
+    <color name="black">#0f0d0d</color>
+    <color name="colorHead">#363147</color>
+    <color name="view_line">#9f9e9e</color>
+    <color name="View_line">#EAEBED</color>
+    <color name="subText">#a2a2a2</color>
+    <color name="mainText">#454545</color>
+    <color name="red">#ef4e33</color>
+    <color name="colorTitle">#2A2A2A</color>
+    <color name="colorSubtitle">#9F9F9F</color>
+    <color name="gradient_start_color">#4c84ff</color>
+    <color name="gradient_end_color">#18a3fe</color>
+
+
+    <color name="colorGray">#495C67</color>
+
+    <color name="colorOrange">#F68159</color>
+    <color name="colorLightGray">#a6abae</color>
+
+    <color name="colorBackroundWhite">#f0f2ea</color>
+
+    <color name="colorGrey">#616161</color>
+    <color name="colorLightGrey">#757575</color>
+    <color name="colorVeryLightGrey">#E0E0E0</color>
+    <color name="colorGreyTransparent">#50000000</color>
+
+    <color name="colorPageGrey">#EEEEEE</color>
+    <color name="colorBlack">#000000</color>
+
+    <color name="colorRatingBackground">#f2f2f2</color>
+
+    <color name="overlay_dark_50">#80000000</color>
+
+    <color name="grey_40">#999999</color>
+    <color name="grey_80">#37474F</color>
+    <color name="grey_5">#f2f2f2</color>
+    <color name="overlay_light_30">#4DFFFFFF</color>
+    <color name="grey_20">#cccccc</color>
+    <color name="myBlack">#000000</color>
+    <color name="myWhite">#ffffff</color>
+</resources>

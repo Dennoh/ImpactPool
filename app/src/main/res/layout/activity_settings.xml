@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SettingsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="15dp"
+                android:text="INVITE FRIENDS"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/buttonInvite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="settingsClicked"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="5dp"
+                android:text="Shout Out (Invite a Friend)"
+                android:textAllCaps="false"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="15dp"
+                android:text="APPLICATION"
+                android:textStyle="bold" />
+
+            <Button
+                android:onClick="settingsClicked"
+
+                android:id="@+id/buttonAbout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="5dp"
+                android:text="About"
+                android:textAllCaps="false"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/buttonHelp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:onClick="settingsClicked"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="5dp"
+                android:text="Help"
+                android:textAllCaps="false"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/buttonTC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:onClick="settingsClicked"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="5dp"
+                android:text="Terms and Conditions"
+                android:textAllCaps="false"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/buttonPrivacy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:onClick="settingsClicked"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="5dp"
+                android:text="Privacy Policy"
+                android:textAllCaps="false"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/buttonLang"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:onClick="clickedd"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="5dp"
+                android:text="Change Language"
+                android:textAllCaps="false"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="15dp"
+                android:text="ACCOUNT"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/buttonUserFeedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:onClick="settingsClicked"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="5dp"
+                android:text="User Feedback"
+                android:textAllCaps="false"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/buttonReportProblem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:onClick="settingsClicked"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="5dp"
+                android:text="Report a problem"
+                android:textAllCaps="false"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/buttonLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:onClick="clickedd"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="5dp"
+                android:text="Logout"
+                android:textAllCaps="false"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
