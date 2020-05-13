@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private MyTask_Banners taskBanners;
 
 
-    private static final String URL_NEWS = "http://mbinitiative.com/seedco_reports/get_all_news.php";
+    private static final String URL_NEWS = "http://mbinitiative.com/impactpoolMobile/getNews.php";
     private List<Getter_News> customList_news;
     private String id;
     private String news_title;
@@ -178,7 +178,53 @@ public class MainActivity extends AppCompatActivity {
             case R.id.textViewLatestNews:
                 startActivity(new Intent(getApplicationContext(), NewsActivity.class));
                 break;
+        }
+    }
 
+    public void categoryClicked(View view) {
+        switch (view.getId()) {
+            case R.id.cardViewHighLearning:
+                startActivity(new Intent(getApplicationContext(), HighLearningInstitutionActivity.class));
+
+                break;
+            case R.id.cardViewOccupational:
+              //  startActivity(new Intent(getApplicationContext(), HighLearningInstitutionActivity.class));
+
+                break;
+            case R.id.cardViewUndergraduate:
+                startActivity(new Intent(getApplicationContext(), UndergraduateProgrammeActivity.class));
+
+                break;
+            case R.id.cardViewEconomicSector:
+              //  startActivity(new Intent(getApplicationContext(), HighLearningInstitutionActivity.class));
+
+                break;
+        }
+    }
+
+    public void cardClicked(View view) {
+        switch (view.getId()) {
+            case R.id.cardViewCareerDatabase:
+                Intent intentCD = new Intent(getApplicationContext(), TCDSServicesActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("servicetype", "Career Database");
+                intentCD.putExtras(bundle);
+                startActivity(intentCD);
+                break;
+            case R.id.cardViewCareerServices:
+                Intent intentCS = new Intent(getApplicationContext(), TCDSServicesActivity.class);
+                Bundle bundleCS = new Bundle();
+                bundleCS.putString("servicetype", "Career Services");
+                intentCS.putExtras(bundleCS);
+                startActivity(intentCS);
+                break;
+            case R.id.cardViewOnlineShop:
+                Intent intentOS = new Intent(getApplicationContext(), TCDSServicesActivity.class);
+                Bundle bundleOS = new Bundle();
+                bundleOS.putString("servicetype", "Online Shop");
+                intentOS.putExtras(bundleOS);
+                startActivity(intentOS);
+                break;
         }
     }
 
@@ -257,8 +303,7 @@ public class MainActivity extends AppCompatActivity {
                     news_title = jsonChildNode.optString("news_title");
                     details = jsonChildNode.optString("details");
                     posted_date = jsonChildNode.optString("posted_date");
-                    updated_on = jsonChildNode.optString("updated_on");
-                    customList_news.add(new Getter_News(id, news_title, details, posted_date, updated_on));
+                    customList_news.add(new Getter_News(id, news_title, details, posted_date));
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();

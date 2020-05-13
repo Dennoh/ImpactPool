@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/impactpooltrans" />
+        app:srcCompat="@drawable/logooo" />
 
     <TextView
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
         android:background="@drawable/roundbt"
         android:gravity="center"
         android:padding="7dp"
-        android:text="  Angaza Terms and Conditions   "
+        android:text="  TCDS Terms and Conditions   "
         android:textAppearance="?android:textAppearanceSmall"
         android:textColor="@color/myWhite" />
 

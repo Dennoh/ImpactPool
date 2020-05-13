@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/c_view"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="#e8e8e8"
+    cardview:cardCornerRadius="10dp"
+    cardview:cardElevation="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:background="@color/myWhite"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/imageViewLogo"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvProgramme"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimaryDark"
+                    android:drawableRight="@drawable/ic_navigate_next_black_24dp"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:padding="5dp"
+                    android:text="ABC COnsulting Company Limted"
+                    android:textAllCaps="true"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textColor="@color/myWhite" />
+
+                <TextView
+                    android:id="@+id/tvuniversity"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_below="@+id/locale"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:maxLines="3"
+                    android:padding="5dp"
+                    android:text="tvCompanyDetails"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textColor="#000" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvMinInstAdmPoints"
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_below="@+id/locale"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:padding="5dp"
+                        android:text="Branch : Head Office"
+                        android:textAppearance="?android:textAppearanceSmall"
+                        android:textColor="#000" />
+
+                    <TextView
+                        android:id="@+id/tvAdmCapacity"
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_below="@+id/locale"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:padding="5dp"
+                        android:text="Branch : Head Office"
+                        android:textAppearance="?android:textAppearanceSmall"
+                        android:textColor="#000" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvProgDuration"
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_below="@+id/locale"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:padding="5dp"
+                        android:text="Branch : Head Office"
+                        android:textAppearance="?android:textAppearanceSmall"
+                        android:textColor="#000" />
+
+                    <TextView
+                        android:id="@+id/tvregion"
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_below="@+id/locale"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:padding="5dp"
+                        android:text="Branch : Head Office"
+                        android:textAppearance="?android:textAppearanceSmall"
+                        android:textColor="#000" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

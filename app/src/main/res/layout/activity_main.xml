@@ -108,7 +108,7 @@
 
                         <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="140dp">
+                            android:layout_height="180dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -147,7 +147,7 @@
                                         <com.daimajia.slider.library.SliderLayout
                                             android:id="@+id/slider"
                                             android:layout_width="match_parent"
-                                            android:layout_height="150dp"
+                                            android:layout_height="180dp"
                                             android:background="@drawable/impactpooltrans">
 
                                         </com.daimajia.slider.library.SliderLayout>
@@ -171,7 +171,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Search Categories"
+                    android:text="Career Database"
                     android:textAppearance="?android:textAppearanceSmall"
                     android:textColor="@color/myBlack" />
 
@@ -189,277 +189,221 @@
                     android:layout_marginBottom="5dp"
                     android:orientation="horizontal">
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        app:cardCornerRadius="7dp"
-                        cardview:cardElevation="15dp">
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cardViewEconomicSector"
+                                android:onClick="categoryClicked"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@color/white"
-                                android:orientation="vertical">
+                                android:layout_margin="5dp"
+                                app:cardCornerRadius="7dp"
+                                cardview:cardElevation="15dp">
 
-                                <ImageView
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
-                                    android:layout_weight="1"
-                                    android:padding="10dp"
-                                    android:tint="@color/colorPrimaryDark"
-                                    app:srcCompat="@drawable/ic_blur_on_black_24dp" />
-
-                                <TextView
+                                <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@color/colorPrimaryDark"
-                                    android:gravity="center"
-                                    android:maxLines="1"
-                                    android:padding="5dp"
-                                    android:text="Career database"
-                                    android:textAppearance="?android:textAppearanceSmall"
-                                    android:textColor="@color/white" />
+                                    android:orientation="vertical">
 
-                            </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@color/white"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="80dp"
+                                            android:layout_height="80dp"
+                                            android:layout_gravity="center"
+                                            android:layout_weight="1"
+                                            android:padding="10dp"
+                                            android:tint="@color/colorPrimaryDark"
+                                            app:srcCompat="@drawable/ic_blur_on_black_24dp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:background="@color/colorPrimaryDark"
+                                            android:gravity="center"
+                                            android:maxLines="1"
+                                            android:padding="5dp"
+                                            android:text="Economic Sectors"
+                                            android:textAppearance="?android:textAppearanceSmall"
+                                            android:textColor="@color/white" />
+
+                                    </LinearLayout>
 
 
-                        </LinearLayout>
+                                </LinearLayout>
 
-                    </androidx.cardview.widget.CardView>
+                            </androidx.cardview.widget.CardView>
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        app:cardCornerRadius="7dp"
-                        cardview:cardElevation="15dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cardViewHighLearning"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@color/white"
-                                android:orientation="vertical">
+                                android:layout_margin="5dp"
+                                android:onClick="categoryClicked"
+                                app:cardCornerRadius="7dp"
+                                cardview:cardElevation="15dp">
 
-                                <ImageView
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
-                                    android:layout_weight="1"
-                                    android:padding="10dp"
-                                    android:tint="@color/colorPrimaryDark"
-                                    app:srcCompat="@drawable/ic_blur_on_black_24dp" />
-
-                                <TextView
+                                <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@color/colorPrimaryDark"
-                                    android:gravity="center"
-                                    android:maxLines="1"
-                                    android:padding="5dp"
-                                    android:text="Career database"
-                                    android:textAppearance="?android:textAppearanceSmall"
-                                    android:textColor="@color/white" />
+                                    android:orientation="vertical">
 
-                            </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@color/white"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="80dp"
+                                            android:layout_height="80dp"
+                                            android:layout_gravity="center"
+                                            android:layout_weight="1"
+                                            android:padding="10dp"
+                                            android:tint="@color/colorPrimaryDark"
+                                            app:srcCompat="@drawable/ic_blur_on_black_24dp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:background="@color/colorPrimaryDark"
+                                            android:gravity="center"
+                                            android:maxLines="1"
+                                            android:padding="5dp"
+                                            android:text="High Learning Institutions"
+                                            android:textAppearance="?android:textAppearanceSmall"
+                                            android:textColor="@color/white" />
+
+                                    </LinearLayout>
 
 
-                        </LinearLayout>
+                                </LinearLayout>
 
-                    </androidx.cardview.widget.CardView>
+                            </androidx.cardview.widget.CardView>
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        app:cardCornerRadius="7dp"
-                        cardview:cardElevation="15dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cardViewOccupational"
+                                android:onClick="categoryClicked"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@color/white"
-                                android:orientation="vertical">
+                                android:layout_margin="5dp"
+                                app:cardCornerRadius="7dp"
+                                cardview:cardElevation="15dp">
 
-                                <ImageView
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
-                                    android:layout_weight="1"
-                                    android:padding="10dp"
-                                    android:tint="@color/colorPrimaryDark"
-                                    app:srcCompat="@drawable/ic_blur_on_black_24dp" />
-
-                                <TextView
+                                <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@color/colorPrimaryDark"
-                                    android:gravity="center"
-                                    android:maxLines="1"
-                                    android:padding="5dp"
-                                    android:text="Career database"
-                                    android:textAppearance="?android:textAppearanceSmall"
-                                    android:textColor="@color/white" />
+                                    android:orientation="vertical">
 
-                            </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:background="@color/white"
+                                        android:orientation="vertical">
+
+                                        <HorizontalScrollView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1">
+
+                                            <LinearLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="match_parent"
+                                                android:orientation="vertical">
+
+                                            </LinearLayout>
+                                        </HorizontalScrollView>
+
+                                        <ImageView
+                                            android:layout_width="80dp"
+                                            android:layout_height="80dp"
+                                            android:layout_gravity="center"
+                                            android:layout_weight="1"
+                                            android:padding="10dp"
+                                            android:tint="@color/colorPrimaryDark"
+                                            app:srcCompat="@drawable/ic_blur_on_black_24dp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:background="@color/colorPrimaryDark"
+                                            android:gravity="center"
+                                            android:maxLines="1"
+                                            android:padding="5dp"
+                                            android:text="Occupational Pathways"
+                                            android:textAppearance="?android:textAppearanceSmall"
+                                            android:textColor="@color/white" />
+
+                                    </LinearLayout>
 
 
-                        </LinearLayout>
+                                </LinearLayout>
 
-                    </androidx.cardview.widget.CardView>
+                            </androidx.cardview.widget.CardView>
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        app:cardCornerRadius="7dp"
-                        cardview:cardElevation="15dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cardViewUndergraduate"
+                                android:onClick="categoryClicked"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@color/white"
-                                android:orientation="vertical">
+                                android:layout_margin="5dp"
+                                app:cardCornerRadius="7dp"
+                                cardview:cardElevation="15dp">
 
-                                <ImageView
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
-                                    android:layout_weight="1"
-                                    android:padding="10dp"
-                                    android:tint="@color/colorPrimaryDark"
-                                    app:srcCompat="@drawable/ic_blur_on_black_24dp" />
-
-                                <TextView
+                                <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@color/colorPrimaryDark"
-                                    android:gravity="center"
-                                    android:maxLines="1"
-                                    android:padding="5dp"
-                                    android:text="Career database"
-                                    android:textAppearance="?android:textAppearanceSmall"
-                                    android:textColor="@color/white" />
+                                    android:orientation="vertical">
 
-                            </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@color/white"
+                                        android:orientation="vertical">
+
+                                        <ImageView
+                                            android:layout_width="80dp"
+                                            android:layout_height="80dp"
+                                            android:layout_gravity="center"
+                                            android:layout_weight="1"
+                                            android:padding="10dp"
+                                            android:tint="@color/colorPrimaryDark"
+                                            app:srcCompat="@drawable/ic_blur_on_black_24dp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:background="@color/colorPrimaryDark"
+                                            android:gravity="center"
+                                            android:maxLines="1"
+                                            android:padding="5dp"
+                                            android:text="Undergraduate Programme"
+                                            android:textAppearance="?android:textAppearanceSmall"
+                                            android:textColor="@color/white" />
+
+                                    </LinearLayout>
 
 
+                                </LinearLayout>
+
+                            </androidx.cardview.widget.CardView>
                         </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        app:cardCornerRadius="7dp"
-                        cardview:cardElevation="15dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@color/white"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
-                                    android:layout_weight="1"
-                                    android:padding="10dp"
-                                    android:tint="@color/colorPrimaryDark"
-                                    app:srcCompat="@drawable/ic_blur_on_black_24dp" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@color/colorPrimaryDark"
-                                    android:gravity="center"
-                                    android:maxLines="1"
-                                    android:padding="5dp"
-                                    android:text="Career database"
-                                    android:textAppearance="?android:textAppearanceSmall"
-                                    android:textColor="@color/white" />
-
-                            </LinearLayout>
-
-
-                        </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        app:cardCornerRadius="7dp"
-                        cardview:cardElevation="15dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@color/white"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
-                                    android:layout_weight="1"
-                                    android:padding="10dp"
-                                    android:tint="@color/colorPrimaryDark"
-                                    app:srcCompat="@drawable/ic_blur_on_black_24dp" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:background="@color/colorPrimaryDark"
-                                    android:gravity="center"
-                                    android:maxLines="1"
-                                    android:padding="5dp"
-                                    android:text="Career database"
-                                    android:textAppearance="?android:textAppearanceSmall"
-                                    android:textColor="@color/white" />
-
-                            </LinearLayout>
-
-
-                        </LinearLayout>
-
-                    </androidx.cardview.widget.CardView>
-
-
+                    </HorizontalScrollView>
                 </LinearLayout>
 
                 <include layout="@layout/news_design" />
@@ -476,7 +420,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp"
-                        android:text="ImpactPool Services"
+                        android:text="TCDS Services"
                         android:textAppearance="?android:textAppearanceSmall"
                         android:textColor="@color/myBlack" />
 
@@ -495,6 +439,8 @@
                         android:orientation="horizontal">
 
                         <androidx.cardview.widget.CardView
+                            android:onClick="cardClicked"
+                            android:id="@+id/cardViewCareerDatabase"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -516,7 +462,6 @@
                                     android:orientation="vertical">
 
                                     <ImageView
-                                        android:id="@+id/imageView"
                                         android:layout_width="90dp"
                                         android:layout_height="90dp"
                                         android:layout_gravity="center"
@@ -546,6 +491,8 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
+                            android:onClick="cardClicked"
+                            android:id="@+id/cardViewCareerServices"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -596,6 +543,8 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
+                            android:onClick="cardClicked"
+                            android:id="@+id/cardViewOnlineShop"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -664,7 +613,6 @@
         android:layout_marginTop="10dp">
 
         <LinearLayout
-            android:id="@+id/linearBottom"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_alignParentBottom="true"
@@ -704,7 +652,6 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/account"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -733,7 +680,6 @@
 
 
             <LinearLayout
-                android:id="@+id/favourite"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -763,7 +709,6 @@
 
 
             <LinearLayout
-                android:id="@+id/settings"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

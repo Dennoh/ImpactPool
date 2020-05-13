@@ -7,10 +7,10 @@
     android:padding="15dp">
 
     <ImageView
-        android:layout_width="290dp"
-        android:layout_height="210dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/impactpooltrans" />
+        app:srcCompat="@drawable/logooo" />
 
     <TextView
         android:layout_width="match_parent"

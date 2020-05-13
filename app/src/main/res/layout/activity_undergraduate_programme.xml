@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".NewsActivity">
+    tools:context=".UndergraduateProgrammeActivity">
 
     <ProgressBar
         android:id="@+id/my_progressBar"
@@ -17,6 +17,16 @@
         android:indeterminate="true"
         android:progressDrawable="@drawable/prog_color" />
 
+    <TextView
+        android:id="@+id/textViewSearchResults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_youtube_searched_for_black_24dp"
+        android:padding="5dp"
+        android:text="Search Results"
+        android:textColor="@color/colorPrimaryDark"
+        android:visibility="gone" />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe"
         android:layout_width="fill_parent"
@@ -24,9 +34,10 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerScratchStories"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="#09000000" />
+            android:id="@+id/recyclerListLearningInst"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff" />
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

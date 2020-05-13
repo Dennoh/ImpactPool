@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
-        app:srcCompat="@drawable/impactpooltrans" />
+        app:srcCompat="@drawable/logooo" />
 
     <TextView
         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
         android:background="@drawable/roundbt"
         android:gravity="center"
         android:padding="7dp"
-        android:text="  ImpactPool Privacy Policy   "
+        android:text="  TCDS Privacy Policy   "
         android:textAppearance="?android:textAppearanceSmall"
         android:textColor="@color/myWhite" />
 

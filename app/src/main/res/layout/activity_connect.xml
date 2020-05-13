@@ -1,9 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ConnectActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:id="@+id/downloadImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@drawable/logooo" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingBottom="5dp"
+        android:text="Connect with Us"
+        android:textColor="@color/myBlack"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="40dp"
+        android:layout_height="3dp"
+        android:layout_gravity="center"
+        android:background="@color/myBlack" />
+
+
+    <TextView
+        android:id="@+id/tvWebsite"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/roundbt"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:onClick="tvclicked"
+        android:padding="10dp"
+        android:text="website"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/myWhite" />
+
+    <TextView
+        android:id="@+id/tvfacebook"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/roundbt"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:onClick="tvclicked"
+        android:padding="10dp"
+        android:text="facebook"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/myWhite" />
+
+
+    <TextView
+        android:id="@+id/tvinstagram"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/roundbt"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:onClick="tvclicked"
+        android:padding="10dp"
+        android:text="Instagram"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/myWhite" />
+
+
+    <TextView
+        android:id="@+id/tvmobile"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/roundbt"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:onClick="tvclicked"
+        android:padding="10dp"
+        android:text="mobile"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/myWhite" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+</LinearLayout>

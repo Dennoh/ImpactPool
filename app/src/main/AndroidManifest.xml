@@ -15,10 +15,30 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".UnderGraduateDetailsActivity"
+            android:label="Programme Details"
+            android:parentActivityName=".UndergraduateProgrammeActivity"></activity>
+        <activity
+            android:name=".UndergraduateProgrammeActivity"
+            android:label="Undergraduate  Programmes"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".TCDSServicesActivity"
+            android:label="TCDS Services"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".LearningInstDetailsActivity"
+            android:label="Details"
+            android:parentActivityName=".HighLearningInstitutionActivity" />
+        <activity
+            android:name=".HighLearningInstitutionActivity"
+            android:label="High Learning"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".TermsAndConditionsActivity"
             android:label="Usage Terms"
             android:parentActivityName=".SettingsActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".PrivacyPolicyActivity"
             android:label="Privacy Policy"

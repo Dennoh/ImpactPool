@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">ImpactPool</string>
+    <string name="app_name">TCDS</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="abouttext">© 2020 - 2022 ImpactPool</string>
+    <string name="abouttext">© 2020 - 2022 TCDS</string>
     <string name="report">REPORT NOW</string>
+    <string name="agro_spinner_prompt">Select Agro Dealer</string>
+
 </resources>

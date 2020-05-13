@@ -7,15 +7,13 @@ public class Getter_News {
     private String news_tittle;
     private String news_details;
     private String news_postedOn;
-    private String news_updatedOn;
     private String id;
 
-    public Getter_News(String id, String news_tittle, String news_details, String news_postedOn, String news_updatedOn) {
+    public Getter_News(String id, String news_tittle, String news_details, String news_postedOn) {
         this.id = id;
         this.news_tittle = news_tittle;
         this.news_details = news_details;
         this.news_postedOn = news_postedOn;
-        this.news_updatedOn = news_updatedOn;
     }
 
     public Getter_News() {
@@ -38,10 +36,6 @@ public class Getter_News {
         return news_postedOn;
     }
 
-    public String getNews_updatedOn() {
-        return news_updatedOn;
-    }
-
 
     public void setNews_tittle(String news_tittle) {
         this.news_tittle = news_tittle;
@@ -53,10 +47,6 @@ public class Getter_News {
 
     public void setNews_postedOn(String news_postedOn) {
         this.news_postedOn = news_postedOn;
-    }
-
-    public void setNews_updatedOn(String news_updatedOn) {
-        this.news_updatedOn = news_updatedOn;
     }
 
     public void setId(String id) {

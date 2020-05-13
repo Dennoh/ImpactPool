@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="Invite"
-        app:showAsAction="never" />
+        android:id="@+id/menuCategory"
+        android:title="Search"
+        app:showAsAction="always" />
 </menu>

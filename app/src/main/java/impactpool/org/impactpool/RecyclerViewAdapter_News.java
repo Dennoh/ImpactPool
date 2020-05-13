@@ -39,12 +39,6 @@ public class RecyclerViewAdapter_News extends RecyclerView.Adapter<RecyclerViewA
 
     public void onBindViewHolder(final StockViewHolder paramStockViewHolder, int paramInt) {
         paramStockViewHolder.tvNewsDetails.setText(productGetters.get(paramInt).getNews_details());
-        paramStockViewHolder.tvNewsDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                context.startActivity(new Intent(context, NewsActivity.class));
-            }
-        });
         SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date MyDate = null;
         try {
@@ -54,12 +48,10 @@ public class RecyclerViewAdapter_News extends RecyclerView.Adapter<RecyclerViewA
         }
         newDateFormat.applyPattern("EE d MMM yyyy");
         paramStockViewHolder.tvPostedOn.setText("  " + newDateFormat.format(MyDate));
-
-        paramStockViewHolder.imageViewLogo.setOnClickListener(new View.OnClickListener() {
+        paramStockViewHolder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                context.startActivity(new Intent(context, NewsActivity.class));
-
+                context.startActivity(new Intent(context, NewsActivity.class));
             }
         });
     }

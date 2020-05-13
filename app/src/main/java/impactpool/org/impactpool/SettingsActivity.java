@@ -46,7 +46,7 @@ public class SettingsActivity extends AppCompatActivity {
             case R.id.buttonInvite:
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, "Hey am using ImpactPool App for my career issues. Download it today \n\nhttps://play.google.com/store/apps/details?id=com.angazadirectory.www.angazadirectory&hl=en");
+                intent.putExtra(Intent.EXTRA_TEXT, "Hey am using TCDS App for my career issues. Download it today \n\nhttps://play.google.com/store/apps/details?id=com.angazadirectory.www.angazadirectory&hl=en");
                 startActivity(Intent.createChooser(intent, "Invite Friends"));
                 break;
             case R.id.buttonAbout:

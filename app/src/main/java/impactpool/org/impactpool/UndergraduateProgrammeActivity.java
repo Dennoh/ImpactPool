@@ -12,6 +12,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -33,16 +34,14 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsActivity extends AppCompatActivity {
-
-    private static final String URL_NEWS = "http://mbinitiative.com/impactpoolMobile/getNews.php";
-    private List<Getter_News> customList_news;
-    private String id;
+public class UndergraduateProgrammeActivity extends AppCompatActivity {
+    private static String URL_UNDERGRADUATE = "http://mbinitiative.com/impactpoolMobile/getProgrammes.php";
+    private List<Getter_Undergraduate> customList_undergraduateprog;
 
     private RecyclerView recyclerView;
-    private RecyclerViewAdapter_NewsMore recyclerViewAdapterNews;
+    private RecyclerViewAdapter_Undergraduate recyclerViewAdapter_undergraduateprog;
     SwipeRefreshLayout swipeRefreshLayout;
-    private MyTask_News taskNews;
+    private MyTask_Undergraduateprog taskUndergraduateprog;
     private java.net.URL url;
     private HttpURLConnection urlConnection;
     String receivedstate;
@@ -52,40 +51,37 @@ public class NewsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news);
+        setContentView(R.layout.activity_undergraduate_programme);
         progressBar = (ProgressBar) findViewById(R.id.my_progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerScratchStories);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerListLearningInst);
         recyclerView.setHasFixedSize(true);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(NewsActivity.this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(UndergraduateProgrammeActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);
-
-
 
         receivedstate = Boolean.toString(haveNetworkConnection());
         if (receivedstate.equalsIgnoreCase("true")) {
 
-            accessWebService_news();
+            accessWebService_Undergraduateprog();
             swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
                     progressBar.setVisibility(View.VISIBLE);
                     progressBar.setIndeterminate(true);
-                    accessWebService_news();
+                    accessWebService_Undergraduateprog();
                     swipeRefreshLayout.setRefreshing(false);
                 }
             });
         } else {
             progressBar.setIndeterminate(false);
             progressBar.setVisibility(View.GONE);
-
-            snack = Snackbar.make(NewsActivity.this.findViewById(android.R.id.content), "No internet. Check Network Settings!", Snackbar.LENGTH_LONG).setAction("RETRY", new View.OnClickListener() {
+            snack = Snackbar.make(UndergraduateProgrammeActivity.this.findViewById(android.R.id.content), "No internet. Check Network Settings!", Snackbar.LENGTH_LONG).setAction("RETRY", new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     snack.dismiss();
-                    startActivity(new Intent(NewsActivity.this, MainActivity.class));
+                    startActivity(new Intent(UndergraduateProgrammeActivity.this, MainActivity.class));
                 }
             });
             View v = snack.getView();
@@ -95,10 +91,12 @@ public class NewsActivity extends AppCompatActivity {
             snack.setDuration(Snackbar.LENGTH_INDEFINITE);
             snack.show();
         }
+
+
     }
 
 
-    private class MyTask_News extends AsyncTask<String, Void, List> {
+    private class MyTask_Undergraduateprog extends AsyncTask<String, Void, List> {
 
         @Override
         protected List doInBackground(String... params) {
@@ -110,17 +108,22 @@ public class NewsActivity extends AppCompatActivity {
 
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 StringBuilder jsonResult = inputStreamToString(in);
-                customList_news = new ArrayList<>();
+                customList_undergraduateprog = new ArrayList<>();
                 JSONObject jsonResponse = new JSONObject(jsonResult.toString());
-                JSONArray jsonMainNode = jsonResponse.optJSONArray("news_jsondata");
+                JSONArray jsonMainNode = jsonResponse.optJSONArray("programmes_jsondata");
                 for (int i = 0; i < jsonMainNode.length(); i++) {
                     JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-                    id = jsonChildNode.optString("id");
-                    String news_title = jsonChildNode.optString("news_title");
-                    String details = jsonChildNode.optString("details");
-                    String posted_date = jsonChildNode.optString("posted_date");
+                    String id = jsonChildNode.optString("id");
+                    String Programme = jsonChildNode.optString("Programme");
+                    String Code = jsonChildNode.optString("Code");
+                    String AdmReq = jsonChildNode.optString("AdmReq");
+                    String MinInstAdmPoints = jsonChildNode.optString("MinInstAdmPoints");
+                    String AdmCapacity = jsonChildNode.optString("AdmCapacity");
+                    String ProgDuration = jsonChildNode.optString("ProgDuration");
+                    String university = jsonChildNode.optString("university");
+                    String region = jsonChildNode.optString("region");
 
-                    customList_news.add(new Getter_News(id, news_title, details, posted_date));
+                    customList_undergraduateprog.add(new Getter_Undergraduate(id, Programme, Code, AdmReq, MinInstAdmPoints, AdmCapacity, ProgDuration, university, region));
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -129,7 +132,7 @@ public class NewsActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return customList_news;
+            return customList_undergraduateprog;
         }
 
         private StringBuilder inputStreamToString(InputStream is) {
@@ -148,23 +151,24 @@ public class NewsActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List list) {
-            ListDrawer_News(list);
+            ListDrawer_Undergraduateprog(list);
             progressBar.setIndeterminate(false);
             progressBar.setVisibility(View.GONE);
         }
     }
 
-    private void accessWebService_news() {
-        taskNews = new MyTask_News();
-        taskNews.execute(new String[]{URL_NEWS});
+    private void accessWebService_Undergraduateprog() {
+        taskUndergraduateprog = new MyTask_Undergraduateprog();
+        taskUndergraduateprog.execute(new String[]{URL_UNDERGRADUATE});
     }
 
-    public void ListDrawer_News(List<Getter_News> customList) {
-        recyclerViewAdapterNews = new RecyclerViewAdapter_NewsMore(customList, NewsActivity.this);
-        recyclerViewAdapterNews.notifyDataSetChanged();
-        recyclerView.setAdapter(recyclerViewAdapterNews);
-    }
 
+    public void ListDrawer_Undergraduateprog(List<Getter_Undergraduate> customList) {
+        //textViewSearchResults.setText(" " + customList.size() + " Results Found");
+        recyclerViewAdapter_undergraduateprog = new RecyclerViewAdapter_Undergraduate(customList, UndergraduateProgrammeActivity.this);
+        recyclerViewAdapter_undergraduateprog.notifyDataSetChanged();
+        recyclerView.setAdapter(recyclerViewAdapter_undergraduateprog);
+    }
 
     private boolean haveNetworkConnection() {
         boolean haveConnectedWifi = false;
@@ -182,5 +186,12 @@ public class NewsActivity extends AppCompatActivity {
         }
         return haveConnectedWifi || haveConnectedMobile;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.learningmenu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
 
 }
