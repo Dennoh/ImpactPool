@@ -23,7 +23,7 @@
                 android:id="@+id/textViewDealerName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="7dp"
+                android:layout_marginLeft="3dp"
                 android:background="@color/myWhite"
                 android:gravity="center_vertical"
                 android:padding="10dp"

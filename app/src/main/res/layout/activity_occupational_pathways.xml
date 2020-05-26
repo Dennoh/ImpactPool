@@ -5,38 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".HighLearningInstitutionActivity">
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="2dp"
-        android:visibility="gone"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textViewClickToSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_search_black_24dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:paddingRight="10dp"
-            android:paddingBottom="5dp"
-            android:text="Click to Search" />
-
-        <ImageView
-            android:id="@+id/imageViewCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            android:layout_marginRight="13dp"
-            app:srcCompat="@drawable/ic_cancel_black_24dp" />
-    </LinearLayout>
+    tools:context=".OccupationalPathwaysActivity">
 
     <LinearLayout
         android:id="@+id/linearSearchDesign"
@@ -64,11 +33,11 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
                         android:layout_weight="1"
                         android:padding="5dp"
-                        android:textSize="12dp"
-                        android:layout_marginLeft="2dp"
-                        android:text="Main Sector" />
+                        android:text="Major Occupations"
+                        android:textSize="12dp" />
 
 
                 </LinearLayout>
@@ -90,10 +59,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
                     android:layout_marginLeft="2dp"
-                    android:textSize="12dp"
-                    android:text="Region" />
+                    android:padding="5dp"
+                    android:text="Sub Major Occupation"
+                    android:textSize="12dp" />
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/spinnerRegion"
@@ -113,10 +82,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:textSize="12dp"
                     android:layout_marginLeft="2dp"
-                    android:text="District" />
+                    android:padding="5dp"
+                    android:text="Minor Occupation"
+                    android:textSize="12dp" />
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/spinnerDistrict"
@@ -126,7 +95,9 @@
                     android:prompt="@string/agro_spinner_prompt" />
             </LinearLayout>
 
+
         </LinearLayout>
+
 
 <!--        <TextView-->
 <!--            android:id="@+id/textviewSearch"-->
@@ -144,7 +115,6 @@
 <!--            android:textStyle="bold" />-->
 
     </LinearLayout>
-
 
     <ProgressBar
         android:id="@+id/my_progressBar"

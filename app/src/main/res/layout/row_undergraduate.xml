@@ -47,6 +47,7 @@
                     android:textColor="@color/myWhite" />
 
                 <TextView
+                    android:drawableLeft="@drawable/iconmonstr_school_22_24"
                     android:id="@+id/tvuniversity"
                     android:layout_width="match_parent"
                     android:layout_height="fill_parent"
@@ -73,6 +74,7 @@
                         android:gravity="center_vertical"
                         android:maxLines="1"
                         android:padding="5dp"
+                        android:drawableLeft="@drawable/iconmonstr_stop_7_16"
                         android:text="Branch : Head Office"
                         android:textAppearance="?android:textAppearanceSmall"
                         android:textColor="#000" />
@@ -86,6 +88,7 @@
                         android:gravity="center_vertical"
                         android:maxLines="1"
                         android:padding="5dp"
+                        android:drawableLeft="@drawable/iconmonstr_stop_7_16"
                         android:text="Branch : Head Office"
                         android:textAppearance="?android:textAppearanceSmall"
                         android:textColor="#000" />
@@ -106,6 +109,7 @@
                         android:gravity="center_vertical"
                         android:maxLines="1"
                         android:padding="5dp"
+                        android:drawableLeft="@drawable/iconmonstr_stop_7_16"
                         android:text="Branch : Head Office"
                         android:textAppearance="?android:textAppearanceSmall"
                         android:textColor="#000" />
@@ -119,6 +123,7 @@
                         android:gravity="center_vertical"
                         android:maxLines="1"
                         android:padding="5dp"
+                        android:drawableLeft="@drawable/iconmonstr_stop_7_16"
                         android:text="Branch : Head Office"
                         android:textAppearance="?android:textAppearanceSmall"
                         android:textColor="#000" />

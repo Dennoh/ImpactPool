@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="impactpool.org.impactpool">
+    package="tcds.or.tcdsapp">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,9 +15,21 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".PhoneVerificationActivity"
+            android:theme="@style/MyAppTheme" />
+        <activity android:name=".RegistrationActivity" />
+        <activity
+            android:name=".OccupationalPathwaysActivity"
+            android:label="Occupational Pathways"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".EconomicSectorsActivity"
+            android:label="Economic Sectors"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".UnderGraduateDetailsActivity"
             android:label="Programme Details"
-            android:parentActivityName=".UndergraduateProgrammeActivity"></activity>
+            android:parentActivityName=".UndergraduateProgrammeActivity" />
         <activity
             android:name=".UndergraduateProgrammeActivity"
             android:label="Undergraduate  Programmes"
@@ -32,7 +44,7 @@
             android:parentActivityName=".HighLearningInstitutionActivity" />
         <activity
             android:name=".HighLearningInstitutionActivity"
-            android:label="High Learning"
+            android:label="High Learning Institutions"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".TermsAndConditionsActivity"
@@ -96,6 +108,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".StarterActivity" />
 
         <uses-library
             android:name="org.apache.http.legacy"

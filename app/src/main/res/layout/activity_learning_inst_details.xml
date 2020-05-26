@@ -9,9 +9,103 @@
     tools:context=".LearningInstDetailsActivity">
 
     <TextView
+        android:id="@+id/textViewTittle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="TextView"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Main Sector"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/textViewSector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:drawableLeft="@drawable/iconmonstr_stop_7_16"
+        android:text="Main Sector Here"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="District"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/textViewDistrict"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="District Here"
+        android:drawableLeft="@drawable/iconmonstr_stop_7_16"
+        android:textColor="@color/colorPrimaryDark" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Region"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:layout_width="60dp"
+        android:layout_height="2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/textViewRegion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Region Here"
+        android:drawableLeft="@drawable/iconmonstr_stop_7_16"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
         android:id="@+id/textViewDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:text="TextView"
         android:textColor="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/textviewExpore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_margin="25dp"
+        android:background="@drawable/roundbt"
+        android:gravity="center"
+        android:padding="7dp"
+        android:text="  VISIT US FOR MORE   "
+        android:textAppearance="?android:textAppearanceSmall"
+        android:textColor="@color/myWhite" />
+
 </LinearLayout>

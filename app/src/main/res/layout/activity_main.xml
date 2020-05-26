@@ -198,12 +198,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:orientation="horizontal">
+
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/cardViewEconomicSector"
-                                android:onClick="categoryClicked"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="5dp"
+                                android:onClick="categoryClicked"
                                 app:cardCornerRadius="7dp"
                                 cardview:cardElevation="15dp">
 
@@ -296,10 +297,10 @@
 
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/cardViewOccupational"
-                                android:onClick="categoryClicked"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="5dp"
+                                android:onClick="categoryClicked"
                                 app:cardCornerRadius="7dp"
                                 cardview:cardElevation="15dp">
 
@@ -357,10 +358,10 @@
 
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/cardViewUndergraduate"
-                                android:onClick="categoryClicked"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="5dp"
+                                android:onClick="categoryClicked"
                                 app:cardCornerRadius="7dp"
                                 cardview:cardElevation="15dp">
 
@@ -439,12 +440,12 @@
                         android:orientation="horizontal">
 
                         <androidx.cardview.widget.CardView
-                            android:onClick="cardClicked"
                             android:id="@+id/cardViewCareerDatabase"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:layout_weight="1"
+                            android:onClick="cardClicked"
                             app:cardCornerRadius="10dp"
                             cardview:cardElevation="20dp">
 
@@ -491,12 +492,12 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:onClick="cardClicked"
                             android:id="@+id/cardViewCareerServices"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:layout_weight="1"
+                            android:onClick="cardClicked"
                             app:cardCornerRadius="10dp"
                             cardview:cardElevation="20dp">
 
@@ -543,12 +544,12 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:onClick="cardClicked"
                             android:id="@+id/cardViewOnlineShop"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:layout_weight="1"
+                            android:onClick="cardClicked"
                             app:cardCornerRadius="10dp"
                             cardview:cardElevation="20dp">
 
@@ -673,7 +674,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
                     android:onClick="mainClicked"
-                    android:text="Coaching"
+                    android:text="Training"
                     android:textColor="@color/myWhite"
                     android:textSize="12dp" />
             </LinearLayout>

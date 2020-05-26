@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "969798365832",
+    "firebase_url": "https://tcds-70c35.firebaseio.com",
+    "project_id": "tcds-70c35",
+    "storage_bucket": "tcds-70c35.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969798365832:android:2babc37e4c3701c820e53d",
+        "android_client_info": {
+          "package_name": "tcds.or.tcdsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969798365832-tqfupqd2s76eaj8pmik3q4pjb369olgu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaorsKfDNV3BQ9fl01EP2yDIWtF-SMAzw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "969798365832-tqfupqd2s76eaj8pmik3q4pjb369olgu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
