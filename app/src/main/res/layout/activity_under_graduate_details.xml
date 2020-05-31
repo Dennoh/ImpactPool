@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".UnderGraduateDetailsActivity">
+    tools:context=".mainapp.UnderGraduateDetailsActivity">
 
 
     <androidx.cardview.widget.CardView xmlns:cardview="http://schemas.android.com/apk/res-auto"

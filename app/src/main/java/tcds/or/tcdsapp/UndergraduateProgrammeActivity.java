@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import tcds.or.tcdsapp.mainapp.Getter_Undergraduate;
+import tcds.or.tcdsapp.mainapp.MainActivity;
+import tcds.or.tcdsapp.mainapp.RecyclerViewAdapter_Undergraduate;
 
 import android.content.Context;
 import android.content.Intent;
@@ -270,7 +273,7 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
                     String region = jsonChildNode.optString("region");
                     String sector = jsonChildNode.optString("sector");
 
-                    customList_undergraduateprog.add(new Getter_Undergraduate(id, Programme, Code, AdmReq, MinInstAdmPoints, AdmCapacity, ProgDuration, university, region,sector));
+                    customList_undergraduateprog.add(new Getter_Undergraduate(id, Programme, Code, AdmReq, MinInstAdmPoints, AdmCapacity, ProgDuration, university, region, sector));
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -356,6 +359,7 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
 
 
     String php_response_sector;
+
     class GetSectors extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {

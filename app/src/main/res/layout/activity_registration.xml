@@ -7,7 +7,7 @@
     android:background="#fff"
     android:gravity="center_vertical|center_horizontal"
     android:orientation="vertical"
-    tools:context=".PhoneVerificationActivity"
+    tools:context=".mainapp.PhoneVerificationActivity"
     tools:layout_editor_absoluteY="81dp">
 
     <LinearLayout

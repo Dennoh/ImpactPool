@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:padding="3dp"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:textAlignment="center"
+        android:text="ADD TO CART"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_marginTop="35dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+
+
+        <ImageView
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+
+            android:id="@+id/img_cart_product"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+
+                <TextView
+
+                    android:textStyle="bold"
+                    android:layout_marginRight="5dp"
+                    android:id="@+id/txt_cart_product_name"
+                    android:layout_weight="6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jeans"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+                <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_gravity="end"
+                    android:layout_width="80dp"
+                    app:initialNumber="1"
+                    app:finalNumber="20"
+                    android:id="@+id/txt_count"
+                    android:layout_height="30dp"
+                    app:backGroundColor="@color/colorPrimary"
+
+                    >
+
+                </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+
+                    android:textStyle="bold"
+                    android:id="@+id/txt_cart_product_price"
+                    android:layout_weight="7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tsh 67999"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_margin="5dp"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <Button
+                    android:textStyle="bold"
+                    android:layout_margin="5dp"
+                    android:background="@color/colorPrimary"
+                    android:id="@+id/buttonOkay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Confirm"
+                    android:textColor="#fff" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

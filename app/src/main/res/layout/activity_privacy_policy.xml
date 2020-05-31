@@ -7,7 +7,7 @@
     android:background="@color/myWhite"
     android:orientation="vertical"
     android:padding="40dp"
-    tools:context=".PrivacyPolicyActivity">
+    tools:context=".mainapp.PrivacyPolicyActivity">
 
     <TextView
         android:layout_width="match_parent"
