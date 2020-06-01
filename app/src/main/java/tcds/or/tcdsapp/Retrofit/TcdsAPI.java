@@ -12,6 +12,7 @@ import retrofit2.http.POST;
 import tcds.or.tcdsapp.Model.Banner;
 import tcds.or.tcdsapp.Model.Book;
 import tcds.or.tcdsapp.Model.CheckUserResponse;
+import tcds.or.tcdsapp.Model.Order;
 import tcds.or.tcdsapp.Model.User;
 
 
@@ -28,6 +29,11 @@ public interface TcdsAPI {
     @POST("getuser.php")//getuser.php
     Call<User> getUserInformation(
             @Field("phonenumber") String phone);
+
+    @FormUrlEncoded
+    @POST("getorder.php")
+    Observable <List<Order>> getOrder(@Field("userPhone") String userPhone,
+                                      @Field("status") String status);
 
     @FormUrlEncoded
     @POST("register.php")

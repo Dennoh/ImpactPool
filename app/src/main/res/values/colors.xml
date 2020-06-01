@@ -13,4 +13,16 @@
 
     <color name="myBlack">#000000</color>
     <color name="myWhite">#ffffff</color>
+
+
+
+    <color name="red">#ef4e33</color>
+
+    <color name="overlay_dark_50">#80000000</color>
+
+    <color name="grey_40">#999999</color>
+    <color name="grey_80">#37474F</color>
+    <color name="grey_5">#f2f2f2</color>
+    <color name="overlay_light_30">#4DFFFFFF</color>
+    <color name="grey_20">#cccccc</color>
 </resources>

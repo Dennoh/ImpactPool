@@ -14,9 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ThankYouActivity"></activity>
+        <activity android:name=".OrderDetailActivity" />
         <activity
             android:name=".MyOrdersActivity"
-            android:label="My Orders"></activity>
+            android:label="My Orders" />
         <activity android:name=".PlaceOrderActivity" />
         <activity
             android:name=".CartActivity"
@@ -125,6 +127,10 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+
+        <meta-data
+            android:name="com.hover.ApiKey"
+            android:value="75bbdd3942256a2f7a682c55bbe76ca5" />
     </application>
 
 </manifest>

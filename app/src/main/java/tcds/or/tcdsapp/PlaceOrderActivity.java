@@ -17,7 +17,9 @@ import tcds.or.tcdsapp.Retrofit.TcdsAPI;
 import tcds.or.tcdsapp.Utils.Common;
 import tcds.or.tcdsapp.mainapp.MainActivity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,6 +38,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static tcds.or.tcdsapp.mainapp.PhoneVerificationActivity.MyPREFERENCES;
 
 public class PlaceOrderActivity extends AppCompatActivity {
 
@@ -214,6 +218,22 @@ public class PlaceOrderActivity extends AppCompatActivity {
 //                Log.e("natsahaaaaaa","vendorphone: "+c.vendorphone);
 //            }
 
+            SharedPreferences preferences = getApplicationContext().getSharedPreferences(MyPREFERENCES,
+                    Context.MODE_PRIVATE);
+         String   usernumberverified = preferences.getString("verifiedphone", null);
+
+
+            orderpay_sharedpreferences = getSharedPreferences(OrderPAY_PREFERENCES,
+                    Activity.MODE_PRIVATE);
+            orderPay_editor = orderpay_sharedpreferences.edit();
+            orderPay_editor.putString("verifiedphone", usernumberverified);
+            orderPay_editor.putString("orderDate", orderDate);
+            orderPay_editor.putString("orderaddress", orderaddress);
+            orderPay_editor.putString("sumPrice", String.valueOf(sumPrice));
+
+            orderPay_editor.apply();
+
+
             final Cart cart = carts.get(0);
 
 
@@ -230,12 +250,16 @@ public class PlaceOrderActivity extends AppCompatActivity {
                             Log.e("leteeeeee", "yanguuuuq_code: " + response.code());
 
 
-                            Toasty.success(PlaceOrderActivity.this, "Order Sent Successful", Toast.LENGTH_LONG, true).show();
+                         //   Toasty.success(PlaceOrderActivity.this, "Order Sent Successful", Toast.LENGTH_LONG, true).show();
                             SendSMS("+255673444029","Hello"+", "+"Admin"+" "+"Umepokea Oda mpya");
-                            Common.cartRepository.emptyCart();
-                            startActivity(new Intent(PlaceOrderActivity.this, MainActivity.class));
-                            finish();
+                            //Common.cartRepository.emptyCart();
+                          //  startActivity(new Intent(PlaceOrderActivity.this, MainActivity.class));
+                          //  finish();
 
+                            Toasty.success(PlaceOrderActivity.this, "Proceed with with payments", Toast.LENGTH_LONG, true).show();
+                            Common.cartRepository.emptyCart();
+                            startActivity(new Intent(PlaceOrderActivity.this, ThankYouActivity.class));
+                            finish();
 
 
 
