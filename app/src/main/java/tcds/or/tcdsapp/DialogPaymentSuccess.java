@@ -86,7 +86,7 @@ public class DialogPaymentSuccess extends DialogFragment {
             public void onClick(View v) {
 
                 Intent i = new HoverParameters.Builder(getActivity())
-                        .request("ee70d395")
+                        .request("d455c800")
 //                        .extra("accountname","42810007227")
                         .extra("amount", user_price)
                         .buildIntent();
@@ -99,7 +99,7 @@ public class DialogPaymentSuccess extends DialogFragment {
             public void onClick(View v) {
 
                 Intent i = new HoverParameters.Builder(getActivity())
-                        .request("c6a5f142")
+                        .request("71cbe3a6")
 //                        .extra("accountname","42810007227")
                         .extra("amount", user_price)
                         .buildIntent();
@@ -113,7 +113,7 @@ public class DialogPaymentSuccess extends DialogFragment {
             @Override
             public void onClick(View v) {
                 Intent i = new HoverParameters.Builder(getActivity())
-                        .request("c76f6dcc")
+                        .request("55f4348e")
 //                        .extra("accountname","42810007227")
                         .extra("amount", user_price)
                         .buildIntent();
@@ -125,7 +125,7 @@ public class DialogPaymentSuccess extends DialogFragment {
             @Override
             public void onClick(View v) {
                 Intent i = new HoverParameters.Builder(getActivity())
-                        .request("bd7b14ab")
+                        .request("086122ae")
 //                        .extra("accountname","42810007227")
                         .extra("amount", user_price)
                         .buildIntent();
