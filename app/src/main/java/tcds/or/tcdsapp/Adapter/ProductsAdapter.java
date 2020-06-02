@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     Context context;
     public List<Book> bookList, filterList;
     CustomFilter filter;
+    DecimalFormat decimalFormat;
 
 
     public ProductsAdapter(Context context, List<Book> bookList, List<Book> filterList) {
@@ -51,10 +53,12 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                 .load(bookList.get(position).getLink())
                 .into(holder.img_product);
 
+        decimalFormat = new DecimalFormat("#");
+        decimalFormat.setGroupingUsed(true);
+        decimalFormat.setGroupingSize(3);
+
         holder.txtbookname.setText(bookList.get(position).getName());
-        holder.txtauthor.setText(bookList.get(position).getBook_publisher());
-
-
+        holder.txtauthor.setText("Tsh " + decimalFormat.format(Float.parseFloat(bookList.get(position).getPrice())));
         holder.img_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

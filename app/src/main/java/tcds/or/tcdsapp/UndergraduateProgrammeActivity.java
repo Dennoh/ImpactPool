@@ -143,7 +143,6 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
             snack.show();
         }
 
-//        TextView textviewSearch = findViewById(R.id.textviewSearch);
         spinnerSector = findViewById(R.id.spinnerSector);
         spinnerRegion = findViewById(R.id.spinnerRegion);
         spinnerDistrict = findViewById(R.id.spinnerDistrict);
@@ -316,12 +315,7 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
         Random rand = new Random();
         int n = rand.nextInt(50000000) + 1;
         String randomstamp = "70timestamp" + n;
-        Log.e("looooo2", search_district + " search_district");
-        Log.e("looooo2", search_region + " search_region");
-        Log.e("looooo2", search_sector + " search_MajorOccupation");
-
         URL_UNDERGRADUATE = "http://mbinitiative.com/impactpoolMobile/getundergraduate_bycategory.php?tmps=" + randomstamp + "&sector=" + search_sector + "&region=" + search_region + "&district=" + search_district;
-        Log.e("looooo2", URL_UNDERGRADUATE + "");
         taskUndergraduateprog = new MyTask_Undergraduateprog();
         taskUndergraduateprog.execute(new String[]{URL_UNDERGRADUATE});
     }
@@ -359,7 +353,6 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
 
 
     String php_response_sector;
-
     class GetSectors extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
@@ -400,10 +393,8 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.e("dataa12", php_response_sector + "");
             php_response_sector = "All#" + php_response_sector;
             sector_data = php_response_sector.split("#");
-
 
             ArrayAdapter<String> adapterSector = new ArrayAdapter<String>(UndergraduateProgrammeActivity.this, R.layout.row_spinner, R.id.textViewDealerName, sector_data);
             spinnerSector.setAdapter(adapterSector);
@@ -412,9 +403,7 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     search_sector = sector_data[position];
                     seachByCategory();
-
                 }
-
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
                     search_sector = "All";

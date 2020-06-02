@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="10.6dp"
     android:layout_marginTop="6dp"
+    android:layout_marginRight="10.6dp"
     android:layout_marginBottom="2dp"
     app:cardCornerRadius="3.8dp"
-    android:layout_marginRight="10.6dp"
-    app:cardElevation="8dp"
-    >
+    app:cardElevation="8dp">
 
 
     <RelativeLayout
@@ -19,88 +17,83 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:layout_marginRight="10dp"
             android:id="@+id/delete_icon"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-
             android:layout_width="30dp"
             android:layout_height="30dp"
-            />
+            android:layout_alignParentRight="true"
+
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp" />
+
         <TextView
 
-            android:text="DELETE"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/delete_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/delete_icon"
+            android:text="DELETE" />
     </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/view_foreground"
-        android:layout_margin="8dp"
-        android:background="@color/white"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:layout_margin="8dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
         <ImageView
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
+            android:id="@+id/img_productt"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:id="@+id/img_productt"
-            />
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
             android:layout_height="wrap_content"
-            >
+            android:orientation="vertical">
+
             <TextView
-                android:textColor="#000"
-                android:padding="4dp"
                 android:id="@+id/txt_productname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="4dp"
                 android:text="Ugali Maini"
+                android:textColor="#000"
 
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <LinearLayout
-                android:layout_weight="7"
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
                 android:layout_height="wrap_content"
-                >
+                android:layout_weight="7"
+                android:orientation="horizontal">
+
                 <TextView
-                    android:textStyle="bold"
-                    android:padding="4dp"
-                    android:layout_weight="6"
                     android:id="@+id/txtx_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:padding="4dp"
                     android:text="500Tsh"
-                    />
-
-
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:padding="4dp"
-                    android:layout_weight="6"
                     android:id="@+id/txt_restaurantname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Restaurant name"
-                    />
+                    android:layout_weight="6"
+                    android:padding="4dp"
+                    android:text="Restaurant name" />
             </LinearLayout>
         </LinearLayout>
 

@@ -4,14 +4,21 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -21,6 +28,8 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.google.android.material.snackbar.Snackbar;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,9 +37,12 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -45,9 +57,11 @@ import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 import de.mateware.snacky.Snacky;
+import tcds.or.tcdsapp.BookDetailsActivity;
 import tcds.or.tcdsapp.MainOnlineShopActivity;
 import tcds.or.tcdsapp.R;
 import tcds.or.tcdsapp.UndergraduateProgrammeActivity;
+import tcds.or.tcdsapp.Utils.Common;
 
 public class MainActivity extends AppCompatActivity {
     SliderLayout sliderLayout;
@@ -115,6 +129,66 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuInvite:
+                Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+                String applink = "https://play.google.com/store/apps/details?id=tcds.or.tcdsapp";  //www.fursane.com.fursanet
+                String invitemessage = "Am using TCDS to explore Career opportunities and much more.\n\nDownload it Today:" + applink;
+                String imageLink = "http://mbinitiative.com/impactpoolMobile/logooo.png";
+                if (Build.VERSION.SDK_INT >= 24) {
+                    try {
+                        Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
+                        m.invoke(null);
+                        shareItem(imageLink, invitemessage);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    public void shareItem(String url, final String message) {
+        Picasso.with(MainActivity.this).load(url).into(new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("image/*");
+                i.putExtra(Intent.EXTRA_STREAM, getLocalBitmapUri(bitmap));
+                i.putExtra(Intent.EXTRA_TEXT, message);
+                startActivity(Intent.createChooser(i, "Share  Product"));
+            }
+
+            @Override
+            public void onBitmapFailed(Drawable errorDrawable) {
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+            }
+        });
+    }
+
+    public Uri getLocalBitmapUri(Bitmap bmp) {
+        Uri bmpUri = null;
+        try {
+            File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
+            FileOutputStream out = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
+            out.close();
+            bmpUri = Uri.fromFile(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bmpUri;
+    }
+
+
     private void dislayBanners(List<GetterBanner> banners) {
         HashMap<String, String> bannerMap = new HashMap<>();
 
@@ -142,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
         Random rand = new Random();
         int n = rand.nextInt(50000000) + 1;
         String randomstamp = "70timestamp" + n;
-        URL_BANNERS = "http://mbinitiative.com/safehub/getbanner.php?tmps=" + randomstamp;
+        URL_BANNERS = "http://mbinitiative.com/impactpoolMobile/getbanner.php?tmps=" + randomstamp;
         URL_BANNERS = URL_BANNERS.replaceAll("\\s+", "%20");
         taskBanners = new MyTask_Banners();
         taskBanners.execute(new String[]{URL_BANNERS});
@@ -209,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             //Toast.makeText(this, "No Verified,Please Login", Toast.LENGTH_LONG.show());
-            Toast.makeText(this, "Not Verified,Please Login", Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, "Not Verified,Please Login", Toast.LENGTH_LONG).show();
             Snacky.builder()
                     .setActivity((Activity) MainActivity.this)
                     .setMaxLines(2)

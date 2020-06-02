@@ -95,6 +95,8 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         new GetMajorOccupation().execute();
+        new GetSubMajorOccupation().execute();
+        new GetMinnorOccupation().execute();
 
         search_MajorOccupation = "All";
         search_SubMajorOccupation = "All";

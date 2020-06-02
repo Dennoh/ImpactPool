@@ -5,118 +5,58 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="#ffffff"
-        android:orientation="vertical">
+        android:layout_margin="14dp"
+        android:background="@color/grey_40"
+        android:clipToPadding="true"
+        android:elevation="8dp"
+        android:onClick="ClcikedPurchaseOrder"
+        app:cardElevation="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-                android:layout_weight="7"
-                android:background="#ffffff"
-                android:paddingLeft="10dp"
-                android:paddingTop="3dp"
-                android:paddingBottom="2dp"
-
-                android:text="BOOKS CATEGORIES"
-                android:textColor="#5E5B5B"
-                android:textSize="15sp" />
-
-
-            <TextView
-                android:id="@+id/ttx_home_purchasetype"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="View All"
-                android:textColor="#5E5B5B"
-                android:textSize="11sp"
-                android:visibility="gone" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="#ffffff"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp">
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:id="@+id/linear_general"
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_book_black_24dp" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:orientation="vertical">
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:padding="3dp"
+                    android:text="eBooks Service" />
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-
-                        android:layout_width="54dp"
-                        android:layout_height="54dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_explore_black_24dp"
-                        app:civ_border_color="#FF000000"
-                        app:civ_border_width="2dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="3dp"
-                        android:maxLines="1"
-                        android:text="Online Books" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linear_school"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:orientation="vertical">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="54dp"
-                        android:layout_height="54dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_explore_black_24dp"
-                        app:civ_border_color="#FF000000"
-                        app:civ_border_width="2dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="3dp"
-                        android:gravity="center"
-                        android:text="Hard Copy Books" />
-                </LinearLayout>
+                    android:background="@drawable/roundbt"
+                    android:padding="3dp"
+                    android:text="  Shop Now   "
+                    android:textColor="@color/white" />
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="You can buy our eBooks from Amazon and enjoy our lates release and updated contents in a softcopy."
+                android:textSize="12sp"></TextView>
         </LinearLayout>
-
-
-    </LinearLayout>
-
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

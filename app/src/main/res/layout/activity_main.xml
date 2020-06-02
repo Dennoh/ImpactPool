@@ -147,8 +147,7 @@
                                         <com.daimajia.slider.library.SliderLayout
                                             android:id="@+id/slider"
                                             android:layout_width="match_parent"
-                                            android:layout_height="180dp"
-                                            android:background="@drawable/impactpooltrans">
+                                            android:layout_height="180dp">
 
                                         </com.daimajia.slider.library.SliderLayout>
 
@@ -454,7 +453,7 @@
                                 android:layout_height="wrap_content"
                                 android:background="@color/colorPrimaryDark"
                                 android:orientation="vertical"
-                                android:paddingLeft="5dp">
+                                android:paddingLeft="3dp">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -469,7 +468,7 @@
                                         android:layout_weight="1"
                                         android:padding="10dp"
                                         android:tint="@color/colorPrimaryDark"
-                                        app:srcCompat="@drawable/iconmonstr_school_4_240" />
+                                        app:srcCompat="@drawable/icon2" />
 
 
                                     <TextView
@@ -506,7 +505,7 @@
                                 android:layout_height="wrap_content"
                                 android:background="@color/colorPrimaryDark"
                                 android:orientation="vertical"
-                                android:paddingLeft="5dp">
+                                android:paddingLeft="3dp">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -521,7 +520,7 @@
                                         android:layout_weight="1"
                                         android:padding="10dp"
                                         android:tint="@color/colorPrimaryDark"
-                                        app:srcCompat="@drawable/iconmonstr_school_4_240" />
+                                        app:srcCompat="@drawable/icon1" />
 
 
                                     <TextView
@@ -558,7 +557,7 @@
                                 android:layout_height="wrap_content"
                                 android:background="@color/colorPrimaryDark"
                                 android:orientation="vertical"
-                                android:paddingLeft="5dp">
+                                android:paddingLeft="3dp">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -573,7 +572,7 @@
                                         android:layout_weight="1"
                                         android:padding="10dp"
                                         android:tint="@color/colorPrimaryDark"
-                                        app:srcCompat="@drawable/iconmonstr_school_4_240" />
+                                        app:srcCompat="@drawable/icon4" />
 
 
                                     <TextView

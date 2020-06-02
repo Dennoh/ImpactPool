@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,9 +45,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, final int position) {
        // holder.txt_order_date.setText(orderList.get(position).getOrderDate());
+
+        final DecimalFormat decimalFormat = new DecimalFormat("#");
+        decimalFormat.setGroupingUsed(true);
+        decimalFormat.setGroupingSize(3);
+
         holder.txt_order_deliverycost.setText(new StringBuilder("Tsh ").append(orderList.get(position).getDeliveryPrice()));
         holder.txt_order_productPrice.setText(new StringBuilder("Tsh ").append(orderList.get(position).getOriginalPrice()));
-        holder.txt_order_price.setText(new StringBuilder("Tsh ").append(orderList.get(position).getOrderPrice()));
+       // holder.txt_order_price.setText(new StringBuilder("Tsh ").append(orderList.get(position).getOrderPrice()));
+        holder.txt_order_price.setText(new StringBuilder("Tsh ").append(decimalFormat.format((orderList.get(position).getOrderPrice()))));
         holder.txt_order_address.setText(orderList.get(position).getOrderAddress());
         //holder.txt_order_status.setText((Common.convertCodeToStatus(orderList.get(position).getOrderStatus())));
 

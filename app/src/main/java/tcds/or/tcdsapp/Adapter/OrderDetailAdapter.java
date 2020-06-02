@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -37,12 +38,16 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull OrderDetailViewHolder holder, int position) {
+        final DecimalFormat decimalFormat = new DecimalFormat("#");
+        decimalFormat.setGroupingUsed(true);
+        decimalFormat.setGroupingSize(3);
 
 
         Picasso.with(context)
                 .load(cartList.get(position).link)
                 .into(holder.img_product);
-        holder.txt_price.setText(new StringBuilder("TSh ").append(cartList.get(position).price));
+        //holder.txt_price.setText(new StringBuilder("TSh ").append(cartList.get(position).price));
+        holder.txt_price.setText(new StringBuilder("TSh ").append(decimalFormat.format((cartList.get(position).price))));
         holder.txt_restaurantname.setText(cartList.get(position).restaurantname);
         holder.txt_prodct_name.setText(new StringBuilder(cartList.get(position).name)
                         .append(" x")

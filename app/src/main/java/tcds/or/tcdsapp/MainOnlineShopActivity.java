@@ -51,7 +51,6 @@ public class MainOnlineShopActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.bottomHome:
-                    // Toast.makeText(MainActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     return true;
                 case R.id.bottomOrders:
@@ -59,9 +58,7 @@ public class MainOnlineShopActivity extends AppCompatActivity {
                     return true;
                 case R.id.bottomCart:
                     startActivity(new Intent(MainOnlineShopActivity.this, CartActivity.class));
-                    // Toast.makeText(MainActivity.this, "Clicked Profile", Toast.LENGTH_SHORT).show();
                     return true;
-
             }
             return false;
         }
@@ -78,7 +75,7 @@ public class MainOnlineShopActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
 
-        GridLayoutManager mGridLayoutManager = new GridLayoutManager(MainOnlineShopActivity.this, 3);
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(MainOnlineShopActivity.this, 2);
         recycler_otherbooks.setLayoutManager(mGridLayoutManager);
 
         initDB();

@@ -85,6 +85,8 @@ public class HighLearningInstitutionActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
 
         new GetSectors().execute();
+        new GetRegion().execute();
+        new GetDistrict().execute();
 
         textViewClickToSearch.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".MainActivity">
+    tools:context=".MainOnlineShopActivity">
 
 
     <LinearLayout
@@ -40,12 +40,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:padding="5dp"
-                        android:text="LATEST RELEASE"
+                        android:text="HARDCOPY BOOKS"
                         android:textAllCaps="true"
                         android:textColor="#5E5B5B"
                         android:textSize="15sp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/txt_viewall2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -71,10 +72,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_otherbooks"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="55dp">
+                    android:layout_height="wrap_content">
 
                 </androidx.recyclerview.widget.RecyclerView>
 

@@ -1,107 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/c_view"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="15dp"
-    android:background="#e8e8e8"
-    android:clipToPadding="true"
-    cardview:cardCornerRadius="10dp"
-    cardview:cardElevation="10dp">
+    app:cardCornerRadius="10dp"
+    app:cardElevation="7dp"
+    app:cardUseCompatPadding="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="155dp"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
-        tools:ignore="UnusedAttribute">
-
+        android:orientation="vertical">
 
         <ImageView
-
             android:id="@+id/item_movie_img"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="165dp"
-            android:layout_marginEnd="18dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_gravity="center"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/item_movie_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="8dp"
             android:maxLines="1"
+            android:paddingLeft="@dimen/_3sdp"
             android:text="John Doe"
-            android:textColor="#3A3A3A"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_movie_img" />
+            android:textColor="#3A3A3A" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
             android:maxLines="1"
+            android:paddingLeft="@dimen/_3sdp"
             android:text="TextView"
-            android:textSize="11sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.02"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_movie_title" />
+            android:textSize="11sp" />
 
-        <!--    <LinearLayout-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:orientation="horizontal"-->
-        <!--        app:layout_constraintBottom_toBottomOf="@+id/textView">-->
-
-        <!--    </LinearLayout>-->
-
-        <!--    <RatingBar-->
-        <!--        android:id="@+id/starRating"-->
-        <!--        style="?android:attr/ratingBarStyleSmall"-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:isIndicator="true"-->
-        <!--        android:numStars="5"-->
-        <!--        android:rating="4"-->
-        <!--        android:stepSize="1.0"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintHorizontal_bias="0.026"-->
-        <!--        app:layout_constraintStart_toStartOf="parent"-->
-        <!--        app:layout_constraintTop_toBottomOf="@+id/textView" />-->
-
-        <!--    <com.github.ivbaranov.mfb.MaterialFavoriteButton-->
-        <!--        android:id="@+id/favorite_button"-->
-        <!--        android:layout_width="wrap_content"-->
-        <!--        android:layout_height="wrap_content"-->
-        <!--        android:layout_gravity="right"-->
-        <!--        android:layout_marginEnd="14dp"-->
-        <!--        android:padding="2dp"-->
-        <!--        app:layout_constraintBottom_toBottomOf="@+id/starRating"-->
-        <!--        app:layout_constraintEnd_toEndOf="parent"-->
-        <!--        app:layout_constraintHorizontal_bias="0.6"-->
-        <!--        app:layout_constraintStart_toEndOf="@+id/starRating"-->
-        <!--        app:layout_constraintTop_toTopOf="@+id/starRating"-->
-        <!--        app:mfb_animate_favorite="true"-->
-        <!--        app:mfb_animate_unfavorite="false"-->
-        <!--        app:mfb_bounce_duration="300"-->
-        <!--        app:mfb_rotation_angle="360"-->
-        <!--        app:mfb_rotation_duration="400"-->
-        <!--        app:mfb_type="heart" />-->
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>
 
 

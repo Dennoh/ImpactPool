@@ -15,7 +15,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".ThankYouActivity"></activity>
-        <activity android:name=".OrderDetailActivity" />
+        <activity
+            android:name=".OrderDetailActivity"
+            android:label="Details" />
         <activity
             android:name=".MyOrdersActivity"
             android:label="My Orders" />
@@ -23,7 +25,10 @@
         <activity
             android:name=".CartActivity"
             android:label="My Cart" />
-        <activity android:name=".BookDetailsActivity" />
+        <activity
+            android:name=".BookDetailsActivity"
+            android:label="Book Details"
+            android:parentActivityName=".MainOnlineShopActivity" />
         <activity
             android:name=".MainOnlineShopActivity"
             android:label="Online Shop"
@@ -92,7 +97,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".mainapp.CoachingActivity"
-            android:label="Coaching"
+            android:label="Training"
             android:parentActivityName=".mainapp.MainActivity"
             android:screenOrientation="portrait" />
         <activity

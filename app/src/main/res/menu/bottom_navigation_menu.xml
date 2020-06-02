@@ -3,15 +3,14 @@
 
     <item android:title="Home"
         android:id="@+id/bottomHome"
-        android:icon="@drawable/ic_favorite_border_black_24dp"/>
+        android:icon="@drawable/iconmonstr_home_7_240"/>
 
     <item android:title="My Cart"
         android:id="@+id/bottomCart"
-        android:icon="@drawable/ic_favorite_border_black_24dp"/>
+        android:icon="@drawable/iconmonstr_shopping_cart_5_240"/>
 
     <item android:title="My Orders"
         android:id="@+id/bottomOrders"
-        android:icon="@drawable/ic_search_black_36dp"/>
-
+        android:icon="@drawable/iconmonstr_shopping_bag_4_240"/>
 
 </menu>
