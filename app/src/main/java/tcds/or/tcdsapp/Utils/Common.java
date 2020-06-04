@@ -10,9 +10,10 @@ import tcds.or.tcdsapp.Retrofit.RetrofitClient;
 import tcds.or.tcdsapp.Retrofit.TcdsAPI;
 
 public class Common {
-    public static final String BASE_URL="http://nougattechnologies.com/somavitabu/";
-//http://nougattechnologies.com/somavitabu/getbanner.php
-//Database
+    //public static final String BASE_URL="http://nougattechnologies.com/somavitabu/";
+    public static final String BASE_URL="http://mbinitiative.com/impactpoolMobile/onlineshop/somavitabu/";
+
+    //Database
 public static CartRepository cartRepository;
     public static Order currentOder=null;
     public static Book currentProduct=null;

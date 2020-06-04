@@ -65,8 +65,8 @@ public class IntroActivity extends AppCompatActivity {
         // fill list screen
 
         final List<ScreenItem> mList = new ArrayList<>();
-        mList.add(new ScreenItem("Career Database", "Find Occupations Browse groups of similar occupations to explore careers. Choose from industry, field of work, science area, and more. Bright Outlook and make informed decision", R.drawable.logooo));
-        mList.add(new ScreenItem("TCDS Services", "Tanzanite Career Development Services, provides number of services from an intensive and up to date career database, training to online shop for books.", R.drawable.logooo));
+        mList.add(new ScreenItem("Career Database", "Find Occupations Browse groups of similar occupations to explore careers. Choose from industry, field of work, science area, and more. Bright Outlook and make informed decision", R.drawable.tcdstranslogo));
+        mList.add(new ScreenItem("TCDS Services", "Tanzanite Career Development Services, provides number of services from an intensive and up to date career database, training to online shop for books.", R.drawable.tcdstranslogo));
 
         // setup viewpager
         screenPager = findViewById(R.id.screen_viewpager);

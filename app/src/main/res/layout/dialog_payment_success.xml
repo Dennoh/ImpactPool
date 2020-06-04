@@ -221,8 +221,9 @@
                     </LinearLayout>
 
                     <TextView
-                        android:text=" Choose Payments Option"
+                        android:text=" Choose Payments Option.\nNote Payment SIMCARD needs to be on this device"
                         android:layout_width="wrap_content"
+                        android:gravity="center"
                         android:layout_height="wrap_content">
 
                     </TextView>

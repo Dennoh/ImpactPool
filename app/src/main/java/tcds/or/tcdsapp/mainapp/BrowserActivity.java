@@ -13,16 +13,13 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-public class TCDSServicesActivity extends AppCompatActivity {
+public class BrowserActivity extends AppCompatActivity {
     WebView webViewMainSite;
-    String serviceType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tcdsservices);
-        Bundle bundle = getIntent().getExtras();
-        serviceType = bundle.getString("servicetype");
+        setContentView(R.layout.activity_browser);
 
 
         if (haveNetworkConnection()) {
@@ -32,7 +29,8 @@ public class TCDSServicesActivity extends AppCompatActivity {
         }
     }
 
-    private void LoadWebView() {
+
+    public void LoadWebView() {
         webViewMainSite = findViewById(R.id.webviewMain);
         //This is the id you gave to the WebView in the main.xml
         webViewMainSite.getSettings().setJavaScriptEnabled(true);
@@ -42,7 +40,7 @@ public class TCDSServicesActivity extends AppCompatActivity {
         webViewMainSite.setWebViewClient(new WebViewClient());
 
         // Load URL
-        webViewMainSite.loadUrl("https://tcds.or.tz/");
+        webViewMainSite.loadUrl("https://www.amazon.com/s?i=digital-text&rh=p_27%3APancras+Mayengo&s=relevancerank&text=Pancras+Mayengo&ref=dp_byline_sr_ebooks_1");
 
         // Sets the Chrome Client, and defines the onProgressChanged
         // This makes the Progress bar be updated.
@@ -55,7 +53,7 @@ public class TCDSServicesActivity extends AppCompatActivity {
 
                 // Return the app name after finish loading
                 if (progress == 100)
-                    MyActivity.setTitle(serviceType);
+                    MyActivity.setTitle("eBooks Service");
             }
         });
     }

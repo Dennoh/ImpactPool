@@ -9,66 +9,80 @@ import java.util.List;
  */
 public class ExpandableListDataPumpHelp {
 
-    static String stringCalendar = "View TWUK calender by clicking on Calendar button and swipe from right to left to share the calendar info with your friends.";
-    static String stringInfoPortal = "Get a summary of the TWUK ,union and the Legislature by clicking on info portal button.";
-    static String stringMap = "Get GPS location of TWUK Headquarters by clicking on the location icon.";
-    static String stringAbout = "Get version and copyright details of the TWUK app by clicking on About button.";
-    static String stringHelp = "Get assistance on how to use and navigate the TWUK app by clicking on help button";
-    static String stringFeedback = "Give response, reaction, comments, criticism; reception, reviews to the TWUK administrators by clicking on feedback button and filling the feedback form.";
-    static String stringNews = "Get TWUK related news on both Transit and Air division by clicking on view all news button.";
-    static String stringSocialMedia = "Get connected to TWUK social media pages by clicking on the respective icons.";
-    static String stringGallery = "View best of TWUK Album photos by clicking on gallery icon. Once inside you can apply gestures to zoon in and out";
-    static String stringJoinUs = "Register as a member of TWUK, by reading and accepting the terms and conditions, filling the registration form and submitting it.";
-    static String stringcall = "Get a speed dial to TWUK head office mobile phone by clicking on call icon.";
+    static String economicSectors = "economicSectors.";
+    static String onlineShop = "onlineShop.";
+    static String eBooksServices = "eBooksServices.";
+    static String careerServices = "careerServices.";
+    static String onlineTraining = "onlineTraining.";
+    static String newsandAlerts = "newsandAlerts.";
+    static String occupationalPathways = "occupationalPathways.";
+    static String undergraduateProgramme = "undergraduateProgramme.";
+    static String highLearningInstitutions = "highLearningInstitutions.";
+    static String careerDatabase = "careerDatabase.";
+    static String Connect = "Connect.";
+    static String Settings = "Settings.";
+    static String MyOrders = "MyOrders.";
+    static String myCart = "myCart.";
 
     public static HashMap<String, List<String>> getData() {
         HashMap<String, List<String>> expandableListDetail = new HashMap<String, List<String>>();
 
-        List<String> tawuCalendar = new ArrayList<String>();
-        tawuCalendar.add(stringCalendar);
+        List<String> economicSectors = new ArrayList<String>();
+        economicSectors.add(ExpandableListDataPumpHelp.economicSectors);
 
-        List<String> gallery = new ArrayList<String>();
-        gallery.add(stringGallery);
+        List<String> highLearningInstitutions = new ArrayList<String>();
+        highLearningInstitutions.add(ExpandableListDataPumpHelp.highLearningInstitutions);
 
-        List<String> news = new ArrayList<String>();
-        news.add(stringNews);
+        List<String> occupationalPathways = new ArrayList<String>();
+        occupationalPathways.add(ExpandableListDataPumpHelp.occupationalPathways);
 
-        List<String> sociaMedia = new ArrayList<String>();
-        sociaMedia.add(stringSocialMedia);
+        List<String> undergraduateProgramme = new ArrayList<String>();
+        undergraduateProgramme.add(ExpandableListDataPumpHelp.undergraduateProgramme);
 
+        List<String> newsandAlerts = new ArrayList<String>();
+        newsandAlerts.add(ExpandableListDataPumpHelp.newsandAlerts);
 
-        List<String> feedback = new ArrayList<String>();
-        feedback.add(stringFeedback);
+        List<String> careerDatabase = new ArrayList<String>();
+        careerDatabase.add(ExpandableListDataPumpHelp.careerDatabase);
 
-        List<String> joinus = new ArrayList<String>();
-        joinus.add(stringJoinUs);
+        List<String> careerServices = new ArrayList<String>();
+        careerServices.add(ExpandableListDataPumpHelp.careerServices);
 
-        List<String> about = new ArrayList<String>();
-        about.add(stringAbout);
+        List<String> onlineShop = new ArrayList<String>();
+        onlineShop.add(ExpandableListDataPumpHelp.onlineShop);
 
-        List<String> infoportal = new ArrayList<String>();
-        infoportal.add(stringInfoPortal);
+        List<String> eBooksServices = new ArrayList<String>();
+        eBooksServices.add(ExpandableListDataPumpHelp.eBooksServices);
 
-        List<String> mapandlocation = new ArrayList<String>();
-        mapandlocation.add(stringMap);
+        List<String> onlineTraining = new ArrayList<String>();
+        onlineTraining.add(ExpandableListDataPumpHelp.onlineTraining);
 
-        List<String> Help = new ArrayList<String>();
-        Help.add(stringHelp);
+        List<String> Connect = new ArrayList<String>();
+        Connect.add(ExpandableListDataPumpHelp.Connect);
 
-        List<String> ServiceCall = new ArrayList<String>();
-        ServiceCall.add(stringcall);
+        List<String> Settings = new ArrayList<String>();
+        Settings.add(ExpandableListDataPumpHelp.Settings);
 
-        expandableListDetail.put("Calendar", tawuCalendar);
-        expandableListDetail.put("Gallery", gallery);
-        expandableListDetail.put("News", news);
-        expandableListDetail.put("Social Media", sociaMedia);
-        expandableListDetail.put("Feedback", feedback);
-        expandableListDetail.put("Join Us", joinus);
-        expandableListDetail.put("About", about);
-        expandableListDetail.put("Info Portal", infoportal);
-        expandableListDetail.put("Map and Location", mapandlocation);
-        expandableListDetail.put("Help", Help);
-        expandableListDetail.put("Service Call", ServiceCall);
+        List<String> MyOrders = new ArrayList<String>();
+        MyOrders.add(ExpandableListDataPumpHelp.MyOrders);
+
+        List<String> myCart = new ArrayList<String>();
+        myCart.add(ExpandableListDataPumpHelp.myCart);
+
+        expandableListDetail.put("Economic Sectors", economicSectors);
+        expandableListDetail.put("High Learning Institutions", highLearningInstitutions);
+        expandableListDetail.put("Occupational Pathways", occupationalPathways);
+        expandableListDetail.put("Undergraduate Programme", undergraduateProgramme);
+        expandableListDetail.put("News and Alerts", newsandAlerts);
+        expandableListDetail.put("Career Database", careerDatabase);
+        expandableListDetail.put("Career Services", careerServices);
+        expandableListDetail.put("Online Shop", onlineShop);
+        expandableListDetail.put("eBooks Services", eBooksServices);
+        expandableListDetail.put("Online Training", onlineTraining);
+        expandableListDetail.put("Connect", Connect);
+        expandableListDetail.put("Settings", Settings);
+        expandableListDetail.put("My Orders", MyOrders);
+        expandableListDetail.put("My Cart", myCart);
 
         return expandableListDetail;
     }

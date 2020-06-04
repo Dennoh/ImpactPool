@@ -1,6 +1,7 @@
 package tcds.or.tcdsapp.mainapp;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,7 +21,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -51,22 +56,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 import de.mateware.snacky.Snacky;
-import tcds.or.tcdsapp.BookDetailsActivity;
 import tcds.or.tcdsapp.MainOnlineShopActivity;
 import tcds.or.tcdsapp.R;
 import tcds.or.tcdsapp.UndergraduateProgrammeActivity;
-import tcds.or.tcdsapp.Utils.Common;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener {
     SliderLayout sliderLayout;
 
-    private static String URL_BANNERS = "http://mbinitiative.com/safehub/getbanner.php";
+    private static String URL_BANNERS = "http://mbinitiative.com/impactpoolMobile/getbanner.php";
     private List<GetterBanner> customList_banner;
 
     private java.net.URL url;
@@ -88,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar progressBar;
     String receivedstate;
     Snackbar snack;
+
+    public static final String MYPREFERENCES_ACCESSDIALOG = "MyPreferences_ACCESSDIALOG";
+    SharedPreferences.Editor editor;
+    SharedPreferences sharedpreferences_AccessDialog;
+    Dialog accessDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,9 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
         receivedstate = Boolean.toString(haveNetworkConnection());
         if (receivedstate.equalsIgnoreCase("true")) {
-
             accessWebService_news();
-
         } else {
 
         }
@@ -137,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
                 String applink = "https://play.google.com/store/apps/details?id=tcds.or.tcdsapp";  //www.fursane.com.fursanet
                 String invitemessage = "Am using TCDS to explore Career opportunities and much more.\n\nDownload it Today:" + applink;
-                String imageLink = "http://mbinitiative.com/impactpoolMobile/logooo.png";
+                String imageLink = "http://mbinitiative.com/impactpoolMobile/tcdstranslogo.png";
                 if (Build.VERSION.SDK_INT >= 24) {
                     try {
                         Method m = StrictMode.class.getMethod("disableDeathOnFileUriExposure");
@@ -196,6 +203,8 @@ public class MainActivity extends AppCompatActivity {
             bannerMap.put(item.getName(), item.getLink());
         for (String name : bannerMap.keySet()) {
             TextSliderView textSliderView = new TextSliderView(this);
+            textSliderView.setOnSliderClickListener(this);
+
             textSliderView.description(name)
                     .image(bannerMap.get(name))
                     .setScaleType(BaseSliderView.ScaleType.Fit);
@@ -210,7 +219,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+    public void onSliderClick(BaseSliderView sliderview)
+    {
+        Intent myNewIntent = new Intent(getApplicationContext(), MainOnlineShopActivity.class);
+        startActivity(myNewIntent);
+    }
 
     private void accessWebService_banners() {
         Random rand = new Random();
@@ -233,14 +246,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
                 break;
-            case R.id.Coaching_img:
-                startActivity(new Intent(getApplicationContext(), CoachingActivity.class));
-
-                break;
-            case R.id.Coaching_txt:
-                startActivity(new Intent(getApplicationContext(), CoachingActivity.class));
-
-                break;
+//            case R.id.Coaching_img:
+//                startActivity(new Intent(getApplicationContext(), CoachingActivity.class));
+//
+//                break;
+//            case R.id.Coaching_txt:
+//                startActivity(new Intent(getApplicationContext(), CoachingActivity.class));
+//
+//                break;
             case R.id.Connect_img:
                 startActivity(new Intent(getApplicationContext(), ConnectActivity.class));
 
@@ -316,25 +329,106 @@ public class MainActivity extends AppCompatActivity {
     public void categoryClicked(View view) {
         switch (view.getId()) {
             case R.id.cardViewHighLearning:
-                checkifUserVerified("HighLearning");
+                sharedpreferences_AccessDialog = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, Context.MODE_PRIVATE);
+                if (sharedpreferences_AccessDialog.contains("NameHighLearning")) {
+                    mySharedPreferences = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, 0);
+                    startActivity(new Intent(getApplicationContext(), HighLearningInstitutionActivity.class));
+                } else {
+                    accessDialog = new Dialog(MainActivity.this);
+                    accessDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    accessDialog.setContentView(R.layout.charges_dialog);
+                    accessDialog.getWindow().setLayout(android.app.ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+                    TextView textviewOKAY = accessDialog.findViewById(R.id.textviewOKAY);
+                    textviewOKAY.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mySharedPreferences = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, Activity.MODE_PRIVATE);
+                            editor = mySharedPreferences.edit();
+                            editor.putString("NameHighLearning", "HighLearning");
+                            editor.commit();
+                            accessDialog.dismiss();
+                            startActivity(new Intent(getApplicationContext(), HighLearningInstitutionActivity.class));
+                        }
+                    });
+                    accessDialog.show();
+                }
+
+//                checkifUserVerified("HighLearning");
                 break;
             case R.id.cardViewOccupational:
-                checkifUserVerified("Occupational");
-
-                //  startActivity(new Intent(getApplicationContext(), OccupationalPathwaysActivity.class));
-
+                sharedpreferences_AccessDialog = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, Context.MODE_PRIVATE);
+                if (sharedpreferences_AccessDialog.contains("NameOccupational")) {
+                    mySharedPreferences = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, 0);
+                    startActivity(new Intent(getApplicationContext(), HighLearningInstitutionActivity.class));
+                } else {
+                    accessDialog = new Dialog(MainActivity.this);
+                    accessDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    accessDialog.setContentView(R.layout.charges_dialog);
+                    accessDialog.getWindow().setLayout(android.app.ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+                    TextView textviewOccupational = accessDialog.findViewById(R.id.textviewOKAY);
+                    textviewOccupational.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mySharedPreferences = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, Activity.MODE_PRIVATE);
+                            editor = mySharedPreferences.edit();
+                            editor.putString("NameOccupational", "Occupational");
+                            editor.commit();
+                            accessDialog.dismiss();
+                            startActivity(new Intent(getApplicationContext(), OccupationalPathwaysActivity.class));
+                        }
+                    });
+                    accessDialog.show();
+                }
                 break;
             case R.id.cardViewUndergraduate:
-                checkifUserVerified("Undergraduate");
-
-                // startActivity(new Intent(getApplicationContext(), UndergraduateProgrammeActivity.class));
-
+                sharedpreferences_AccessDialog = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, Context.MODE_PRIVATE);
+                if (sharedpreferences_AccessDialog.contains("NameUndergraduate")) {
+                    mySharedPreferences = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, 0);
+                    startActivity(new Intent(getApplicationContext(), HighLearningInstitutionActivity.class));
+                } else {
+                    accessDialog = new Dialog(MainActivity.this);
+                    accessDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    accessDialog.setContentView(R.layout.charges_dialog);
+                    accessDialog.getWindow().setLayout(android.app.ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+                    TextView textviewUndergraduate = accessDialog.findViewById(R.id.textviewOKAY);
+                    textviewUndergraduate.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mySharedPreferences = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, Activity.MODE_PRIVATE);
+                            editor = mySharedPreferences.edit();
+                            editor.putString("NameUndergraduate", "Undergraduate");
+                            editor.commit();
+                            accessDialog.dismiss();
+                            startActivity(new Intent(getApplicationContext(), UndergraduateProgrammeActivity.class));
+                        }
+                    });
+                    accessDialog.show();
+                }
                 break;
             case R.id.cardViewEconomicSector:
-                checkifUserVerified("EconomicSector");
-
-                // startActivity(new Intent(getApplicationContext(), EconomicSectorsActivity.class));
-
+                sharedpreferences_AccessDialog = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, Context.MODE_PRIVATE);
+                if (sharedpreferences_AccessDialog.contains("NameEconomicSector")) {
+                    mySharedPreferences = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, 0);
+                    startActivity(new Intent(getApplicationContext(), HighLearningInstitutionActivity.class));
+                } else {
+                    accessDialog = new Dialog(MainActivity.this);
+                    accessDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    accessDialog.setContentView(R.layout.charges_dialog);
+                    accessDialog.getWindow().setLayout(android.app.ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+                    TextView textviewEconomicSector = accessDialog.findViewById(R.id.textviewOKAY);
+                    textviewEconomicSector.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mySharedPreferences = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, Activity.MODE_PRIVATE);
+                            editor = mySharedPreferences.edit();
+                            editor.putString("NameEconomicSector", "EconomicSector");
+                            editor.commit();
+                            accessDialog.dismiss();
+                            startActivity(new Intent(getApplicationContext(), EconomicSectorsActivity.class));
+                        }
+                    });
+                    accessDialog.show();
+                }
                 break;
         }
     }
@@ -364,6 +458,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainOnlineShopActivity.class));
                 break;
         }
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 
 

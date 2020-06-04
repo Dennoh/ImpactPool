@@ -103,6 +103,7 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/frameSlider"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -147,6 +148,7 @@
                                         <com.daimajia.slider.library.SliderLayout
                                             android:id="@+id/slider"
                                             android:layout_width="match_parent"
+                                            app:indicator_visibility="invisible"
                                             android:layout_height="180dp">
 
                                         </com.daimajia.slider.library.SliderLayout>
@@ -171,8 +173,10 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp"
                     android:text="Career Database"
-                    android:textAppearance="?android:textAppearanceSmall"
-                    android:textColor="@color/myBlack" />
+                    android:textAllCaps="true"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:textColor="@color/myBlack"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="45dp"
@@ -421,6 +425,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="5dp"
                         android:text="TCDS Services"
+                        android:textAllCaps="true"
                         android:textAppearance="?android:textAppearanceSmall"
                         android:textColor="@color/myBlack" />
 
@@ -647,33 +652,6 @@
                     android:clickable="false"
                     android:onClick="mainClicked"
                     android:text="@string/title_home"
-                    android:textColor="@color/myWhite"
-                    android:textSize="12dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:onClick="mainClicked"
-
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/Coaching_img"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:onClick="mainClicked"
-                    android:src="@drawable/ic_supervisor_account_black_24dp" />
-
-                <TextView
-                    android:id="@+id/Coaching_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:onClick="mainClicked"
-                    android:text="Training"
                     android:textColor="@color/myWhite"
                     android:textSize="12dp" />
             </LinearLayout>

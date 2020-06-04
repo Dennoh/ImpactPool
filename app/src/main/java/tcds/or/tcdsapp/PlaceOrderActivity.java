@@ -25,7 +25,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,12 +61,11 @@ public class PlaceOrderActivity extends AppCompatActivity {
     TextView btn_orderNow;
     String userlocationFromStart;
     String tokenyavendor;
-    float newDeliveryCost=0;
+    float newDeliveryCost = 0;
 
     float totalAmount;
 
     float toSendTotalPrice;
-
 
 
     public static final String OrderPAY_PREFERENCES = "ORDERPAY_001";
@@ -72,10 +74,12 @@ public class PlaceOrderActivity extends AppCompatActivity {
     SharedPreferences.Editor orderPay_editor;
 
     String selectedDelievryLoc;
-    TextView delievrycosts;
-
+    TextView delievrycosts, textviewNetPay;
+    String deliveryOption;
     DecimalFormat decimalFormat;
-
+    Spinner spinnerDelibery;
+    int delivery = 0;
+    int net_tt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,12 +90,13 @@ public class PlaceOrderActivity extends AppCompatActivity {
         txtview_address = findViewById(R.id.txtview_address);
         edittxt_comment = findViewById(R.id.edittxt_comment);
         delievrycosts = findViewById(R.id.delievrycosts);
+        textviewNetPay = findViewById(R.id.textviewNetPay);
         btn_orderNow = findViewById(R.id.btn_orderNow);
+        spinnerDelibery = findViewById(R.id.spinnerDelibery);
         mService = Common.getAPI();
         decimalFormat = new DecimalFormat("#.00");
         decimalFormat.setGroupingUsed(true);
         decimalFormat.setGroupingSize(3);
-
 
 
         compositeDisposable = new CompositeDisposable();
@@ -102,14 +107,46 @@ public class PlaceOrderActivity extends AppCompatActivity {
         recycler_place_order.setHasFixedSize(true);
         // txt_subtotal.setText(new StringBuilder("Tsh ").append(Common.cartRepository.sumPrice()));
 
-        txt_subtotal.setText(new StringBuilder("Tsh ").append( decimalFormat.format(Float.parseFloat(String.valueOf(Common.cartRepository.sumPrice())))));
+        txt_subtotal.setText(new StringBuilder("Tsh ").append(decimalFormat.format(Float.parseFloat(String.valueOf(Common.cartRepository.sumPrice())))));
+        final int sbt = Math.round(Common.cartRepository.sumPrice());
+        int tt = sbt + delivery;
+        textviewNetPay.setText("Tsh " + decimalFormat.format(tt));
 
-        totalAmount=Common.cartRepository.sumPrice();
-
+        totalAmount = Common.cartRepository.sumPrice();
         recycler_place_order.setLayoutManager(new LinearLayoutManager(this));
         recycler_place_order.setHasFixedSize(true);
 
         loardCartItems();
+
+        final String[] deliveryOptions = {"Select Delivery Option", "Delivery to Specific Address", "Pickup from TCDS Pickup Points"};
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(PlaceOrderActivity.this, R.layout.row_spinner, R.id.textViewDealerName, deliveryOptions);
+        spinnerDelibery.setAdapter(arrayAdapter);
+        spinnerDelibery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                deliveryOption = deliveryOptions[position];
+                if (deliveryOption.equals("Delivery to Specific Address")) {
+                    delievrycosts.setText("Tsh 5,000");
+                    delivery = 5000;
+                    net_tt = sbt + delivery;
+                    textviewNetPay.setText("Tsh " + decimalFormat.format(net_tt));
+                    txtview_address.setVisibility(View.VISIBLE);
+                } else if (deliveryOption.equals("Pickup from TCDS Pickup Points")) {
+                    txtview_address.setVisibility(View.GONE);
+                    delievrycosts.setText("Tsh 00");
+                    delivery = 0;
+                    net_tt = sbt + delivery;
+                    textviewNetPay.setText("Tsh " + decimalFormat.format(net_tt));
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         btn_orderNow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,19 +186,14 @@ public class PlaceOrderActivity extends AppCompatActivity {
     private void placeOrderNow() {
 
 
-
-
-
-
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
         Date date = new Date();
         orderDate = dateFormat.format(date);
 
-        Log.e(TAG,orderDate+" : ORDER TAREHEEE");
+        Log.e(TAG, orderDate + " : ORDER TAREHEEE");
 
 
-
-        Log.d("priceeee","SUMPRICE: "+Common.cartRepository.sumPrice());
+        Log.d("priceeee", "SUMPRICE: " + Common.cartRepository.sumPrice());
 
         //  String newUsername,newUserarea,newUserPhone;
 //        Log.d(TAG,"userArea: "+userArea);
@@ -176,9 +208,9 @@ public class PlaceOrderActivity extends AppCompatActivity {
                         .subscribe(new Consumer<List<Cart>>() {
                             @Override
                             public void accept(List<Cart> carts) throws Exception {
-                                sendOrderToServer(orderDate,totalAmount,
+                                sendOrderToServer(orderDate, totalAmount,
                                         carts,
-                                        "","");
+                                        "", "");
 
 
 //  String newUsername,newUserarea,newUserPhone;
@@ -196,10 +228,8 @@ public class PlaceOrderActivity extends AppCompatActivity {
     }
 
 
-
     private void sendOrderToServer(String orderDate, final float sumPrice, List<Cart> carts, String orderComment,
                                    String orderaddress) {
-
 
 
 //        final String   userarea = preferences.getString("userarea", null);
@@ -220,7 +250,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
             SharedPreferences preferences = getApplicationContext().getSharedPreferences(MyPREFERENCES,
                     Context.MODE_PRIVATE);
-         String   usernumberverified = preferences.getString("verifiedphone", null);
+            String usernumberverified = preferences.getString("verifiedphone", null);
 
 
             orderpay_sharedpreferences = getSharedPreferences(OrderPAY_PREFERENCES,
@@ -229,18 +259,16 @@ public class PlaceOrderActivity extends AppCompatActivity {
             orderPay_editor.putString("verifiedphone", usernumberverified);
             orderPay_editor.putString("orderDate", orderDate);
             orderPay_editor.putString("orderaddress", orderaddress);
-            orderPay_editor.putString("sumPrice", String.valueOf(sumPrice));
-
+            orderPay_editor.putString("sumPrice", net_tt+"");
             orderPay_editor.apply();
 
 
             final Cart cart = carts.get(0);
 
 
-
-            mService.submitOrder(orderDate,sumPrice,orderDetail, edittxt_comment.getText()
-                            .toString().trim(),txtview_address.getText().toString(), "+255673444029",
-                    "COD","No Vendor","No Vendor")
+            mService.submitOrder(orderDate, Float.parseFloat(net_tt+""), orderDetail, edittxt_comment.getText()
+                            .toString().trim(), "Delivery Option Selected " + deliveryOption + " " + txtview_address.getText().toString(), "+255673444029",
+                    "COD", "No Vendor", "No Vendor")
                     .enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
@@ -250,20 +278,16 @@ public class PlaceOrderActivity extends AppCompatActivity {
                             Log.e("leteeeeee", "yanguuuuq_code: " + response.code());
 
 
-                         //   Toasty.success(PlaceOrderActivity.this, "Order Sent Successful", Toast.LENGTH_LONG, true).show();
-                            SendSMS("+255673444029","Hello"+", "+"Admin"+" "+"Umepokea Oda mpya");
+                            //   Toasty.success(PlaceOrderActivity.this, "Order Sent Successful", Toast.LENGTH_LONG, true).show();
+                            SendSMS("+255673444029", "Hello" + ", " + "Admin" + " " + "Umepokea Oda mpya");
                             //Common.cartRepository.emptyCart();
-                          //  startActivity(new Intent(PlaceOrderActivity.this, MainActivity.class));
-                          //  finish();
+                            //  startActivity(new Intent(PlaceOrderActivity.this, MainActivity.class));
+                            //  finish();
 
                             Toasty.success(PlaceOrderActivity.this, "Proceed with with payments", Toast.LENGTH_LONG, true).show();
                             Common.cartRepository.emptyCart();
                             startActivity(new Intent(PlaceOrderActivity.this, ThankYouActivity.class));
                             finish();
-
-
-
-
 
 
                         }
@@ -281,22 +305,23 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
 
     }
-    public void SendSMS(String vendorPhone,String txtmessage){
 
-        compositeDisposable.add(mService.SendSMSBULK(vendorPhone,txtmessage)
+    public void SendSMS(String vendorPhone, String txtmessage) {
+
+        compositeDisposable.add(mService.SendSMSBULK(vendorPhone, txtmessage)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Consumer<String>() {
                                @Override
                                public void accept(String s) throws Exception {
                                    // Toast.makeText(NewUserProfileRegistrationActivity.this, s, Toast.LENGTH_LONG).show();
-                                   Log.e("yaMessage","MESSAGE: "+s);
+                                   Log.e("yaMessage", "MESSAGE: " + s);
 
                                }
                            }, new Consumer<Throwable>() {
                                @Override
                                public void accept(Throwable throwable) throws Exception {
-                                   Log.e("yaMessage","ERROR MESSAGE: "+throwable.getMessage());
+                                   Log.e("yaMessage", "ERROR MESSAGE: " + throwable.getMessage());
 
 
                                }

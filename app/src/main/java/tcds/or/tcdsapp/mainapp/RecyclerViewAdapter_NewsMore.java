@@ -1,6 +1,8 @@
 package tcds.or.tcdsapp.mainapp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import java.util.List;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+import tcds.or.tcdsapp.NewsDetailsActivity;
 import tcds.or.tcdsapp.R;
 
 /**
@@ -42,13 +45,13 @@ public class RecyclerViewAdapter_NewsMore extends RecyclerView.Adapter<RecyclerV
         paramStockViewHolder.tvNewsDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(context, NewsDetailsActivity.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putString("tittle", productGetters.get(paramInt).getNews_tittle());
-//                bundle.putString("details", productGetters.get(paramInt).getNews_details());
-//                bundle.putString("postedon", productGetters.get(paramInt).getNews_postedOn());
-//                intent.putExtras(bundle);
-//                context.startActivity(intent);
+                Intent intent = new Intent(context, NewsDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("tittle", productGetters.get(paramInt).getNews_tittle());
+                bundle.putString("details", productGetters.get(paramInt).getNews_details());
+                bundle.putString("postedon", productGetters.get(paramInt).getNews_postedOn());
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         });
         SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");

@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
-        app:srcCompat="@drawable/logooo" />
+        app:srcCompat="@drawable/tcdstranslogo" />
 
 
     <TextView
@@ -37,60 +37,83 @@
 
 
     <TextView
+        android:id="@+id/textViewWebsite"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/roundbt"
         android:clickable="true"
+        android:drawableLeft="@drawable/ic_web_black_24dp"
         android:gravity="center_vertical"
         android:maxLines="1"
         android:onClick="tvclicked"
         android:padding="10dp"
-        android:text="website"
+        android:text="  www.tcds.or.tz"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/myWhite" />
 
     <TextView
+        android:id="@+id/textViewMobile"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/roundbt"
         android:clickable="true"
+        android:drawableLeft="@drawable/ic_phone_iphone_black_24dp"
         android:gravity="center_vertical"
         android:maxLines="1"
         android:onClick="tvclicked"
         android:padding="10dp"
-        android:text="facebook"
+        android:text="  +255 (0) 752 581 521"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/myWhite" />
+
+    <TextView
+        android:id="@+id/textViewFacebook"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/roundbt"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_phone_iphone_black_24dp"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:onClick="tvclicked"
+        android:padding="10dp"
+        android:text="  Facebook: @tcds"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/myWhite" />
 
 
     <TextView
+        android:id="@+id/textViewInstagram"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/roundbt"
         android:clickable="true"
+        android:drawableLeft="@drawable/ic_phone_iphone_black_24dp"
         android:gravity="center_vertical"
         android:maxLines="1"
         android:onClick="tvclicked"
         android:padding="10dp"
-        android:text="Instagram"
+        android:text="  Instagram: @tcds"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/myWhite" />
 
-
     <TextView
+        android:id="@+id/textViewTwitter"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/roundbt"
         android:clickable="true"
+        android:drawableLeft="@drawable/ic_phone_iphone_black_24dp"
         android:gravity="center_vertical"
         android:maxLines="1"
         android:onClick="tvclicked"
         android:padding="10dp"
-        android:text="mobile"
+        android:text="  Twitter: @tcds"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/myWhite" />
 

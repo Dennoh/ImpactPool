@@ -96,10 +96,8 @@ public class BookDetailsActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-
             }
         });
-
     }
 
 
@@ -241,35 +239,36 @@ public class BookDetailsActivity extends AppCompatActivity {
 //                        context.startActivity(new Intent(context, CartActivity.class));
 
 
-                    Snacky.builder()
-
-                            .setActivity((Activity) BookDetailsActivity.this)
-                            .setMaxLines(2)
-                            .setDuration(Snacky.LENGTH_INDEFINITE)
-                            .setText("Save item to cart success")
-                            .centerText()
-                            .setBackgroundColor(Color.parseColor("#000000"))
-                            .setTextColor(Color.parseColor("#FFFFFF"))
-                            .setActionText("View Item")
-                            .setActionTextColor(Color.parseColor("#FFFFFF"))
-                            .setActionClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    startActivity(new Intent(BookDetailsActivity.this, CartActivity.class));
-
-                                    //   context.startActivity(new Intent(context, CartActivity.class));
-
-                                }
-                            })
-                            .setActionTextSize(14)
-                            .setMaxLines(4)
-                            .centerText()
-                            .setActionTextTypefaceStyle(Typeface.BOLD)
-                            .info()
-                            .show();
+//                    Snacky.builder()
+//
+//                            .setActivity((Activity) BookDetailsActivity.this)
+//                            .setMaxLines(2)
+//                            .setDuration(Snacky.LENGTH_INDEFINITE)
+//                            .setText("Save item to cart success")
+//                            .centerText()
+//                            .setBackgroundColor(Color.parseColor("#000000"))
+//                            .setTextColor(Color.parseColor("#FFFFFF"))
+//                            .setActionText("View Item")
+//                            .setActionTextColor(Color.parseColor("#FFFFFF"))
+//                            .setActionClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    startActivity(new Intent(BookDetailsActivity.this, CartActivity.class));
+//
+//                                    //   context.startActivity(new Intent(context, CartActivity.class));
+//
+//                                }
+//                            })
+//                            .setActionTextSize(14)
+//                            .setMaxLines(4)
+//                            .centerText()
+//                            .setActionTextTypefaceStyle(Typeface.BOLD)
+//                            .info()
+//                            .show();
 
                     // Toast.makeText(context, "Save item to cart success", Toast.LENGTH_LONG).show();
                     //  context.startActivity(new Intent(context, CartActivity.class));
+                    startActivity(new Intent(BookDetailsActivity.this, CartActivity.class));
 
 
                 } catch (Exception ex) {

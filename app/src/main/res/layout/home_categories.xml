@@ -6,13 +6,13 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardShopNow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="14dp"
         android:background="@color/grey_40"
         android:clipToPadding="true"
         android:elevation="8dp"
-        android:onClick="ClcikedPurchaseOrder"
         app:cardElevation="10dp">
 
         <LinearLayout

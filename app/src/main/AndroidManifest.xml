@@ -14,7 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ThankYouActivity"></activity>
+        <activity
+            android:name=".NewsDetailsActivity"
+            android:label="Details"
+            android:parentActivityName=".mainapp.NewsActivity"></activity>
+        <activity
+            android:name=".mainapp.BrowserActivity"
+            android:label="eBooks Service"
+            android:parentActivityName=".MainOnlineShopActivity" />
+        <activity android:name=".ThankYouActivity" />
         <activity
             android:name=".OrderDetailActivity"
             android:label="Details" />
@@ -97,7 +105,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".mainapp.CoachingActivity"
-            android:label="Training"
+            android:label="Online Training"
             android:parentActivityName=".mainapp.MainActivity"
             android:screenOrientation="portrait" />
         <activity
