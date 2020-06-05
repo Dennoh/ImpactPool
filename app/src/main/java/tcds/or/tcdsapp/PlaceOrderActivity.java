@@ -80,6 +80,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
     Spinner spinnerDelibery;
     int delivery = 0;
     int net_tt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -259,14 +260,14 @@ public class PlaceOrderActivity extends AppCompatActivity {
             orderPay_editor.putString("verifiedphone", usernumberverified);
             orderPay_editor.putString("orderDate", orderDate);
             orderPay_editor.putString("orderaddress", orderaddress);
-            orderPay_editor.putString("sumPrice", net_tt+"");
+            orderPay_editor.putString("sumPrice", net_tt + "");
             orderPay_editor.apply();
 
 
             final Cart cart = carts.get(0);
 
 
-            mService.submitOrder(orderDate, Float.parseFloat(net_tt+""), orderDetail, edittxt_comment.getText()
+            mService.submitOrder(orderDate, Float.parseFloat(net_tt + ""), orderDetail, edittxt_comment.getText()
                             .toString().trim(), "Delivery Option Selected " + deliveryOption + " " + txtview_address.getText().toString(), "+255673444029",
                     "COD", "No Vendor", "No Vendor")
                     .enqueue(new Callback<String>() {
@@ -279,7 +280,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
 
                             //   Toasty.success(PlaceOrderActivity.this, "Order Sent Successful", Toast.LENGTH_LONG, true).show();
-                            SendSMS("+255673444029", "Hello" + ", " + "Admin" + " " + "Umepokea Oda mpya");
+                            SendSMS("+255699784877", "Habari" + ", " + " Admin wa TCDS" + " " + "Umepokea Oda mpya. Tafadhali fungua App kuona maelezo zaidi.");
                             //Common.cartRepository.emptyCart();
                             //  startActivity(new Intent(PlaceOrderActivity.this, MainActivity.class));
                             //  finish();

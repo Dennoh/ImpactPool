@@ -37,12 +37,13 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 import static tcds.or.tcdsapp.PlaceOrderActivity.OrderPAY_PREFERENCES;
 
 
-public class DialogPaymentSuccess extends DialogFragment {
+public class DialogPaymentAccess extends DialogFragment {
 
     private View root_view;
-    Object clipboardService ;
+    Object clipboardService;
     ClipboardManager clipboardManager;
-    LinearLayout linearMpesa,linearTigoPesa,linearAirtel,lineaHalopesa;
+    LinearLayout linearMpesa, linearTigoPesa, linearAirtel, lineaHalopesa;
+    RadioGroup radioGroupOptions;
     RadioGroup radioGroupPaymentOptions;
     String accessCharges;
     TextView textViewMobilePayment, textViewVisaPayIntro, textviewCopy;
@@ -50,22 +51,17 @@ public class DialogPaymentSuccess extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        root_view = inflater.inflate(R.layout.dialog_payment_success, container, false);
+        root_view = inflater.inflate(R.layout.dialog_payment_access, container, false);
 
         clipboardService = getContext().getSystemService(CLIPBOARD_SERVICE);
         clipboardManager = (ClipboardManager) clipboardService;
 
-        //final MaterialEditText materialEditUSerProblem = register_layout.findViewById(R.id.editTextName);
-        TextView txt_date=root_view.findViewById(R.id.txt_date);
-        final TextView sum_price=root_view.findViewById(R.id.sum_price);
-        linearMpesa=root_view.findViewById(R.id.linearMpesa);
-        lineaHalopesa=root_view.findViewById(R.id.lineaHalopesa);
-        linearAirtel=root_view.findViewById(R.id.linearAirtel);
-        linearTigoPesa=root_view.findViewById(R.id.linearTigoPesa);
-
-//        TextView location=root_view.findViewById(R.id.location);
-//        TextView phone_user=root_view.findViewById(R.id.phone_user)
-
+        TextView txt_date = root_view.findViewById(R.id.txt_date);
+        final TextView sum_price = root_view.findViewById(R.id.sum_price);
+        linearMpesa = root_view.findViewById(R.id.linearMpesa);
+        lineaHalopesa = root_view.findViewById(R.id.lineaHalopesa);
+        linearAirtel = root_view.findViewById(R.id.linearAirtel);
+        linearTigoPesa = root_view.findViewById(R.id.linearTigoPesa);
 
         textViewMobilePayment = root_view.findViewById(R.id.textViewMobilePayment);
         cardMobilePay1 = root_view.findViewById(R.id.cardMobilePay1);
@@ -74,8 +70,8 @@ public class DialogPaymentSuccess extends DialogFragment {
         textViewVisaPayIntro = root_view.findViewById(R.id.textViewVisaPayIntro);
         textviewCopy = root_view.findViewById(R.id.textviewCopy);
 
+        radioGroupOptions = root_view.findViewById(R.id.radioGroupOptions);
         radioGroupPaymentOptions = root_view.findViewById(R.id.radioGroupPaymentOptions);
-
         radioGroupPaymentOptions.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -98,22 +94,67 @@ public class DialogPaymentSuccess extends DialogFragment {
                 }
             }
         });
+        int selectedId = radioGroupOptions.getCheckedRadioButtonId();
 
+        if (selectedId == R.id.radioDaily) {
+            Log.e("kokoooo4545", "radioDaily");
+            accessCharges = "1000";
+            sum_price.setText("Tsh 1,000");
+        }
+        if (selectedId == R.id.radioMonthly) {
+            Log.e("kokoooo4545", "radioMonthly");
+            accessCharges = "5000";
+            sum_price.setText("Tsh 5,000");
+        }
+        if (selectedId == R.id.radioWeekly) {
+            Log.e("kokoooo4545", "radioWeekly");
+            accessCharges = "2000";
+            sum_price.setText("Tsh 2,000");
+        }
+
+        radioGroupOptions.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int selectedId = radioGroupOptions.getCheckedRadioButtonId();
+
+                if (selectedId == R.id.radioDaily) {
+                    Log.e("kokoooo4545", "radioDaily");
+                    accessCharges = "1000";
+                    sum_price.setText("Tsh 1,000");
+                }
+                if (selectedId == R.id.radioMonthly) {
+                    Log.e("kokoooo4545", "radioMonthly");
+                    accessCharges = "5000";
+                    sum_price.setText("Tsh 5,000");
+                }
+                if (selectedId == R.id.radioWeekly) {
+                    Log.e("kokoooo4545", "radioWeekly");
+                    accessCharges = "2000";
+                    sum_price.setText("Tsh 2,000");
+                }
+            }
+        });
+
+
+        // Get clipboard manager object.
+        clipboardService = getContext().getSystemService(CLIPBOARD_SERVICE);
+        clipboardManager = (ClipboardManager) clipboardService;
 
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
         decimalFormat.setGroupingUsed(true);
         decimalFormat.setGroupingSize(3);
 
-        SharedPreferences location_sharedpreferences = getActivity().getSharedPreferences(OrderPAY_PREFERENCES, Context.MODE_PRIVATE);
-       String userdate = location_sharedpreferences.getString("orderDate", "no date");
-       final String user_price = location_sharedpreferences.getString("sumPrice", "no price");
-       String user_locationn = location_sharedpreferences.getString("orderaddress", "no location");
-       String user_simu = location_sharedpreferences.getString("verifiedphone", "no phone");
 
-        txt_date.setText(userdate);
-        if (user_price != null) {
-            sum_price.setText(decimalFormat.format(Float.parseFloat(user_price)));
-        }
+//        SharedPreferences location_sharedpreferences = getActivity().getSharedPreferences(OrderPAY_PREFERENCES, Context.MODE_PRIVATE);
+//        String userdate = location_sharedpreferences.getString("orderDate", "no date");
+//        final String user_price = location_sharedpreferences.getString("sumPrice", "no price");
+//        String user_locationn = location_sharedpreferences.getString("orderaddress", "no location");
+//        String user_simu = location_sharedpreferences.getString("verifiedphone", "no phone");
+
+//        txt_date.setText(userdate);
+//        if (user_price != null) {
+//        }
+
 //        location.setText(user_locationn);
 //        phone_user.setText(user_simu);
 
@@ -133,7 +174,7 @@ public class DialogPaymentSuccess extends DialogFragment {
                 Intent i = new HoverParameters.Builder(getActivity())
                         .request("d455c800")
 //                        .extra("accountname","42810007227")
-                        .extra("amount", user_price)
+                        .extra("amount", accessCharges)
                         .buildIntent();
                 startActivityForResult(i, 0);
             }
@@ -146,7 +187,7 @@ public class DialogPaymentSuccess extends DialogFragment {
                 Intent i = new HoverParameters.Builder(getActivity())
                         .request("71cbe3a6")
 //                        .extra("accountname","42810007227")
-                        .extra("amount", user_price)
+                        .extra("amount", accessCharges)
                         .buildIntent();
                 startActivityForResult(i, 0);
 
@@ -160,7 +201,7 @@ public class DialogPaymentSuccess extends DialogFragment {
                 Intent i = new HoverParameters.Builder(getActivity())
                         .request("55f4348e")
 //                        .extra("accountname","42810007227")
-                        .extra("amount", user_price)
+                        .extra("amount", accessCharges)
                         .buildIntent();
                 startActivityForResult(i, 0);
             }
@@ -172,7 +213,7 @@ public class DialogPaymentSuccess extends DialogFragment {
                 Intent i = new HoverParameters.Builder(getActivity())
                         .request("086122ae")
 //                        .extra("accountname","42810007227")
-                        .extra("amount", user_price)
+                        .extra("amount", accessCharges)
                         .buildIntent();
                 startActivityForResult(i, 0);
             }
@@ -194,10 +235,8 @@ public class DialogPaymentSuccess extends DialogFragment {
             }
         });
 
-
         return root_view;
     }
-
 
 
     private void copyToClipper(String generatedPassword, View v) {
@@ -215,12 +254,12 @@ public class DialogPaymentSuccess extends DialogFragment {
         getActivity().finish();
     }
 
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         return dialog;
     }
 
@@ -248,7 +287,7 @@ public class DialogPaymentSuccess extends DialogFragment {
 //
 //    }
 
-    private void showSpinner(String message){
+    private void showSpinner(String message) {
         Snacky.builder()
 
                 .setActivity((Activity) getContext())

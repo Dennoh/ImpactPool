@@ -51,10 +51,14 @@ import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -64,7 +68,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 import de.mateware.snacky.Snacky;
 import tcds.or.tcdsapp.MainOnlineShopActivity;
+import tcds.or.tcdsapp.PlaceOrderActivity;
 import tcds.or.tcdsapp.R;
+import tcds.or.tcdsapp.ThankYouAccessActivity;
+import tcds.or.tcdsapp.ThankYouActivity;
 import tcds.or.tcdsapp.UndergraduateProgrammeActivity;
 
 public class MainActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener {
@@ -97,14 +104,53 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
     SharedPreferences.Editor editor;
     SharedPreferences sharedpreferences_AccessDialog;
     Dialog accessDialog;
+    String startdatetime;
+    public static final String MYPREFERENCES_ACCESSPAYMENT = "MyPreferences_ACCESSPAYMENT";
+    SharedPreferences sharedpreferences_AccessPayment;
+    long totalDays;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sliderLayout = findViewById(R.id.slider);
 
+        sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
+        if (sharedpreferences_AccessPayment.contains("startDate")) {
+            SharedPreferences sharedpreferences = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
+            startdatetime = sharedpreferences.getString("startDate", null);
+//            startdatetime = "2020-5-26 11:12:45";
+            try {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                Date past = format.parse(startdatetime);
+                Date now = new Date();
+                totalDays = TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime());
+            } catch (Exception j) {
+                j.printStackTrace();
+            }
+
+            if (totalDays >= 7) {
+                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
+                finish();
+                Log.e("mdaaaaaa", totalDays + " start charge");
+
+            } else {
+
+                Log.e("mdaaaaaa", totalDays + " continue using");
+
+            }
+
+        } else {
+            DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            String startdate = dateFormat2.format(new Date()).toString();
+            sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Activity.MODE_PRIVATE);
+            editor = sharedpreferences_AccessPayment.edit();
+            editor.putString("startDate", startdate);
+            editor.commit();
+        }
+
+
+        sliderLayout = findViewById(R.id.slider);
         progressBar = (ProgressBar) findViewById(R.id.my_progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
@@ -219,8 +265,8 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
 
 
     }
-    public void onSliderClick(BaseSliderView sliderview)
-    {
+
+    public void onSliderClick(BaseSliderView sliderview) {
         Intent myNewIntent = new Intent(getApplicationContext(), MainOnlineShopActivity.class);
         startActivity(myNewIntent);
     }

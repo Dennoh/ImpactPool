@@ -484,7 +484,7 @@
                                         android:gravity="center"
                                         android:maxLines="1"
                                         android:padding="5dp"
-                                        android:text="Career database"
+                                        android:text="Career Database"
                                         android:textAppearance="?android:textAppearanceSmall"
                                         android:textColor="@color/white" />
 
@@ -536,13 +536,10 @@
                                         android:gravity="center"
                                         android:maxLines="1"
                                         android:padding="5dp"
-                                        android:text="Career services"
+                                        android:text="Career Services"
                                         android:textAppearance="?android:textAppearanceSmall"
                                         android:textColor="@color/white" />
-
                                 </LinearLayout>
-
-
                             </LinearLayout>
 
                         </androidx.cardview.widget.CardView>

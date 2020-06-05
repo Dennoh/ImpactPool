@@ -14,10 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ThankYouAccessActivity"></activity>
         <activity
             android:name=".NewsDetailsActivity"
             android:label="Details"
-            android:parentActivityName=".mainapp.NewsActivity"></activity>
+            android:parentActivityName=".mainapp.NewsActivity" />
         <activity
             android:name=".mainapp.BrowserActivity"
             android:label="eBooks Service"
