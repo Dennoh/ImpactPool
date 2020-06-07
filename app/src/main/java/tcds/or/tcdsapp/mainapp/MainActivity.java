@@ -405,7 +405,7 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
                 sharedpreferences_AccessDialog = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, Context.MODE_PRIVATE);
                 if (sharedpreferences_AccessDialog.contains("NameOccupational")) {
                     mySharedPreferences = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, 0);
-                    startActivity(new Intent(getApplicationContext(), HighLearningInstitutionActivity.class));
+                    startActivity(new Intent(getApplicationContext(), OccupationalPathwaysActivity.class));
                 } else {
                     accessDialog = new Dialog(MainActivity.this);
                     accessDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -430,7 +430,7 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
                 sharedpreferences_AccessDialog = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, Context.MODE_PRIVATE);
                 if (sharedpreferences_AccessDialog.contains("NameUndergraduate")) {
                     mySharedPreferences = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, 0);
-                    startActivity(new Intent(getApplicationContext(), HighLearningInstitutionActivity.class));
+                    startActivity(new Intent(getApplicationContext(), UndergraduateProgrammeActivity.class));
                 } else {
                     accessDialog = new Dialog(MainActivity.this);
                     accessDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -455,7 +455,7 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
                 sharedpreferences_AccessDialog = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, Context.MODE_PRIVATE);
                 if (sharedpreferences_AccessDialog.contains("NameEconomicSector")) {
                     mySharedPreferences = getSharedPreferences(MYPREFERENCES_ACCESSDIALOG, 0);
-                    startActivity(new Intent(getApplicationContext(), HighLearningInstitutionActivity.class));
+                    startActivity(new Intent(getApplicationContext(), EconomicSectorsActivity.class));
                 } else {
                     accessDialog = new Dialog(MainActivity.this);
                     accessDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

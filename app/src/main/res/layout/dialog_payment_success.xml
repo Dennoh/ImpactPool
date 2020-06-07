@@ -47,7 +47,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="3dp"
                         android:gravity="center_vertical"
                         android:text=""
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -215,34 +215,35 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
                             android:text="Tshs"
+                            android:visibility="gone"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                             android:textColor="@color/grey_40" />
 
                     </LinearLayout>
 
-                    <RadioGroup
-                        android:id="@+id/radioGroupPaymentOptions"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+<!--                    <RadioGroup-->
+<!--                        android:id="@+id/radioGroupPaymentOptions"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:orientation="horizontal">-->
 
-                        <RadioButton
-                            android:id="@+id/radioMobilePayment"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:checked="true"
-                            android:text="Mobile Payment" />
+<!--                        <RadioButton-->
+<!--                            android:id="@+id/radioMobilePayment"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:checked="true"-->
+<!--                            android:text="Mobile Payment" />-->
 
 
-                        <RadioButton
-                            android:id="@+id/radioVisa"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="VISA / MASTERCARD" />
+<!--                        <RadioButton-->
+<!--                            android:id="@+id/radioVisa"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:text="VISA / MASTERCARD" />-->
 
-                    </RadioGroup>
+<!--                    </RadioGroup>-->
 
 
                     <TextView
@@ -255,16 +256,16 @@
                     </TextView>
 
 
-                    <TextView
-                        android:id="@+id/textViewVisaPayIntro"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="\nMake Payment by transfer to below Account with your VISA or MasterCard\n"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:visibility="gone">
+<!--                    <TextView-->
+<!--                        android:id="@+id/textViewVisaPayIntro"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="\nMake Payment by transfer to below Account with your VISA or MasterCard\n"-->
+<!--                        android:textColor="@color/colorPrimaryDark"-->
+<!--                        android:visibility="gone">-->
 
-                    </TextView>
+<!--                    </TextView>-->
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardMobilePay1"
@@ -424,51 +425,51 @@
 
                     </androidx.cardview.widget.CardView>
 
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/cardVisaPayment"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical|center_horizontal"
-                        android:layout_marginTop="5dp"
-                        android:visibility="gone"
-                        app:cardCornerRadius="6dp"
-                        app:cardElevation="0dp">
+<!--                    <androidx.cardview.widget.CardView-->
+<!--                        android:id="@+id/cardVisaPayment"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center_vertical|center_horizontal"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:visibility="gone"-->
+<!--                        app:cardCornerRadius="6dp"-->
+<!--                        app:cardElevation="0dp">-->
 
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:orientation="vertical">-->
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/visa_mastercard_in_iran" />
+<!--                            <ImageView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:src="@drawable/visa_mastercard_in_iran" />-->
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Account Name: PANCRAS KAFONGO MAYENGO\nAccount Number:015-224-159-7300\nBANK NAME: CRDB" />
+<!--                            <TextView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="Account Name: PANCRAS KAFONGO MAYENGO\nAccount Number:015-224-159-7300\nBANK NAME: CRDB" />-->
 
-                            <TextView
-                                android:id="@+id/textviewCopy"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_gravity="center"
-                                android:layout_margin="10dp"
-                                android:background="@drawable/roundthin"
-                                android:gravity="center"
-                                android:padding="7dp"
-                                android:text="  COPY TO CLIPBOARD    "
-                                android:textAppearance="?android:textAppearanceSmall"
-                                android:textColor="#212121" />
-
-
-                        </LinearLayout>
+<!--                            <TextView-->
+<!--                                android:id="@+id/textviewCopy"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_centerInParent="true"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:layout_margin="10dp"-->
+<!--                                android:background="@drawable/roundthin"-->
+<!--                                android:gravity="center"-->
+<!--                                android:padding="7dp"-->
+<!--                                android:text="  COPY TO CLIPBOARD    "-->
+<!--                                android:textAppearance="?android:textAppearanceSmall"-->
+<!--                                android:textColor="#212121" />-->
 
 
-                    </androidx.cardview.widget.CardView>
+<!--                        </LinearLayout>-->
+
+
+<!--                    </androidx.cardview.widget.CardView>-->
 
                 </LinearLayout>
 

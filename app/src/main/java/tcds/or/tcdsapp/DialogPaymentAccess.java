@@ -46,8 +46,8 @@ public class DialogPaymentAccess extends DialogFragment {
     RadioGroup radioGroupOptions;
     RadioGroup radioGroupPaymentOptions;
     String accessCharges;
-    TextView textViewMobilePayment, textViewVisaPayIntro, textviewCopy;
-    CardView cardMobilePay2, cardMobilePay1, cardVisaPayment;
+    TextView textViewMobilePayment;
+    CardView cardMobilePay2, cardMobilePay1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,34 +66,34 @@ public class DialogPaymentAccess extends DialogFragment {
         textViewMobilePayment = root_view.findViewById(R.id.textViewMobilePayment);
         cardMobilePay1 = root_view.findViewById(R.id.cardMobilePay1);
         cardMobilePay2 = root_view.findViewById(R.id.cardMobilePay2);
-        cardVisaPayment = root_view.findViewById(R.id.cardVisaPayment);
-        textViewVisaPayIntro = root_view.findViewById(R.id.textViewVisaPayIntro);
-        textviewCopy = root_view.findViewById(R.id.textviewCopy);
+//        cardVisaPayment = root_view.findViewById(R.id.cardVisaPayment);
+//        textViewVisaPayIntro = root_view.findViewById(R.id.textViewVisaPayIntro);
+//        textviewCopy = root_view.findViewById(R.id.textviewCopy);
 
         radioGroupOptions = root_view.findViewById(R.id.radioGroupOptions);
-        radioGroupPaymentOptions = root_view.findViewById(R.id.radioGroupPaymentOptions);
-        radioGroupPaymentOptions.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                int selectedId = radioGroupPaymentOptions.getCheckedRadioButtonId();
-
-                if (selectedId == R.id.radioMobilePayment) {
-                    textViewMobilePayment.setVisibility(View.VISIBLE);
-                    cardMobilePay1.setVisibility(View.VISIBLE);
-                    cardMobilePay2.setVisibility(View.VISIBLE);
-                    cardVisaPayment.setVisibility(View.GONE);
-                    textViewVisaPayIntro.setVisibility(View.GONE);
-                }
-
-                if (selectedId == R.id.radioVisa) {
-                    textViewMobilePayment.setVisibility(View.GONE);
-                    cardMobilePay1.setVisibility(View.GONE);
-                    cardMobilePay2.setVisibility(View.GONE);
-                    cardVisaPayment.setVisibility(View.VISIBLE);
-                    textViewVisaPayIntro.setVisibility(View.VISIBLE);
-                }
-            }
-        });
+//        radioGroupPaymentOptions = root_view.findViewById(R.id.radioGroupPaymentOptions);
+//        radioGroupPaymentOptions.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                int selectedId = radioGroupPaymentOptions.getCheckedRadioButtonId();
+//
+//                if (selectedId == R.id.radioMobilePayment) {
+//                    textViewMobilePayment.setVisibility(View.VISIBLE);
+//                    cardMobilePay1.setVisibility(View.VISIBLE);
+//                    cardMobilePay2.setVisibility(View.VISIBLE);
+//                    cardVisaPayment.setVisibility(View.GONE);
+//                    textViewVisaPayIntro.setVisibility(View.GONE);
+//                }
+//
+//                if (selectedId == R.id.radioVisa) {
+//                    textViewMobilePayment.setVisibility(View.GONE);
+//                    cardMobilePay1.setVisibility(View.GONE);
+//                    cardMobilePay2.setVisibility(View.GONE);
+//                    cardVisaPayment.setVisibility(View.VISIBLE);
+//                    textViewVisaPayIntro.setVisibility(View.VISIBLE);
+//                }
+//            }
+//        });
         int selectedId = radioGroupOptions.getCheckedRadioButtonId();
 
         if (selectedId == R.id.radioDaily) {
@@ -219,21 +219,6 @@ public class DialogPaymentAccess extends DialogFragment {
             }
         });
 
-//        ((FloatingActionButton) root_view.findViewById(R.id.fab2)).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                copyToClipper("0753453518",v);
-//
-//
-//            }
-//        });
-
-        textviewCopy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                copyToClipper("0152241597300", v);
-            }
-        });
 
         return root_view;
     }

@@ -119,7 +119,8 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
         loardCartItems();
 
-        final String[] deliveryOptions = {"Select Delivery Option", "Delivery to Specific Address", "Pickup from TCDS Pickup Points"};
+        final String[] deliveryOptions = {"Select Delivery Option", "Delivery to Specific Address", "Arusha Pickup Point", "Dar es Salaam Pickup Point", "Dodoma Pickup Point", "Morogoro Pickup Point", "Iringa Pickup Point"
+        };
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(PlaceOrderActivity.this, R.layout.row_spinner, R.id.textViewDealerName, deliveryOptions);
         spinnerDelibery.setAdapter(arrayAdapter);
         spinnerDelibery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -132,7 +133,31 @@ public class PlaceOrderActivity extends AppCompatActivity {
                     net_tt = sbt + delivery;
                     textviewNetPay.setText("Tsh " + decimalFormat.format(net_tt));
                     txtview_address.setVisibility(View.VISIBLE);
-                } else if (deliveryOption.equals("Pickup from TCDS Pickup Points")) {
+                } else if (deliveryOption.equals("Arusha Pickup Point")) {
+                    txtview_address.setVisibility(View.GONE);
+                    delievrycosts.setText("Tsh 00");
+                    delivery = 0;
+                    net_tt = sbt + delivery;
+                    textviewNetPay.setText("Tsh " + decimalFormat.format(net_tt));
+                } else if (deliveryOption.equals("Dar es Salaam Pickup Point")) {
+                    txtview_address.setVisibility(View.GONE);
+                    delievrycosts.setText("Tsh 00");
+                    delivery = 0;
+                    net_tt = sbt + delivery;
+                    textviewNetPay.setText("Tsh " + decimalFormat.format(net_tt));
+                } else if (deliveryOption.equals("Dodoma Pickup Point")) {
+                    txtview_address.setVisibility(View.GONE);
+                    delievrycosts.setText("Tsh 00");
+                    delivery = 0;
+                    net_tt = sbt + delivery;
+                    textviewNetPay.setText("Tsh " + decimalFormat.format(net_tt));
+                } else if (deliveryOption.equals("Morogoro Pickup Point")) {
+                    txtview_address.setVisibility(View.GONE);
+                    delievrycosts.setText("Tsh 00");
+                    delivery = 0;
+                    net_tt = sbt + delivery;
+                    textviewNetPay.setText("Tsh " + decimalFormat.format(net_tt));
+                } else if (deliveryOption.equals("Iringa Pickup Point")) {
                     txtview_address.setVisibility(View.GONE);
                     delievrycosts.setText("Tsh 00");
                     delivery = 0;
