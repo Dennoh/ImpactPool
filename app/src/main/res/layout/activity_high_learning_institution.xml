@@ -73,12 +73,13 @@
 
                 </LinearLayout>
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/spinnerSector"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:prompt="@string/agro_spinner_prompt" />
+                    app:ms_hint="Select Sector" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -95,13 +96,12 @@
                     android:textSize="12dp"
                     android:text="Region" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/spinnerRegion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-
-                    android:prompt="@string/agro_spinner_prompt" />
+                    app:ms_hint="Select Region" />
             </LinearLayout>
 
             <LinearLayout
@@ -118,12 +118,12 @@
                     android:layout_marginLeft="2dp"
                     android:text="District" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/spinnerDistrict"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:prompt="@string/agro_spinner_prompt" />
+                    app:ms_hint="Select Region" />
             </LinearLayout>
 
         </LinearLayout>

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import tcds.or.tcdsapp.R;
+import tcds.or.tcdsapp.UndergraduateProgrammeActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,8 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.apache.http.HttpResponse;
@@ -52,9 +56,11 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
     LinearLayout linearSearchDesign;
     ImageView imageViewCancel;
     String majoroccupation_data[];
-    SearchableSpinner spinnerMajorOccupation;
-    SearchableSpinner spinnerSubMajorOccupation;
-    SearchableSpinner spinnerMinnorOccupation;
+
+    MaterialSpinner spinnerMajorOccupation;
+    MaterialSpinner spinnerSubMajorOccupation;
+    MaterialSpinner spinnerMinnorOccupation;
+
     TextView textViewSearchResults, textViewClickToSearch;
     String search_MajorOccupation;
     String search_SubMajorOccupation;
@@ -74,6 +80,11 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
     Snackbar snack;
     ProgressBar progressBar;
 
+
+    ArrayAdapter<String> adapterMajorOccupation;
+    ArrayAdapter<String> adapterSubMajorOccupation;
+    ArrayAdapter<String> adapterMinnorOccupation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,9 +98,9 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
         spinnerMajorOccupation = findViewById(R.id.spinnerSector);
         spinnerSubMajorOccupation = findViewById(R.id.spinnerRegion);
         spinnerMinnorOccupation = findViewById(R.id.spinnerDistrict);
-        spinnerMajorOccupation.setTitle("Main Sector");
-        spinnerSubMajorOccupation.setTitle("Sub Main Sectors");
-        spinnerMinnorOccupation.setTitle("Sub Sectors");
+//        spinnerMajorOccupation.setTitle("Main Sector");
+//        spinnerSubMajorOccupation.setTitle("Sub Main Sectors");
+//        spinnerMinnorOccupation.setTitle("Sub Sectors");
 
         progressBar = (ProgressBar) findViewById(R.id.my_progressBar);
         progressBar.setVisibility(View.VISIBLE);
@@ -102,6 +113,39 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
         search_SubMajorOccupation = "All";
         search_MinnorOccupation = "All";
 
+
+        spinnerMajorOccupation.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+//                search_sector = sector_data[position];
+                search_MajorOccupation = item;
+                new GetFilters().execute();
+                seachByCategory();
+            }
+        });
+
+
+        spinnerSubMajorOccupation.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+//                search_sector = sector_data[position];
+                search_SubMajorOccupation = item;
+                new GetFilters().execute();
+                seachByCategory();
+            }
+        });
+
+        spinnerMinnorOccupation.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+//                search_sector = sector_data[position];
+                search_MinnorOccupation = item;
+                new GetFilters().execute();
+                seachByCategory();
+            }
+        });
+
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerListLearningInst);
         recyclerView.setHasFixedSize(true);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
@@ -111,6 +155,7 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
         receivedstate = Boolean.toString(haveNetworkConnection());
         if (receivedstate.equalsIgnoreCase("true")) {
             accessWebService_EconomicSectors();
+            textViewSearchResults.setVisibility(View.VISIBLE);
             swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
@@ -316,7 +361,6 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
 
 
     String php_response_majoroccupation;
-
     class GetMajorOccupation extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
@@ -359,24 +403,25 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
             Log.e("dataa12", php_response_majoroccupation + "");
             php_response_majoroccupation = "All#" + php_response_majoroccupation;
             majoroccupation_data = php_response_majoroccupation.split("#");
+            spinnerMajorOccupation.setItems(majoroccupation_data);
 
 
-            ArrayAdapter<String> adapterMajorOccupation = new ArrayAdapter<String>(OccupationalPathwaysActivity.this, R.layout.row_spinner, R.id.textViewDealerName, majoroccupation_data);
-            spinnerMajorOccupation.setAdapter(adapterMajorOccupation);
-            spinnerMajorOccupation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    search_MajorOccupation = majoroccupation_data[position];
-                    seachByCategory();
-                    new GetSubMajorOccupation().execute();
-
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    search_MajorOccupation = "All";
-                }
-            });
+//            ArrayAdapter<String> adapterMajorOccupation = new ArrayAdapter<String>(OccupationalPathwaysActivity.this, R.layout.row_spinner, R.id.textViewDealerName, majoroccupation_data);
+//            spinnerMajorOccupation.setAdapter(adapterMajorOccupation);
+//            spinnerMajorOccupation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                @Override
+//                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                    search_MajorOccupation = majoroccupation_data[position];
+//                    seachByCategory();
+//                    new GetSubMajorOccupation().execute();
+//
+//                }
+//
+//                @Override
+//                public void onNothingSelected(AdapterView<?> parent) {
+//                    search_MajorOccupation = "All";
+//                }
+//            });
 
 
         }
@@ -425,22 +470,24 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
             php_response_subMajorOccupation = "All#" + php_response_subMajorOccupation;
 
             subMajorOccupation_data = php_response_subMajorOccupation.split("#");
+            spinnerSubMajorOccupation.setItems(subMajorOccupation_data);
 
-            ArrayAdapter<String> adapterSubMajorOccupation = new ArrayAdapter<String>(OccupationalPathwaysActivity.this, R.layout.row_spinner, R.id.textViewDealerName, subMajorOccupation_data);
-            spinnerSubMajorOccupation.setAdapter(adapterSubMajorOccupation);
-            spinnerSubMajorOccupation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    search_SubMajorOccupation = subMajorOccupation_data[position];
-                    seachByCategory();
-                    new GetMinnorOccupation().execute();
-                }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    search_SubMajorOccupation = "All";
-                }
-            });
+//            ArrayAdapter<String> adapterSubMajorOccupation = new ArrayAdapter<String>(OccupationalPathwaysActivity.this, R.layout.row_spinner, R.id.textViewDealerName, subMajorOccupation_data);
+//            spinnerSubMajorOccupation.setAdapter(adapterSubMajorOccupation);
+//            spinnerSubMajorOccupation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                @Override
+//                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                    search_SubMajorOccupation = subMajorOccupation_data[position];
+//                    seachByCategory();
+//                    new GetMinnorOccupation().execute();
+//                }
+//
+//                @Override
+//                public void onNothingSelected(AdapterView<?> parent) {
+//                    search_SubMajorOccupation = "All";
+//                }
+//            });
 
 
         }
@@ -485,23 +532,97 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             php_response_MinnorOccupation = "All#" + php_response_MinnorOccupation;
-
             minnorOccupation_data = php_response_MinnorOccupation.split("#");
+            spinnerMinnorOccupation.setItems(minnorOccupation_data);
 
-            ArrayAdapter<String> adapterMinnorOccupation = new ArrayAdapter<String>(OccupationalPathwaysActivity.this, R.layout.row_spinner, R.id.textViewDealerName, minnorOccupation_data);
+
+//            ArrayAdapter<String> adapterMinnorOccupation = new ArrayAdapter<String>(OccupationalPathwaysActivity.this, R.layout.row_spinner, R.id.textViewDealerName, minnorOccupation_data);
+//            spinnerMinnorOccupation.setAdapter(adapterMinnorOccupation);
+//            spinnerMinnorOccupation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                @Override
+//                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                    seachByCategory();
+//                    search_MinnorOccupation = minnorOccupation_data[position];
+//                }
+//
+//                @Override
+//                public void onNothingSelected(AdapterView<?> parent) {
+//                    search_MinnorOccupation = "All";
+//                }
+//            });
+        }
+    }
+
+
+    String filter_results;
+    String[] dataz;
+    class GetFilters extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+
+                /* seting up the connection and send data with url */
+                // create a http default client - initialize the HTTp client
+
+                DefaultHttpClient httpclient = new DefaultHttpClient();
+
+                HttpPost httppost = new HttpPost("http://mbinitiative.com/impactpoolMobile/getfiltersOccupational.php");
+
+                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+                nameValuePairs.add(new BasicNameValuePair("majorOccupation", search_MajorOccupation));
+                nameValuePairs.add(new BasicNameValuePair("subMajorOccupation", search_SubMajorOccupation));
+                nameValuePairs.add(new BasicNameValuePair("minnorOccupation", search_MinnorOccupation));
+
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                HttpResponse response = httpclient.execute(httppost);
+
+                InputStream inputStream = response.getEntity().getContent();
+
+                BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream), 4096);
+                String line;
+                StringBuilder sb = new StringBuilder();
+                while ((line = rd.readLine()) != null) {
+                    sb.append(line);
+                }
+                rd.close();
+                filter_results = sb.toString();
+                inputStream.close();
+
+            } catch (Exception e) {
+                Toast.makeText(OccupationalPathwaysActivity.this, "Try Again", Toast.LENGTH_LONG).show();
+            }
+
+            return filter_results;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.e("yeeeeeee34", "filter_results " + filter_results);
+
+            dataz = filter_results.split("@");
+
+            php_response_majoroccupation = dataz[0];
+            Log.e("gegege34", php_response_majoroccupation);
+            majoroccupation_data = php_response_majoroccupation.split("#");
+            adapterMajorOccupation = new ArrayAdapter<String>(OccupationalPathwaysActivity.this, R.layout.row_spinner, R.id.textViewDealerName, majoroccupation_data);
+            spinnerMajorOccupation.setAdapter(adapterMajorOccupation);
+
+            php_response_subMajorOccupation = dataz[1];
+            Log.e("gegege34", php_response_subMajorOccupation);
+            subMajorOccupation_data = php_response_subMajorOccupation.split("#");
+            adapterSubMajorOccupation = new ArrayAdapter<String>(OccupationalPathwaysActivity.this, R.layout.row_spinner, R.id.textViewDealerName, subMajorOccupation_data);
+            spinnerSubMajorOccupation.setAdapter(adapterSubMajorOccupation);
+
+
+            php_response_MinnorOccupation = dataz[2];
+            Log.e("gegege34", php_response_MinnorOccupation);
+            minnorOccupation_data = php_response_MinnorOccupation.split("#");
+            adapterMinnorOccupation = new ArrayAdapter<String>(OccupationalPathwaysActivity.this, R.layout.row_spinner, R.id.textViewDealerName, minnorOccupation_data);
             spinnerMinnorOccupation.setAdapter(adapterMinnorOccupation);
-            spinnerMinnorOccupation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    seachByCategory();
-                    search_MinnorOccupation = minnorOccupation_data[position];
-                }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    search_MinnorOccupation = "All";
-                }
-            });
         }
     }
 
@@ -521,4 +642,20 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
         }
         return haveConnectedWifi || haveConnectedMobile;
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuClearSearch:
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

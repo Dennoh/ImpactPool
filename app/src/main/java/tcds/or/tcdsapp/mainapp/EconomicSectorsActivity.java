@@ -14,6 +14,8 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.apache.http.HttpResponse;
@@ -52,9 +55,9 @@ public class EconomicSectorsActivity extends AppCompatActivity {
     LinearLayout linearSearchDesign;
     ImageView imageViewCancel;
     String mainsector_data[];
-    SearchableSpinner spinnerMainSector;
-    SearchableSpinner spinnerSubMainSector;
-    SearchableSpinner spinnerSubSector;
+    MaterialSpinner spinnerMainSector;
+    MaterialSpinner spinnerSubMainSector;
+    MaterialSpinner spinnerSubSector;
     TextView textViewSearchResults, textViewClickToSearch, textViewCount;
     String search_Mainsector;
     String search_SubMainSector;
@@ -77,6 +80,11 @@ public class EconomicSectorsActivity extends AppCompatActivity {
     String searched_activityClass;
     String activitygroup;
 
+
+    ArrayAdapter<String> adapterSector;
+    ArrayAdapter<String> adapterSubMainSector;
+    ArrayAdapter<String> adapterSubSector;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,18 +99,53 @@ public class EconomicSectorsActivity extends AppCompatActivity {
         spinnerMainSector = findViewById(R.id.spinnerSector);
         spinnerSubMainSector = findViewById(R.id.spinnerRegion);
         spinnerSubSector = findViewById(R.id.spinnerDistrict);
-        spinnerMainSector.setTitle("Main Sector");
-        spinnerSubMainSector.setTitle("Sub Main Sectors");
-        spinnerSubSector.setTitle("Sub Sectors");
+//        spinnerMainSector.setTitle("Main Sector");
+//        spinnerSubMainSector.setTitle("Sub Main Sectors");
+//        spinnerSubSector.setTitle("Sub Sectors");
 
         progressBar = (ProgressBar) findViewById(R.id.my_progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
         new GetMainSectors().execute();
+        new GetSubMainSector().execute();
+        new GetSubSector().execute();
 
         search_Mainsector = "All";
         search_SubMainSector = "All";
         search_SubSector = "All";
+
+
+        spinnerMainSector.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+//                search_sector = sector_data[position];
+                search_Mainsector = item;
+                new GetFilters().execute();
+                seachByCategory();
+            }
+        });
+
+
+        spinnerSubMainSector.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+//                search_sector = sector_data[position];
+                search_SubMainSector = item;
+                new GetFilters().execute();
+                seachByCategory();
+            }
+        });
+
+        spinnerSubSector.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+//                search_sector = sector_data[position];
+                search_SubSector = item;
+                new GetFilters().execute();
+                seachByCategory();
+            }
+        });
+
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerListLearningInst);
         recyclerView.setHasFixedSize(true);
@@ -191,6 +234,22 @@ public class EconomicSectorsActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuClearSearch:
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void seachByCategory() {
         textViewSearchResults.setVisibility(View.VISIBLE);
         if (search_Mainsector.isEmpty()) {
@@ -236,9 +295,7 @@ public class EconomicSectorsActivity extends AppCompatActivity {
     }
 
 
-
-
-        int tzz = 0;
+    int tzz = 0;
     JSONArray jsonMainNode;
 
     private class MyTask_EconomicSectors extends AsyncTask<String, Void, List> {
@@ -324,8 +381,9 @@ public class EconomicSectorsActivity extends AppCompatActivity {
 
             new GetActivityGroupDetails().execute();
 
+
         } else {
-            textViewCount.setVisibility(View.GONE);
+//            textViewCount.setVisibility(View.GONE);
             ListDrawer_Undergraduateprog(customList_EconomicSectors);
             progressBar.setIndeterminate(false);
             progressBar.setVisibility(View.GONE);
@@ -396,24 +454,24 @@ public class EconomicSectorsActivity extends AppCompatActivity {
             Log.e("dataa12", php_response_mainsector + "");
             php_response_mainsector = "All#" + php_response_mainsector;
             mainsector_data = php_response_mainsector.split("#");
+            spinnerMainSector.setItems(mainsector_data);
 
 
-            ArrayAdapter<String> adapterSector = new ArrayAdapter<String>(EconomicSectorsActivity.this, R.layout.row_spinner, R.id.textViewDealerName, mainsector_data);
-            spinnerMainSector.setAdapter(adapterSector);
-            spinnerMainSector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    search_Mainsector = mainsector_data[position];
-                    seachByCategory();
-                    new GetSubMainSector().execute();
-
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    search_Mainsector = "All";
-                }
-            });
+//            ArrayAdapter<String> adapterSector = new ArrayAdapter<String>(EconomicSectorsActivity.this, R.layout.row_spinner, R.id.textViewDealerName, mainsector_data);
+//            spinnerMainSector.setAdapter(adapterSector);
+//            spinnerMainSector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                @Override
+//                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                    search_Mainsector = mainsector_data[position];
+//                    seachByCategory();
+//
+//                }
+//
+//                @Override
+//                public void onNothingSelected(AdapterView<?> parent) {
+//                    search_Mainsector = "All";
+//                }
+//            });
 
 
         }
@@ -462,22 +520,22 @@ public class EconomicSectorsActivity extends AppCompatActivity {
             php_response_subMainSector = "All#" + php_response_subMainSector;
 
             subMainsector_data = php_response_subMainSector.split("#");
+            spinnerSubMainSector.setItems(subMainsector_data);
 
-            ArrayAdapter<String> adapterSubMainSector = new ArrayAdapter<String>(EconomicSectorsActivity.this, R.layout.row_spinner, R.id.textViewDealerName, subMainsector_data);
-            spinnerSubMainSector.setAdapter(adapterSubMainSector);
-            spinnerSubMainSector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    search_SubMainSector = subMainsector_data[position];
-                    seachByCategory();
-                    new GetSubSector().execute();
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    search_SubMainSector = "All";
-                }
-            });
+//            ArrayAdapter<String> adapterSubMainSector = new ArrayAdapter<String>(EconomicSectorsActivity.this, R.layout.row_spinner, R.id.textViewDealerName, subMainsector_data);
+//            spinnerSubMainSector.setAdapter(adapterSubMainSector);
+//            spinnerSubMainSector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                @Override
+//                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                    search_SubMainSector = subMainsector_data[position];
+//                    seachByCategory();
+//                }
+//
+//                @Override
+//                public void onNothingSelected(AdapterView<?> parent) {
+//                    search_SubMainSector = "All";
+//                }
+//            });
 
 
         }
@@ -524,22 +582,23 @@ public class EconomicSectorsActivity extends AppCompatActivity {
             php_response_SubSector = "All#" + php_response_SubSector;
 
             subSector_data = php_response_SubSector.split("#");
+            spinnerSubSector.setItems(subSector_data);
 
-            ArrayAdapter<String> adapterSubSector = new ArrayAdapter<String>(EconomicSectorsActivity.this, R.layout.row_spinner, R.id.textViewDealerName, subSector_data);
-            spinnerSubSector.setAdapter(adapterSubSector);
-            spinnerSubSector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    search_SubSector = subSector_data[position];
-                    seachByCategory();
-
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    search_SubSector = "All";
-                }
-            });
+//            ArrayAdapter<String> adapterSubSector = new ArrayAdapter<String>(EconomicSectorsActivity.this, R.layout.row_spinner, R.id.textViewDealerName, subSector_data);
+//            spinnerSubSector.setAdapter(adapterSubSector);
+//            spinnerSubSector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                @Override
+//                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                    search_SubSector = subSector_data[position];
+//                    seachByCategory();
+//
+//                }
+//
+//                @Override
+//                public void onNothingSelected(AdapterView<?> parent) {
+//                    search_SubSector = "All";
+//                }
+//            });
         }
     }
 
@@ -613,5 +672,79 @@ public class EconomicSectorsActivity extends AppCompatActivity {
         }
         return haveConnectedWifi || haveConnectedMobile;
     }
+
+    String filter_results;
+    String[] dataz;
+
+    class GetFilters extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+
+                /* seting up the connection and send data with url */
+                // create a http default client - initialize the HTTp client
+
+                DefaultHttpClient httpclient = new DefaultHttpClient();
+
+                HttpPost httppost = new HttpPost("http://mbinitiative.com/impactpoolMobile/getfiltersEconomicSectors.php");
+
+                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+                nameValuePairs.add(new BasicNameValuePair("mainsector", search_Mainsector));
+                nameValuePairs.add(new BasicNameValuePair("subMainSector", search_SubMainSector));
+                nameValuePairs.add(new BasicNameValuePair("subSector", search_SubSector));
+
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                HttpResponse response = httpclient.execute(httppost);
+
+                InputStream inputStream = response.getEntity().getContent();
+
+                BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream), 4096);
+                String line;
+                StringBuilder sb = new StringBuilder();
+                while ((line = rd.readLine()) != null) {
+                    sb.append(line);
+                }
+                rd.close();
+                filter_results = sb.toString();
+                inputStream.close();
+
+            } catch (Exception e) {
+                Toast.makeText(EconomicSectorsActivity.this, "Try Again", Toast.LENGTH_LONG).show();
+            }
+
+            return filter_results;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.e("yeeeeeee34", "filter_results " + filter_results);
+
+            dataz = filter_results.split("@");
+
+            php_response_mainsector = dataz[0];
+            Log.e("gegege34", php_response_mainsector);
+            mainsector_data = php_response_mainsector.split("#");
+            adapterSector = new ArrayAdapter<String>(EconomicSectorsActivity.this, R.layout.row_spinner, R.id.textViewDealerName, mainsector_data);
+            spinnerMainSector.setAdapter(adapterSector);
+
+            php_response_subMainSector = dataz[1];
+            Log.e("gegege34", php_response_subMainSector);
+            subMainsector_data = php_response_subMainSector.split("#");
+            adapterSubMainSector = new ArrayAdapter<String>(EconomicSectorsActivity.this, R.layout.row_spinner, R.id.textViewDealerName, subMainsector_data);
+            spinnerSubMainSector.setAdapter(adapterSubMainSector);
+
+
+            php_response_SubSector = dataz[2];
+            Log.e("gegege34", php_response_SubSector);
+            subSector_data = php_response_SubSector.split("#");
+            adapterSubSector = new ArrayAdapter<String>(EconomicSectorsActivity.this, R.layout.row_spinner, R.id.textViewDealerName, subSector_data);
+            spinnerSubSector.setAdapter(adapterSubSector);
+
+        }
+    }
+
 }
 

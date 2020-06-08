@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".mainapp.OccupationalPathwaysActivity">
-
+    tools:context=".SpinnerDemoActivity">
     <LinearLayout
         android:id="@+id/linearSearchDesign"
         android:layout_width="match_parent"
@@ -33,20 +32,20 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
                         android:layout_weight="1"
                         android:padding="5dp"
-                        android:text="Major Occupations"
-                        android:textSize="12dp" />
+                        android:layout_marginLeft="2dp"
+                        android:text="Main Sector" />
 
 
                 </LinearLayout>
 
-                <com.jaredrummler.materialspinner.MaterialSpinner
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/spinnerSector"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:ms_hint="Select Major" />
+                    android:padding="5dp"
+                    android:prompt="@string/agro_spinner_prompt" />
             </LinearLayout>
 
             <LinearLayout
@@ -58,16 +57,17 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
                     android:padding="5dp"
-                    android:text="Sub Major Occupation"
-                    android:textSize="12dp" />
+                    android:layout_marginLeft="2dp"
+                    android:text="Region" />
 
-                <com.jaredrummler.materialspinner.MaterialSpinner
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/spinnerRegion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:ms_hint="Select Sub Major" />
+                    android:padding="5dp"
+
+                    android:prompt="@string/agro_spinner_prompt" />
             </LinearLayout>
 
             <LinearLayout
@@ -79,56 +79,43 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
                     android:padding="5dp"
-                    android:text="Minor Occupation"
-                    android:textSize="12dp" />
+                    android:layout_marginLeft="2dp"
+                    android:text="Institution" />
 
-
-                <com.jaredrummler.materialspinner.MaterialSpinner
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/spinnerDistrict"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:ms_hint="Select Minor" />
+                    android:padding="5dp"
+                    android:prompt="@string/agro_spinner_prompt" />
             </LinearLayout>
 
 
         </LinearLayout>
 
 
+        <!--        <TextView-->
+        <!--            android:id="@+id/textviewSearch"-->
+        <!--            android:layout_width="160dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_centerInParent="true"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            android:background="@drawable/round"-->
+        <!--            android:gravity="center"-->
+        <!--            android:padding="5dp"-->
+        <!--            android:text="Search"-->
+        <!--            android:textAppearance="?android:textAppearanceSmall"-->
+        <!--            android:textColor="#212121"-->
+        <!--            android:textStyle="bold" />-->
+
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/my_progressBar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="fill_parent"
+    <Button
+        android:id="@+id/buttonSearch"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:indeterminate="true"
-        android:progressDrawable="@drawable/prog_color" />
+        android:text="Search" />
 
-    <TextView
-        android:id="@+id/textViewSearchResults"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_youtube_searched_for_black_24dp"
-        android:padding="5dp"
-        android:text="Search Results"
-        android:textColor="@color/colorPrimaryDark"
-        android:visibility="gone" />
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerListLearningInst"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#ffffff" />
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

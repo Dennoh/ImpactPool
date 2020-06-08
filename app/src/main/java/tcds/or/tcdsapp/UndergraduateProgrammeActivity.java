@@ -16,21 +16,29 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,14 +70,22 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
     ProgressBar progressBar;
     String search_sector;
     String search_region;
-    String search_district;
+    String search_institution;
     LinearLayout linearSearchDesign;
     ImageView imageViewCancel;
     String sector_data[];
-    SearchableSpinner spinnerSector;
-    SearchableSpinner spinnerRegion;
-    SearchableSpinner spinnerDistrict;
+    MaterialSpinner spinner;
+
+
+    MaterialSpinner spinnerSector;
+    MaterialSpinner spinnerRegion;
+    MaterialSpinner spinnerInstitution;
+
     TextView textViewSearchResults, textViewClickToSearch;
+    ArrayAdapter<String> adapterInstitution;
+    ArrayAdapter<String> adapterRegion;
+    ArrayAdapter<String> adapterSector;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,12 +95,15 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
         imageViewCancel = findViewById(R.id.imageViewCancel);
         textViewSearchResults = findViewById(R.id.textViewSearchResults);
         textViewClickToSearch = findViewById(R.id.textViewClickToSearch);
+        spinnerSector = findViewById(R.id.spinnerSector);
+        spinnerRegion = findViewById(R.id.spinnerRegion);
+        spinnerInstitution = findViewById(R.id.spinnerDistrict);
 
         progressBar = (ProgressBar) findViewById(R.id.my_progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
         new GetSectors().execute();
-        new GetDistrict().execute();
+        new GetInstitution().execute();
         new GetRegion().execute();
 
         textViewClickToSearch.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +123,76 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
         });
         search_sector = "All";
         search_region = "All";
-        search_district = "All";
+        search_institution = "All";
+
+
+        spinnerSector.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+//                search_sector = sector_data[position];
+                search_sector = item;
+                new GetFilters().execute();
+                seachByCategory();
+            }
+        });
+
+
+        spinnerRegion.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                search_region = item;
+                new GetFilters().execute();
+                seachByCategory();
+            }
+        });
+
+        spinnerInstitution.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                search_institution = item;
+                new GetFilters().execute();
+                seachByCategory();
+            }
+        });
+
+//               spinnerRegion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//                search_region = region_data[position];
+//                Log.e("yeeeeeee34", search_sector + "");
+//                Log.e("yeeeeeee34", search_region + "");
+//                Log.e("yeeeeeee34", search_institution + "");
+//                new GetFilters().execute();
+//                seachByCategory();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+////                search_region = "All";
+//
+//            }
+//        });
+//
+//
+//        spinnerInstitution.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                search_institution = institution_data[position];
+//                Log.e("yeeeeeee34", search_sector + "");
+//                Log.e("yeeeeeee34", search_region + "");
+//                Log.e("yeeeeeee34", search_institution + "");
+//                new GetFilters().execute();
+//                seachByCategory();
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+////                search_institution = "All";
+//            }
+//        });
+
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerListLearningInst);
         recyclerView.setHasFixedSize(true);
@@ -116,6 +204,8 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
         if (receivedstate.equalsIgnoreCase("true")) {
 
             accessWebService_Undergraduateprog();
+            textViewSearchResults.setVisibility(View.VISIBLE);
+
             swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
@@ -143,67 +233,25 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
             snack.show();
         }
 
-        spinnerSector = findViewById(R.id.spinnerSector);
-        spinnerRegion = findViewById(R.id.spinnerRegion);
-        spinnerDistrict = findViewById(R.id.spinnerDistrict);
-        spinnerSector.setTitle("Select Sector");
-        spinnerRegion.setTitle("Select Region");
-        spinnerDistrict.setTitle("Select District");
 
-//        textviewSearch.setOnClickListener(new View.OnClickListener() {
+//        buttonSearch.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                textViewSearchResults.setVisibility(View.VISIBLE);
-//                if (search_district.isEmpty()) {
-//                    search_district = "All";
-//                }
-//                if (search_region.isEmpty()) {
-//                    search_region = "All";
-//                }
-//                if (search_sector.isEmpty()) {
-//                    search_sector = "All";
-//                }
-//
-//                receivedstate = Boolean.toString(haveNetworkConnection());
-//                if (receivedstate.equalsIgnoreCase("true")) {
-//
-//                    accessWebService_LearningInst_Category();
-//                    swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//                        @Override
-//                        public void onRefresh() {
-//                            progressBar.setVisibility(View.VISIBLE);
-//                            progressBar.setIndeterminate(true);
-//                            accessWebService_LearningInst_Category();
-//                            swipeRefreshLayout.setRefreshing(false);
-//                        }
-//                    });
-//                } else {
-//                    progressBar.setIndeterminate(false);
-//                    progressBar.setVisibility(View.GONE);
-//                    snack = Snackbar.make(UndergraduateProgrammeActivity.this.findViewById(android.R.id.content), "No internet. Check Network Settings!", Snackbar.LENGTH_LONG).setAction("RETRY", new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            snack.dismiss();
-//                            startActivity(new Intent(UndergraduateProgrammeActivity.this, MainActivity.class));
-//                        }
-//                    });
-//                    View myv = snack.getView();
-//                    myv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                    ((TextView) myv.findViewById(R.id.snackbar_text)).setTextColor(Color.WHITE);
-//                    ((TextView) myv.findViewById(R.id.snackbar_action)).setTextColor(Color.WHITE);
-//                    snack.setDuration(Snackbar.LENGTH_INDEFINITE);
-//                    snack.show();
-//                }
+//                Log.e("yeeeeeee34", search_sector + "");
+//                Log.e("yeeeeeee34", search_region + "");
+//                Log.e("yeeeeeee34", search_institution + "");
+//                new GetFilters().execute();
+//                seachByCategory();
 //            }
 //        });
-
 
     }
 
     public void seachByCategory() {
         textViewSearchResults.setVisibility(View.VISIBLE);
-        if (search_district.isEmpty()) {
-            search_district = "All";
+
+        if (search_institution.isEmpty()) {
+            search_institution = "All";
         }
         if (search_region.isEmpty()) {
             search_region = "All";
@@ -211,7 +259,6 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
         if (search_sector.isEmpty()) {
             search_sector = "All";
         }
-
         receivedstate = Boolean.toString(haveNetworkConnection());
         if (receivedstate.equalsIgnoreCase("true")) {
 
@@ -315,7 +362,7 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
         Random rand = new Random();
         int n = rand.nextInt(50000000) + 1;
         String randomstamp = "70timestamp" + n;
-        URL_UNDERGRADUATE = "http://mbinitiative.com/impactpoolMobile/getundergraduate_bycategory.php?tmps=" + randomstamp + "&sector=" + search_sector + "&region=" + search_region + "&district=" + search_district;
+        URL_UNDERGRADUATE = "http://mbinitiative.com/impactpoolMobile/getundergraduate_bycategory.php?tmps=" + randomstamp + "&sector=" + search_sector + "&region=" + search_region + "&district=" + search_institution;
         taskUndergraduateprog = new MyTask_Undergraduateprog();
         taskUndergraduateprog.execute(new String[]{URL_UNDERGRADUATE});
     }
@@ -328,31 +375,8 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
         recyclerView.setAdapter(recyclerViewAdapter_undergraduateprog);
     }
 
-    private boolean haveNetworkConnection() {
-        boolean haveConnectedWifi = false;
-        boolean haveConnectedMobile = false;
-
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
-        for (NetworkInfo ni : netInfo) {
-            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
-                if (ni.isConnected())
-                    haveConnectedWifi = true;
-            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
-                if (ni.isConnected())
-                    haveConnectedMobile = true;
-        }
-        return haveConnectedWifi || haveConnectedMobile;
-    }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.learningmenu, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
-
-
     String php_response_sector;
+
     class GetSectors extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
@@ -361,14 +385,11 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
                 DefaultHttpClient httpclient = new DefaultHttpClient();
 
                 HttpPost httppost = new HttpPost("http://mbinitiative.com/impactpoolMobile/getsector_under.php");
-
                 // Execute HTTP Post Request
                 HttpResponse response = httpclient.execute(httppost);
-
                 InputStream inputStream = response.getEntity().getContent();
 
-                BufferedReader rd = new BufferedReader(new InputStreamReader(
-                        inputStream), 4096);
+                BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream), 4096);
                 String line;
                 StringBuilder sb = new StringBuilder();
 
@@ -393,22 +414,11 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            Log.e("pooo9898", "here");
             php_response_sector = "All#" + php_response_sector;
             sector_data = php_response_sector.split("#");
-
-            ArrayAdapter<String> adapterSector = new ArrayAdapter<String>(UndergraduateProgrammeActivity.this, R.layout.row_spinner, R.id.textViewDealerName, sector_data);
-            spinnerSector.setAdapter(adapterSector);
-            spinnerSector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    search_sector = sector_data[position];
-                    seachByCategory();
-                }
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    search_sector = "All";
-                }
-            });
+            //adapterSector = new ArrayAdapter<String>(UndergraduateProgrammeActivity.this, R.layout.row_spinner, R.id.textViewDealerName, sector_data);
+            spinnerSector.setItems(sector_data);
 
 
         }
@@ -451,34 +461,16 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             php_response_region = "All#" + php_response_region;
-
             region_data = php_response_region.split("#");
-
-            ArrayAdapter<String> adapterRegion = new ArrayAdapter<String>(UndergraduateProgrammeActivity.this, R.layout.row_spinner, R.id.textViewDealerName, region_data);
-            spinnerRegion.setAdapter(adapterRegion);
-            spinnerRegion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    search_region = region_data[position];
-                    seachByCategory();
-
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    search_region = "All";
-
-                }
-            });
-
-
+//            adapterRegion = new ArrayAdapter<String>(UndergraduateProgrammeActivity.this, R.layout.row_spinner, R.id.textViewDealerName, region_data);
+            spinnerRegion.setItems(region_data);
         }
     }
 
-    String district_data[];
-    String php_response_district;
+    String institution_data[];
+    String php_response_institution;
 
-    class GetDistrict extends AsyncTask<String, String, String> {
+    class GetInstitution extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
             try {
@@ -495,7 +487,7 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
                     sb.append(line);
                 }
                 rd.close();
-                php_response_district = sb.toString();
+                php_response_institution = sb.toString();
                 inputStream.close();
 
             } catch (Exception e) {
@@ -503,32 +495,159 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
                         "Error inside set:" + e.toString(), Toast.LENGTH_LONG)
                         .show();
             }
-            return php_response_district;
+            return php_response_institution;
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            php_response_district = "All#" + php_response_district;
+            php_response_institution = "All#" + php_response_institution;
+            institution_data = php_response_institution.split("#");
+//            adapterInstitution = new ArrayAdapter<String>(UndergraduateProgrammeActivity.this, R.layout.row_spinner, R.id.textViewDealerName, institution_data);
+            spinnerInstitution.setItems(institution_data);
 
-            district_data = php_response_district.split("#");
-
-
-            ArrayAdapter<String> adapterDistrict = new ArrayAdapter<String>(UndergraduateProgrammeActivity.this, R.layout.row_spinner, R.id.textViewDealerName, district_data);
-            spinnerDistrict.setAdapter(adapterDistrict);
-            spinnerDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    search_district = district_data[position];
-                    seachByCategory();
-
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    search_district = "All";
-                }
-            });
         }
     }
+
+
+    public void changeFilterByCategory() {
+        textViewSearchResults.setVisibility(View.VISIBLE);
+        if (search_institution.isEmpty()) {
+            search_institution = "All";
+        }
+        if (search_region.isEmpty()) {
+            search_region = "All";
+        }
+        if (search_sector.isEmpty()) {
+            search_sector = "All";
+        }
+
+        receivedstate = Boolean.toString(haveNetworkConnection());
+        if (receivedstate.equalsIgnoreCase("true")) {
+
+
+        } else {
+            progressBar.setIndeterminate(false);
+            progressBar.setVisibility(View.GONE);
+            snack = Snackbar.make(UndergraduateProgrammeActivity.this.findViewById(android.R.id.content), "No internet. Check Network Settings!", Snackbar.LENGTH_LONG).setAction("RETRY", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    snack.dismiss();
+                    startActivity(new Intent(UndergraduateProgrammeActivity.this, MainActivity.class));
+                }
+            });
+            View myv = snack.getView();
+            myv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            ((TextView) myv.findViewById(R.id.snackbar_text)).setTextColor(Color.WHITE);
+            ((TextView) myv.findViewById(R.id.snackbar_action)).setTextColor(Color.WHITE);
+            snack.setDuration(Snackbar.LENGTH_INDEFINITE);
+            snack.show();
+        }
+    }
+
+
+    String filter_results;
+    String[] dataz;
+
+    class GetFilters extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+
+                /* seting up the connection and send data with url */
+                // create a http default client - initialize the HTTp client
+
+                DefaultHttpClient httpclient = new DefaultHttpClient();
+
+                HttpPost httppost = new HttpPost("http://mbinitiative.com/impactpoolMobile/getfilters.php");
+
+                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+                nameValuePairs.add(new BasicNameValuePair("sector", search_sector));
+                nameValuePairs.add(new BasicNameValuePair("region", search_region));
+                nameValuePairs.add(new BasicNameValuePair("inst", search_institution));
+
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                HttpResponse response = httpclient.execute(httppost);
+
+                InputStream inputStream = response.getEntity().getContent();
+
+                BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream), 4096);
+                String line;
+                StringBuilder sb = new StringBuilder();
+                while ((line = rd.readLine()) != null) {
+                    sb.append(line);
+                }
+                rd.close();
+                filter_results = sb.toString();
+                inputStream.close();
+
+            } catch (Exception e) {
+                Toast.makeText(UndergraduateProgrammeActivity.this, "Try Again", Toast.LENGTH_LONG).show();
+            }
+
+            return filter_results;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.e("yeeeeeee34", "filter_results " + filter_results);
+
+            dataz = filter_results.split("@");
+
+            php_response_sector = dataz[0];
+            Log.e("gegege34", php_response_sector);
+            sector_data = php_response_sector.split("#");
+            adapterSector = new ArrayAdapter<String>(UndergraduateProgrammeActivity.this, R.layout.row_spinner, R.id.textViewDealerName, sector_data);
+            spinnerSector.setAdapter(adapterSector);
+
+            php_response_region = dataz[1];
+            Log.e("gegege34", php_response_region);
+            region_data = php_response_region.split("#");
+            adapterRegion = new ArrayAdapter<String>(UndergraduateProgrammeActivity.this, R.layout.row_spinner, R.id.textViewDealerName, region_data);
+            spinnerRegion.setAdapter(adapterRegion);
+
+            php_response_institution = dataz[2];
+            Log.e("gegege34", php_response_institution);
+            institution_data = php_response_institution.split("#");
+            adapterInstitution = new ArrayAdapter<String>(UndergraduateProgrammeActivity.this, R.layout.row_spinner, R.id.textViewDealerName, institution_data);
+            spinnerInstitution.setAdapter(adapterInstitution);
+
+        }
+    }
+
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuClearSearch:
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -15,12 +16,16 @@ import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 import tcds.or.tcdsapp.R;
+import tcds.or.tcdsapp.ThankYouAccessActivity;
 
 public class IntroActivity extends AppCompatActivity {
     private ViewPager screenPager;
@@ -32,10 +37,10 @@ public class IntroActivity extends AppCompatActivity {
     Animation btnAnim;
     TextView tvSkip;
 
-
-    SharedPreferences mySharedPreferences;
     public static final String MYPREFERENCES_INTROSCREEN = "MyPreferences_INTRO";
     SharedPreferences.Editor editor;
+    SharedPreferences sharedpreferences_IntroScreen;
+    String introstatus;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +49,20 @@ public class IntroActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
-        // when this activity is about to be launch we need to check if its openened before or not
+//        // when this activity is about to be launch we need to check if its openened before or not
 //        if (restorePrefData()) {
 //            Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
 //            startActivity(mainActivity);
 //            finish();
 //        }
+        sharedpreferences_IntroScreen = getSharedPreferences(MYPREFERENCES_INTROSCREEN, Context.MODE_PRIVATE);
+        if (sharedpreferences_IntroScreen.contains("introscreen")) {
+            SharedPreferences sharedpreferences = getSharedPreferences(MYPREFERENCES_INTROSCREEN, Context.MODE_PRIVATE);
+            introstatus = sharedpreferences.getString("introscreen", null);
+            Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(mainActivity);
+            finish();
+        }
 
 
         setContentView(R.layout.activity_intro);
@@ -63,7 +76,6 @@ public class IntroActivity extends AppCompatActivity {
         tvSkip = findViewById(R.id.tv_skip);
 
         // fill list screen
-
         final List<ScreenItem> mList = new ArrayList<>();
         mList.add(new ScreenItem("Career Database", "Find Occupations Browse groups of similar occupations to explore careers. Choose from industry, field of work, science area, and more. Bright Outlook and make informed decision", R.drawable.tcdstranslogo));
         mList.add(new ScreenItem("TCDS Services", "Tanzanite Career Development Services, provides number of services from an intensive and up to date career database, training to online shop for books.", R.drawable.tcdstranslogo));
@@ -119,9 +131,12 @@ public class IntroActivity extends AppCompatActivity {
         btnGetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sharedpreferences_IntroScreen = getSharedPreferences(MYPREFERENCES_INTROSCREEN, Activity.MODE_PRIVATE);
+                editor = sharedpreferences_IntroScreen.edit();
+                editor.putString("introscreen", "dooone");
+                editor.commit();
                 Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(mainActivity);
-               // savePrefsData();
                 finish();
             }
         });
@@ -135,22 +150,6 @@ public class IntroActivity extends AppCompatActivity {
         });
     }
 
-    Boolean isIntroActivityOpnendBefore;
-    private boolean restorePrefData() {
-        mySharedPreferences = getSharedPreferences(MYPREFERENCES_INTROSCREEN, Context.MODE_PRIVATE);
-        if (mySharedPreferences.contains("isIntroOpnend")) {
-            mySharedPreferences = getSharedPreferences(MYPREFERENCES_INTROSCREEN, 0);
-            isIntroActivityOpnendBefore = true;
-        }
-        return isIntroActivityOpnendBefore;
-    }
-
-    private void savePrefsData() {
-        mySharedPreferences = getSharedPreferences(MYPREFERENCES_INTROSCREEN, Activity.MODE_PRIVATE);
-        editor = mySharedPreferences.edit();
-        editor.putString("isIntroOpnend", "true");
-        editor.commit();
-    }
 
     // show the GETSTARTED Button and hide the indicator and the next button
     private void loaddLastScreen() {
