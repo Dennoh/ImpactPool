@@ -348,7 +348,7 @@ public class HighLearningInstitutionActivity extends AppCompatActivity {
 
     private void accessWebService_LearningInst() {
         taskLearningInst = new MyTask_LearningInstitution();
-        taskLearningInst.execute(new String[]{URL_LEARNINGINST});
+        taskLearningInst.execute(new String[]{"http://mbinitiative.com/impactpoolMobile/getlearningInst.php"});
     }
 
 
@@ -615,20 +615,20 @@ public class HighLearningInstitutionActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menuClearSearch:
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.search_menu, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.menuClearSearch:
+//
+//                break;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
 }

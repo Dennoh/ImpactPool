@@ -14,6 +14,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,11 +63,8 @@ public class EconomicSectorsActivity extends AppCompatActivity {
     String search_Mainsector;
     String search_SubMainSector;
     String search_SubSector;
-
-
-    private static String URL_ECONOMICSECTORS = "http://mbinitiative.com/impactpoolMobile/getEconimicsectors.php";
+    private static String URL_ECONOMICSECTORS = "http://mbinitiative.com/impactpoolMobile/getEconomicSectors_New.php";
     private List<Getter_EconomicSectors> customList_EconomicSectors;
-
     private RecyclerView recyclerView;
     private RecyclerViewAdapter_EconomicSectors recyclerViewAdapter_EconomicSectors;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -76,11 +74,6 @@ public class EconomicSectorsActivity extends AppCompatActivity {
     String receivedstate;
     Snackbar snack;
     ProgressBar progressBar;
-    String search_activityGroup;
-    String searched_activityClass;
-    String activitygroup;
-
-
     ArrayAdapter<String> adapterSector;
     ArrayAdapter<String> adapterSubMainSector;
     ArrayAdapter<String> adapterSubSector;
@@ -94,14 +87,11 @@ public class EconomicSectorsActivity extends AppCompatActivity {
         imageViewCancel = findViewById(R.id.imageViewCancel);
         textViewSearchResults = findViewById(R.id.textViewSearchResults);
         textViewClickToSearch = findViewById(R.id.textViewClickToSearch);
-//        TextView textviewSearch = findViewById(R.id.textviewSearch);
         textViewCount = findViewById(R.id.textViewCount);
         spinnerMainSector = findViewById(R.id.spinnerSector);
         spinnerSubMainSector = findViewById(R.id.spinnerRegion);
         spinnerSubSector = findViewById(R.id.spinnerDistrict);
-//        spinnerMainSector.setTitle("Main Sector");
-//        spinnerSubMainSector.setTitle("Sub Main Sectors");
-//        spinnerSubSector.setTitle("Sub Sectors");
+
 
         progressBar = (ProgressBar) findViewById(R.id.my_progressBar);
         progressBar.setVisibility(View.VISIBLE);
@@ -118,7 +108,6 @@ public class EconomicSectorsActivity extends AppCompatActivity {
         spinnerMainSector.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-//                search_sector = sector_data[position];
                 search_Mainsector = item;
                 new GetFilters().execute();
                 seachByCategory();
@@ -129,7 +118,6 @@ public class EconomicSectorsActivity extends AppCompatActivity {
         spinnerSubMainSector.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-//                search_sector = sector_data[position];
                 search_SubMainSector = item;
                 new GetFilters().execute();
                 seachByCategory();
@@ -139,13 +127,11 @@ public class EconomicSectorsActivity extends AppCompatActivity {
         spinnerSubSector.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-//                search_sector = sector_data[position];
                 search_SubSector = item;
                 new GetFilters().execute();
                 seachByCategory();
             }
         });
-
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerListLearningInst);
         recyclerView.setHasFixedSize(true);
@@ -155,6 +141,7 @@ public class EconomicSectorsActivity extends AppCompatActivity {
 
         receivedstate = Boolean.toString(haveNetworkConnection());
         if (receivedstate.equalsIgnoreCase("true")) {
+            Log.e("herere98", "nikohapa");
             accessWebService_EconomicSectors();
             swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
@@ -182,73 +169,24 @@ public class EconomicSectorsActivity extends AppCompatActivity {
             snack.setDuration(Snackbar.LENGTH_INDEFINITE);
             snack.show();
         }
+    }
 
-//        textviewSearch.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                textViewSearchResults.setVisibility(View.VISIBLE);
-//                if (search_Mainsector.isEmpty()) {
-//                    search_Mainsector = "All";
-//                }
-//                if (search_SubMainSector.isEmpty()) {
-//                    search_SubMainSector = "All";
-//                }
-//                if (search_SubSector.isEmpty()) {
-//                    search_SubSector = "All";
-//                }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.search_menu, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
 //
-//                receivedstate = Boolean.toString(haveNetworkConnection());
-//                if (receivedstate.equalsIgnoreCase("true")) {
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.menuClearSearch:
 //
-//                    accessWebService_EconomicSectors_Category();
-//                    swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//                        @Override
-//                        public void onRefresh() {
-//                            progressBar.setVisibility(View.VISIBLE);
-//                            progressBar.setIndeterminate(true);
-//                            accessWebService_EconomicSectors_Category();
-//                            swipeRefreshLayout.setRefreshing(false);
-//                        }
-//                    });
-//                } else {
-//                    progressBar.setIndeterminate(false);
-//                    progressBar.setVisibility(View.GONE);
-//                    snack = Snackbar.make(EconomicSectorsActivity.this.findViewById(android.R.id.content), "No internet. Check Network Settings!", Snackbar.LENGTH_LONG).setAction("RETRY", new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            snack.dismiss();
-//                            startActivity(new Intent(EconomicSectorsActivity.this, MainActivity.class));
-//                        }
-//                    });
-//                    View myv = snack.getView();
-//                    myv.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-//                    ((TextView) myv.findViewById(R.id.snackbar_text)).setTextColor(Color.WHITE);
-//                    ((TextView) myv.findViewById(R.id.snackbar_action)).setTextColor(Color.WHITE);
-//                    snack.setDuration(Snackbar.LENGTH_INDEFINITE);
-//                    snack.show();
-//                }
-//            }
-//        });
-
-
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menuClearSearch:
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//                break;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     public void seachByCategory() {
         textViewSearchResults.setVisibility(View.VISIBLE);
@@ -295,13 +233,13 @@ public class EconomicSectorsActivity extends AppCompatActivity {
     }
 
 
-    int tzz = 0;
     JSONArray jsonMainNode;
 
     private class MyTask_EconomicSectors extends AsyncTask<String, Void, List> {
 
         @Override
         protected List doInBackground(String... params) {
+
             try {
                 url = new URL(params[0]);
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -311,24 +249,18 @@ public class EconomicSectorsActivity extends AppCompatActivity {
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 StringBuilder jsonResult = inputStreamToString(in);
                 customList_EconomicSectors = new ArrayList<>();
-                JSONObject jsonResponse = new JSONObject(jsonResult.toString());
-                jsonMainNode = jsonResponse.optJSONArray("economicsector_jsondata");
-//                for (int i = 0; i < jsonMainNode.length(); i++) {
-//                    JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
-//                    String id = jsonChildNode.optString("id");
-//                    String mainsector = jsonChildNode.optString("mainsector");
-//                    String submainsector = jsonChildNode.optString("submainsector");
-//                    String subsector = jsonChildNode.optString("subsector");
-//                    activitygroup = jsonChildNode.optString("activitygroup");
-//                    String activityclass = jsonChildNode.optString("activityclass");
-//                    Log.e("hereee4587", activitygroup + " " + i);
-//
-//                    new GetActivityGroupDetails().execute();
-//                    customList_EconomicSectors.add(new Getter_EconomicSectors(id, mainsector, submainsector, subsector, activitygroup, searched_activityClass));
-//                }
 
-                if (jsonMainNode.length() != 0) {
-                    getReport(tzz);
+                JSONObject jsonResponse = new JSONObject(jsonResult.toString());
+                jsonMainNode = jsonResponse.optJSONArray("economicsectors_jsondata");
+                for (int i = 0; i < jsonMainNode.length(); i++) {
+                    JSONObject jsonChildNode = jsonMainNode.getJSONObject(i);
+                    String id = jsonChildNode.optString("id");
+                    String mainsector = jsonChildNode.optString("mainsector");
+                    String submainsector = jsonChildNode.optString("submainsector");
+                    String subsector = jsonChildNode.optString("subsector");
+                    String activitygroup = jsonChildNode.optString("activitygroup");
+                    String activityclass = jsonChildNode.optString("activityclass");
+                    customList_EconomicSectors.add(new Getter_EconomicSectors(id, mainsector, submainsector, subsector, activitygroup, activityclass));
                 }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -356,45 +288,17 @@ public class EconomicSectorsActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List list) {
-
-        }
-    }
-
-    String id, mainsector, submainsector, subsector, activityclass;
-
-
-    public void getReport(int number) {
-        if (number < jsonMainNode.length()) {
-            JSONObject jsonChildNode = null;
-            try {
-                jsonChildNode = jsonMainNode.getJSONObject(number);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            id = jsonChildNode.optString("id");
-            mainsector = jsonChildNode.optString("mainsector");
-            submainsector = jsonChildNode.optString("submainsector");
-            subsector = jsonChildNode.optString("subsector");
-            activitygroup = jsonChildNode.optString("activitygroup");
-            activityclass = jsonChildNode.optString("activityclass");
-
-            new GetActivityGroupDetails().execute();
-
-
-        } else {
-//            textViewCount.setVisibility(View.GONE);
-            ListDrawer_Undergraduateprog(customList_EconomicSectors);
+            ListDrawer_Undergraduateprog(list);
+            textViewSearchResults.setVisibility(View.VISIBLE);
             progressBar.setIndeterminate(false);
             progressBar.setVisibility(View.GONE);
         }
-
     }
 
 
     private void accessWebService_EconomicSectors() {
         taskEconomicSectors = new MyTask_EconomicSectors();
-        taskEconomicSectors.execute(new String[]{URL_ECONOMICSECTORS});
+        taskEconomicSectors.execute(new String[]{"http://mbinitiative.com/impactpoolMobile/getEconomicSectors_New.php"});
     }
 
     private void accessWebService_EconomicSectors_Category() {
@@ -602,60 +506,6 @@ public class EconomicSectorsActivity extends AppCompatActivity {
         }
     }
 
-
-    String details_response;
-
-    class GetActivityGroupDetails extends AsyncTask<String, String, String> {
-        @Override
-        protected String doInBackground(String... strings) {
-            Log.e("poooooty", activitygroup + " - search");
-
-            try {
-                DefaultHttpClient httpclient = new DefaultHttpClient();
-
-                HttpPost httppost = new HttpPost("http://mbinitiative.com/impactpoolMobile/getDetailsEconomicsector.php");
-                // Add your data
-                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
-                nameValuePairs.add(new BasicNameValuePair("activitygroup", activitygroup));
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-                // Execute HTTP Post Request
-                HttpResponse response = httpclient.execute(httppost);
-
-                InputStream inputStream = response.getEntity().getContent();
-
-                BufferedReader rd = new BufferedReader(new InputStreamReader(
-                        inputStream), 4096);
-                String line;
-                StringBuilder sb = new StringBuilder();
-
-                while ((line = rd.readLine()) != null) {
-                    sb.append(line);
-                }
-                rd.close();
-                details_response = sb.toString();
-                inputStream.close();
-            } catch (Exception e) {
-                Toast.makeText(EconomicSectorsActivity.this, "Error inside set:" + e.toString(), Toast.LENGTH_LONG).show();
-            }
-
-            return details_response;
-
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            searched_activityClass = details_response.replace("#", "\n");
-            textViewCount.setVisibility(View.VISIBLE);
-            textViewCount.setText("Loading Economic Sector " + tzz + "/" + jsonMainNode.length());
-            customList_EconomicSectors.add(new Getter_EconomicSectors(id, mainsector, submainsector, subsector, activitygroup, searched_activityClass));
-            ListDrawer_Undergraduateprog(customList_EconomicSectors);
-            getReport(tzz = tzz + 1);
-
-        }
-    }
-
-
     private boolean haveNetworkConnection() {
         boolean haveConnectedWifi = false;
         boolean haveConnectedMobile = false;
@@ -746,5 +596,16 @@ public class EconomicSectorsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        finish();
+        return super.onKeyDown(keyCode, event);
+    }
 }
 

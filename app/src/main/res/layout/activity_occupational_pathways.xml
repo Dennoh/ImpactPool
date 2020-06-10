@@ -46,7 +46,7 @@
                     android:id="@+id/spinnerSector"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:ms_hint="Select Major" />
+                    app:ms_hint="Select" />
             </LinearLayout>
 
             <LinearLayout
@@ -60,6 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:padding="5dp"
+                    android:maxLines="1"
                     android:text="Sub Major Occupation"
                     android:textSize="12dp" />
 
@@ -67,7 +68,7 @@
                     android:id="@+id/spinnerRegion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:ms_hint="Select Sub Major" />
+                    app:ms_hint="Select" />
             </LinearLayout>
 
             <LinearLayout
@@ -89,7 +90,7 @@
                     android:id="@+id/spinnerDistrict"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:ms_hint="Select Minor" />
+                    app:ms_hint="Select" />
             </LinearLayout>
 
 

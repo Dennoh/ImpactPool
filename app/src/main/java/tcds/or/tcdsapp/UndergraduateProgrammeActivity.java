@@ -355,7 +355,7 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
 
     private void accessWebService_Undergraduateprog() {
         taskUndergraduateprog = new MyTask_Undergraduateprog();
-        taskUndergraduateprog.execute(new String[]{URL_UNDERGRADUATE});
+        taskUndergraduateprog.execute(new String[]{"http://mbinitiative.com/impactpoolMobile/getProgrammes.php"});
     }
 
     private void accessWebService_LearningInst_Category() {
@@ -634,20 +634,20 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
         return haveConnectedWifi || haveConnectedMobile;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menuClearSearch:
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.search_menu, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.menuClearSearch:
+//
+//                break;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
 }

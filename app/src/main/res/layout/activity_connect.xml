@@ -64,7 +64,7 @@
         android:maxLines="1"
         android:onClick="tvclicked"
         android:padding="10dp"
-        android:text="  +255 (0) 752 581 521"
+        android:text="  +255 758 002 017"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/myWhite" />
 
@@ -114,6 +114,21 @@
         android:onClick="tvclicked"
         android:padding="10dp"
         android:text="  Twitter: @tcds"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/myWhite" />
+    <TextView
+        android:id="@+id/textViewWhatsApp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/roundbt"
+        android:clickable="true"
+        android:drawableLeft="@drawable/ic_phone_iphone_black_24dp"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:onClick="tvclicked"
+        android:padding="10dp"
+        android:text="  WhatsApp Chat"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/myWhite" />
 

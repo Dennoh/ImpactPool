@@ -72,18 +72,18 @@
 
                 </LinearLayout>
 
-<!--                <com.toptoche.searchablespinnerlibrary.SearchableSpinner-->
-<!--                    android:id="@+id/spinnerSector"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:padding="5dp"-->
-<!--                    android:prompt="@string/agro_spinner_prompt" />-->
+                <!--                <com.toptoche.searchablespinnerlibrary.SearchableSpinner-->
+                <!--                    android:id="@+id/spinnerSector"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:padding="5dp"-->
+                <!--                    android:prompt="@string/agro_spinner_prompt" />-->
 
                 <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/spinnerSector"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:ms_hint="Select Sector" />
+                    app:ms_hint="Select" />
             </LinearLayout>
 
             <LinearLayout
@@ -100,18 +100,18 @@
                     android:text="Sub Main Sector"
                     android:textSize="12dp" />
 
-<!--                <com.toptoche.searchablespinnerlibrary.SearchableSpinner-->
-<!--                    android:id="@+id/spinnerRegion"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:padding="5dp"-->
-<!--                    android:prompt="@string/agro_spinner_prompt" />-->
+                <!--                <com.toptoche.searchablespinnerlibrary.SearchableSpinner-->
+                <!--                    android:id="@+id/spinnerRegion"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:padding="5dp"-->
+                <!--                    android:prompt="@string/agro_spinner_prompt" />-->
 
                 <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/spinnerRegion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:ms_hint="Select Sector" />
+                    app:ms_hint="Select" />
             </LinearLayout>
 
             <LinearLayout
@@ -128,38 +128,38 @@
                     android:text="Sub Sector"
                     android:textSize="12dp" />
 
-<!--                <com.toptoche.searchablespinnerlibrary.SearchableSpinner-->
-<!--                    android:id="@+id/spinnerDistrict"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:padding="5dp"-->
-<!--                    android:prompt="@string/agro_spinner_prompt" />-->
+                <!--                <com.toptoche.searchablespinnerlibrary.SearchableSpinner-->
+                <!--                    android:id="@+id/spinnerDistrict"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:padding="5dp"-->
+                <!--                    android:prompt="@string/agro_spinner_prompt" />-->
 
                 <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/spinnerDistrict"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:ms_hint="Select Sector" />
+                    app:ms_hint="Select" />
             </LinearLayout>
 
 
         </LinearLayout>
 
 
-<!--        <TextView-->
-<!--            android:id="@+id/textviewSearch"-->
-<!--            android:layout_width="160dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_centerInParent="true"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:background="@drawable/round"-->
-<!--            android:gravity="center"-->
-<!--            android:padding="5dp"-->
-<!--            android:text="Search"-->
-<!--            android:textAppearance="?android:textAppearanceSmall"-->
-<!--            android:textColor="#212121"-->
-<!--            android:textStyle="bold" />-->
+        <!--        <TextView-->
+        <!--            android:id="@+id/textviewSearch"-->
+        <!--            android:layout_width="160dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_centerInParent="true"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:layout_marginTop="10dp"-->
+        <!--            android:background="@drawable/round"-->
+        <!--            android:gravity="center"-->
+        <!--            android:padding="5dp"-->
+        <!--            android:text="Search"-->
+        <!--            android:textAppearance="?android:textAppearanceSmall"-->
+        <!--            android:textColor="#212121"-->
+        <!--            android:textStyle="bold" />-->
 
     </LinearLayout>
 
@@ -191,8 +191,8 @@
         android:layout_marginLeft="2dp"
         android:padding="5dp"
         android:text="Count"
-        android:visibility="gone"
-        android:textSize="12dp" />
+        android:textSize="12dp"
+        android:visibility="gone" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe"

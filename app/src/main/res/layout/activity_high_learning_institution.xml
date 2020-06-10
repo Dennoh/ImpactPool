@@ -78,7 +78,7 @@
                     android:id="@+id/spinnerSector"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:ms_hint="Select Sector" />
+                    app:ms_hint="Select" />
 
             </LinearLayout>
 
@@ -101,7 +101,7 @@
                     android:id="@+id/spinnerRegion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:ms_hint="Select Region" />
+                    app:ms_hint="Select" />
             </LinearLayout>
 
             <LinearLayout
@@ -123,7 +123,7 @@
                     android:id="@+id/spinnerDistrict"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:ms_hint="Select Region" />
+                    app:ms_hint="Select" />
             </LinearLayout>
 
         </LinearLayout>

@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.hover.sdk.api.Hover;
 
 public class ThankYouAccessActivity extends AppCompatActivity {
+    String pricePackage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

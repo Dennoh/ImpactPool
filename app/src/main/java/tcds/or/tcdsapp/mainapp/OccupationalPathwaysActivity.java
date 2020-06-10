@@ -338,7 +338,7 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
 
     private void accessWebService_EconomicSectors() {
         taskEconomicSectors = new MyTask_EconomicSectors();
-        taskEconomicSectors.execute(new String[]{URL_ECONOMICSECTORS});
+        taskEconomicSectors.execute(new String[]{"http://mbinitiative.com/impactpoolMobile/getOccupationPathways.php"});
     }
 
     private void accessWebService_EconomicSectors_Category() {
@@ -642,20 +642,20 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
         }
         return haveConnectedWifi || haveConnectedMobile;
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menuClearSearch:
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.search_menu, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.menuClearSearch:
+//
+//                break;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
 }

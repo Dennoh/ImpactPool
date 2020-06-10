@@ -71,18 +71,18 @@
 
                 </LinearLayout>
 
-<!--                <Spinner-->
-<!--                    android:id="@+id/spinnerSector"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:padding="5dp"-->
-<!--                    android:prompt="@string/agro_spinner_prompt" />-->
+                <!--                <Spinner-->
+                <!--                    android:id="@+id/spinnerSector"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:padding="5dp"-->
+                <!--                    android:prompt="@string/agro_spinner_prompt" />-->
 
                 <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/spinnerSector"
-                    app:ms_hint="Select Sector"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    app:ms_hint="Select" />
             </LinearLayout>
 
             <LinearLayout
@@ -98,18 +98,18 @@
                     android:padding="5dp"
                     android:text="Region" />
 
-<!--                <Spinner-->
-<!--                    android:id="@+id/spinnerRegion"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:padding="5dp"-->
-<!--                    android:prompt="@string/agro_spinner_prompt" />-->
+                <!--                <Spinner-->
+                <!--                    android:id="@+id/spinnerRegion"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:padding="5dp"-->
+                <!--                    android:prompt="@string/agro_spinner_prompt" />-->
 
                 <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/spinnerRegion"
-                    app:ms_hint="Select Region"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    app:ms_hint="Select" />
 
             </LinearLayout>
 
@@ -129,9 +129,9 @@
 
                 <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/spinnerDistrict"
-                    app:ms_hint="Select Institution"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    app:ms_hint="Select" />
             </LinearLayout>
 
 

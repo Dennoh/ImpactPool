@@ -240,7 +240,7 @@
                                             android:gravity="center"
                                             android:maxLines="1"
                                             android:padding="5dp"
-                                            android:text="Economic Sectors"
+                                            android:text="  Economic Sectors  "
                                             android:textAppearance="?android:textAppearanceSmall"
                                             android:textColor="@color/white" />
 

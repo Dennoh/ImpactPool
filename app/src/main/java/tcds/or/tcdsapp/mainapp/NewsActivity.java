@@ -62,8 +62,6 @@ public class NewsActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(NewsActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-
-
         receivedstate = Boolean.toString(haveNetworkConnection());
         if (receivedstate.equalsIgnoreCase("true")) {
 

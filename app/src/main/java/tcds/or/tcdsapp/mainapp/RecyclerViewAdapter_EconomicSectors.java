@@ -35,7 +35,8 @@ public class RecyclerViewAdapter_EconomicSectors extends RecyclerView.Adapter<Re
 
     public void onBindViewHolder(final StockViewHolder paramStockViewHolder, final int paramInt) {
         paramStockViewHolder.tvactivitygroup.setText(paramInt + 1 + ". " + productGetters.get(paramInt).getActivitygroup());
-        paramStockViewHolder.tvactivityclass.setText(productGetters.get(paramInt).getActivityclass());
+        String details = productGetters.get(paramInt).getActivityclass();
+        paramStockViewHolder.tvactivityclass.setText(details.replace("#", "\n"));
     }
 
     public StockViewHolder onCreateViewHolder(ViewGroup paramViewGroup, int paramInt) {

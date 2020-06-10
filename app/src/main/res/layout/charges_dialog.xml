@@ -31,11 +31,12 @@
         android:layout_marginBottom="10dp"
         android:gravity="center_horizontal|center_vertical"
         android:padding="5dp"
-        android:text="After 1 week you will be charged to access TCDS database"
+        android:text="To continue subscribe. Please choose one of the package below"
         android:textAppearance="?android:textAppearanceSmall"
         android:textColor="#383838" />
 
     <LinearLayout
+        android:id="@+id/linearPay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -91,7 +92,7 @@
         android:gravity="center"
         android:onClick="mainWidgetClicked"
         android:padding="7dp"
-        android:text="  CONTINUE EXPLORE    "
+        android:text="      PAY     "
         android:textAppearance="?android:textAppearanceSmall"
         android:textColor="#212121"
         android:textStyle="bold" />
