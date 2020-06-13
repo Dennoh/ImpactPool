@@ -59,8 +59,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
-                    android:padding="5dp"
                     android:maxLines="1"
+                    android:padding="5dp"
                     android:text="Sub Major Occupation"
                     android:textSize="12dp" />
 
@@ -109,15 +109,40 @@
         android:indeterminate="true"
         android:progressDrawable="@drawable/prog_color" />
 
-    <TextView
-        android:id="@+id/textViewSearchResults"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_youtube_searched_for_black_24dp"
-        android:padding="5dp"
-        android:text="Search Results"
-        android:textColor="@color/colorPrimaryDark"
-        android:visibility="gone" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textViewSearchResults"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_youtube_searched_for_black_24dp"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="Search Results"
+            android:textColor="@color/colorPrimaryDark"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textViewClearSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/roundbt"
+            android:drawableLeft="@drawable/ic_clear_black_24dp"
+            android:drawableTint="@color/white"
+            android:gravity="center_vertical|center_horizontal"
+            android:onClick="ClearSearch"
+            android:paddingEnd="@dimen/_10sdp"
+            android:text="Clear Search"
+            android:textColor="@color/myWhite"
+            android:visibility="gone" />
+    </LinearLayout>
+
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe"

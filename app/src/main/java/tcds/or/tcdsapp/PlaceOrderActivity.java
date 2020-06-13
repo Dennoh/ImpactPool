@@ -80,6 +80,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
     Spinner spinnerDelibery;
     int delivery = 0;
     int net_tt;
+    String deliverystatus = "notselected";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,36 +129,47 @@ public class PlaceOrderActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 deliveryOption = deliveryOptions[position];
                 if (deliveryOption.equals("Delivery to Specific Address")) {
+                    deliverystatus = "selected";
                     delievrycosts.setText("Tsh 5,000");
                     delivery = 5000;
                     net_tt = sbt + delivery;
                     textviewNetPay.setText("Tsh " + decimalFormat.format(net_tt));
                     txtview_address.setVisibility(View.VISIBLE);
                 } else if (deliveryOption.equals("Arusha Pickup Point")) {
+                    deliverystatus = "selected";
+
                     txtview_address.setVisibility(View.GONE);
                     delievrycosts.setText("Tsh 00");
                     delivery = 0;
                     net_tt = sbt + delivery;
                     textviewNetPay.setText("Tsh " + decimalFormat.format(net_tt));
                 } else if (deliveryOption.equals("Dar es Salaam Pickup Point")) {
+                    deliverystatus = "selected";
+
                     txtview_address.setVisibility(View.GONE);
                     delievrycosts.setText("Tsh 00");
                     delivery = 0;
                     net_tt = sbt + delivery;
                     textviewNetPay.setText("Tsh " + decimalFormat.format(net_tt));
                 } else if (deliveryOption.equals("Dodoma Pickup Point")) {
+                    deliverystatus = "selected";
+
                     txtview_address.setVisibility(View.GONE);
                     delievrycosts.setText("Tsh 00");
                     delivery = 0;
                     net_tt = sbt + delivery;
                     textviewNetPay.setText("Tsh " + decimalFormat.format(net_tt));
                 } else if (deliveryOption.equals("Morogoro Pickup Point")) {
+                    deliverystatus = "selected";
+
                     txtview_address.setVisibility(View.GONE);
                     delievrycosts.setText("Tsh 00");
                     delivery = 0;
                     net_tt = sbt + delivery;
                     textviewNetPay.setText("Tsh " + decimalFormat.format(net_tt));
                 } else if (deliveryOption.equals("Iringa Pickup Point")) {
+                    deliverystatus = "selected";
+
                     txtview_address.setVisibility(View.GONE);
                     delievrycosts.setText("Tsh 00");
                     delivery = 0;
@@ -177,7 +189,13 @@ public class PlaceOrderActivity extends AppCompatActivity {
         btn_orderNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                placeOrderNow();
+
+                if (deliverystatus.equals("notselected")) {
+                    Toasty.error(getApplicationContext(), "Selected Delivery Option", Toast.LENGTH_LONG, true).show();
+
+                } else {
+                    placeOrderNow();
+                }
             }
         });
     }

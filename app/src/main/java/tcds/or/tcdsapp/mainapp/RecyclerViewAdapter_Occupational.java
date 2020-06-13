@@ -34,10 +34,9 @@ public class RecyclerViewAdapter_Occupational extends RecyclerView.Adapter<Recyc
     }
 
     public void onBindViewHolder(final StockViewHolder paramStockViewHolder, final int paramInt) {
-        paramStockViewHolder.tvunit_label.setText(paramInt+1 +". "+ productGetters.get(paramInt).getUnit_label());
-        paramStockViewHolder.tvDescriptionsofUnits.setText(productGetters.get(paramInt).getUnit_label()+", "+productGetters.get(paramInt).getDescriptionsofUnits());
+        paramStockViewHolder.tvunit_label.setText(paramInt + 1 + ". " + productGetters.get(paramInt).getUnit_label());
+        paramStockViewHolder.tvDescriptionsofUnits.setText(productGetters.get(paramInt).getUnit_label());
         Log.e("here2323", productGetters.get(paramInt).getDescriptionsofUnits() + "");
-
     }
 
     public StockViewHolder onCreateViewHolder(ViewGroup paramViewGroup, int paramInt) {

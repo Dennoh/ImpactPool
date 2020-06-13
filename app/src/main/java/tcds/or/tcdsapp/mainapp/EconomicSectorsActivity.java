@@ -59,7 +59,7 @@ public class EconomicSectorsActivity extends AppCompatActivity {
     MaterialSpinner spinnerMainSector;
     MaterialSpinner spinnerSubMainSector;
     MaterialSpinner spinnerSubSector;
-    TextView textViewSearchResults, textViewClickToSearch, textViewCount;
+    TextView textViewSearchResults, textViewClickToSearch, textViewCount, textViewClearSearch;
     String search_Mainsector;
     String search_SubMainSector;
     String search_SubSector;
@@ -87,6 +87,7 @@ public class EconomicSectorsActivity extends AppCompatActivity {
         imageViewCancel = findViewById(R.id.imageViewCancel);
         textViewSearchResults = findViewById(R.id.textViewSearchResults);
         textViewClickToSearch = findViewById(R.id.textViewClickToSearch);
+        textViewClearSearch = findViewById(R.id.textViewClearSearch);
         textViewCount = findViewById(R.id.textViewCount);
         spinnerMainSector = findViewById(R.id.spinnerSector);
         spinnerSubMainSector = findViewById(R.id.spinnerRegion);
@@ -108,6 +109,7 @@ public class EconomicSectorsActivity extends AppCompatActivity {
         spinnerMainSector.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                textViewClearSearch.setVisibility(View.VISIBLE);
                 search_Mainsector = item;
                 new GetFilters().execute();
                 seachByCategory();
@@ -118,6 +120,7 @@ public class EconomicSectorsActivity extends AppCompatActivity {
         spinnerSubMainSector.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                textViewClearSearch.setVisibility(View.VISIBLE);
                 search_SubMainSector = item;
                 new GetFilters().execute();
                 seachByCategory();
@@ -127,6 +130,7 @@ public class EconomicSectorsActivity extends AppCompatActivity {
         spinnerSubSector.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                textViewClearSearch.setVisibility(View.VISIBLE);
                 search_SubSector = item;
                 new GetFilters().execute();
                 seachByCategory();
@@ -606,6 +610,53 @@ public class EconomicSectorsActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         finish();
         return super.onKeyDown(keyCode, event);
+    }
+
+    public void ClearSearch(View view) {
+        executeStart();
+    }
+
+    private void executeStart() {
+        new GetMainSectors().execute();
+        new GetSubMainSector().execute();
+        new GetSubSector().execute();
+
+        search_Mainsector = "All";
+        search_SubMainSector = "All";
+        search_SubSector = "All";
+
+        textViewClearSearch.setVisibility(View.GONE);
+
+        receivedstate = Boolean.toString(haveNetworkConnection());
+        if (receivedstate.equalsIgnoreCase("true")) {
+            accessWebService_EconomicSectors();
+            textViewSearchResults.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    progressBar.setVisibility(View.VISIBLE);
+                    progressBar.setIndeterminate(true);
+                    accessWebService_EconomicSectors();
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            });
+        } else {
+            progressBar.setIndeterminate(false);
+            progressBar.setVisibility(View.GONE);
+            snack = Snackbar.make(EconomicSectorsActivity.this.findViewById(android.R.id.content), "No internet. Check Network Settings!", Snackbar.LENGTH_LONG).setAction("RETRY", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    snack.dismiss();
+                    startActivity(new Intent(EconomicSectorsActivity.this, MainActivity.class));
+                }
+            });
+            View v = snack.getView();
+            v.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            ((TextView) v.findViewById(R.id.snackbar_text)).setTextColor(Color.WHITE);
+            ((TextView) v.findViewById(R.id.snackbar_action)).setTextColor(Color.WHITE);
+            snack.setDuration(Snackbar.LENGTH_INDEFINITE);
+            snack.show();
+        }
     }
 }
 

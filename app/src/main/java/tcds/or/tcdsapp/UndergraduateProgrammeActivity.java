@@ -81,7 +81,7 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
     MaterialSpinner spinnerRegion;
     MaterialSpinner spinnerInstitution;
 
-    TextView textViewSearchResults, textViewClickToSearch;
+    TextView textViewSearchResults, textViewClickToSearch, textViewClearSearch;
     ArrayAdapter<String> adapterInstitution;
     ArrayAdapter<String> adapterRegion;
     ArrayAdapter<String> adapterSector;
@@ -95,6 +95,7 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
         imageViewCancel = findViewById(R.id.imageViewCancel);
         textViewSearchResults = findViewById(R.id.textViewSearchResults);
         textViewClickToSearch = findViewById(R.id.textViewClickToSearch);
+        textViewClearSearch = findViewById(R.id.textViewClearSearch);
         spinnerSector = findViewById(R.id.spinnerSector);
         spinnerRegion = findViewById(R.id.spinnerRegion);
         spinnerInstitution = findViewById(R.id.spinnerDistrict);
@@ -125,11 +126,10 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
         search_region = "All";
         search_institution = "All";
 
-
         spinnerSector.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-//                search_sector = sector_data[position];
+                textViewClearSearch.setVisibility(View.VISIBLE);
                 search_sector = item;
                 new GetFilters().execute();
                 seachByCategory();
@@ -140,6 +140,7 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
         spinnerRegion.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                textViewClearSearch.setVisibility(View.VISIBLE);
                 search_region = item;
                 new GetFilters().execute();
                 seachByCategory();
@@ -149,6 +150,7 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
         spinnerInstitution.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                textViewClearSearch.setVisibility(View.VISIBLE);
                 search_institution = item;
                 new GetFilters().execute();
                 seachByCategory();
@@ -205,7 +207,6 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
 
             accessWebService_Undergraduateprog();
             textViewSearchResults.setVisibility(View.VISIBLE);
-
             swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
@@ -247,6 +248,53 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
 
     }
 
+
+    public void executeStart() {
+        new GetSectors().execute();
+        new GetInstitution().execute();
+        new GetRegion().execute();
+
+        search_sector = "All";
+        search_region = "All";
+        search_institution = "All";
+        textViewClearSearch.setVisibility(View.GONE);
+
+        receivedstate = Boolean.toString(haveNetworkConnection());
+        if (receivedstate.equalsIgnoreCase("true")) {
+
+            accessWebService_Undergraduateprog();
+            textViewSearchResults.setVisibility(View.VISIBLE);
+
+            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    progressBar.setVisibility(View.VISIBLE);
+                    progressBar.setIndeterminate(true);
+                    accessWebService_Undergraduateprog();
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            });
+        } else {
+            progressBar.setIndeterminate(false);
+            progressBar.setVisibility(View.GONE);
+            snack = Snackbar.make(UndergraduateProgrammeActivity.this.findViewById(android.R.id.content), "No internet. Check Network Settings!", Snackbar.LENGTH_LONG).setAction("RETRY", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    snack.dismiss();
+                    startActivity(new Intent(UndergraduateProgrammeActivity.this, MainActivity.class));
+                }
+            });
+            View v = snack.getView();
+            v.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            ((TextView) v.findViewById(R.id.snackbar_text)).setTextColor(Color.WHITE);
+            ((TextView) v.findViewById(R.id.snackbar_action)).setTextColor(Color.WHITE);
+            snack.setDuration(Snackbar.LENGTH_INDEFINITE);
+            snack.show();
+        }
+
+    }
+
+
     public void seachByCategory() {
         textViewSearchResults.setVisibility(View.VISIBLE);
 
@@ -259,9 +307,9 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
         if (search_sector.isEmpty()) {
             search_sector = "All";
         }
+
         receivedstate = Boolean.toString(haveNetworkConnection());
         if (receivedstate.equalsIgnoreCase("true")) {
-
             accessWebService_LearningInst_Category();
             swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
@@ -290,6 +338,7 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
             snack.show();
         }
     }
+
 
     private class MyTask_Undergraduateprog extends AsyncTask<String, Void, List> {
 
@@ -512,6 +561,7 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
 
     public void changeFilterByCategory() {
         textViewSearchResults.setVisibility(View.VISIBLE);
+
         if (search_institution.isEmpty()) {
             search_institution = "All";
         }
@@ -644,10 +694,13 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
 //    public boolean onOptionsItemSelected(MenuItem item) {
 //        switch (item.getItemId()) {
 //            case R.id.menuClearSearch:
-//
 //                break;
 //        }
 //        return super.onOptionsItemSelected(item);
 //    }
+
+    public void ClearSearch(View view) {
+        executeStart();
+    }
 
 }

@@ -61,7 +61,7 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
     MaterialSpinner spinnerSubMajorOccupation;
     MaterialSpinner spinnerMinnorOccupation;
 
-    TextView textViewSearchResults, textViewClickToSearch;
+    TextView textViewSearchResults, textViewClickToSearch, textViewClearSearch;
     String search_MajorOccupation;
     String search_SubMajorOccupation;
     String search_MinnorOccupation;
@@ -94,6 +94,7 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
         imageViewCancel = findViewById(R.id.imageViewCancel);
         textViewSearchResults = findViewById(R.id.textViewSearchResults);
         textViewClickToSearch = findViewById(R.id.textViewClickToSearch);
+        textViewClearSearch = findViewById(R.id.textViewClearSearch);
 //        TextView textviewSearch = findViewById(R.id.textviewSearch);
         spinnerMajorOccupation = findViewById(R.id.spinnerSector);
         spinnerSubMajorOccupation = findViewById(R.id.spinnerRegion);
@@ -117,7 +118,7 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
         spinnerMajorOccupation.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-//                search_sector = sector_data[position];
+                textViewClearSearch.setVisibility(View.VISIBLE);
                 search_MajorOccupation = item;
                 new GetFilters().execute();
                 seachByCategory();
@@ -128,7 +129,7 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
         spinnerSubMajorOccupation.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-//                search_sector = sector_data[position];
+                textViewClearSearch.setVisibility(View.VISIBLE);
                 search_SubMajorOccupation = item;
                 new GetFilters().execute();
                 seachByCategory();
@@ -138,7 +139,7 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
         spinnerMinnorOccupation.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-//                search_sector = sector_data[position];
+                textViewClearSearch.setVisibility(View.VISIBLE);
                 search_MinnorOccupation = item;
                 new GetFilters().execute();
                 seachByCategory();
@@ -361,6 +362,7 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
 
 
     String php_response_majoroccupation;
+
     class GetMajorOccupation extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
@@ -556,6 +558,7 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
 
     String filter_results;
     String[] dataz;
+
     class GetFilters extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
@@ -642,20 +645,54 @@ public class OccupationalPathwaysActivity extends AppCompatActivity {
         }
         return haveConnectedWifi || haveConnectedMobile;
     }
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.search_menu, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.menuClearSearch:
-//
-//                break;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+
+    public void ClearSearch(View view) {
+        executeStart();
+    }
+
+    private void executeStart() {
+        new GetMajorOccupation().execute();
+        new GetSubMajorOccupation().execute();
+        new GetMinnorOccupation().execute();
+
+
+        search_MajorOccupation = "All";
+        search_SubMajorOccupation = "All";
+        search_MinnorOccupation = "All";
+        textViewClearSearch.setVisibility(View.GONE);
+
+        receivedstate = Boolean.toString(haveNetworkConnection());
+        if (receivedstate.equalsIgnoreCase("true")) {
+            accessWebService_EconomicSectors();
+            textViewSearchResults.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    progressBar.setVisibility(View.VISIBLE);
+                    progressBar.setIndeterminate(true);
+                    accessWebService_EconomicSectors();
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            });
+        } else {
+            progressBar.setIndeterminate(false);
+            progressBar.setVisibility(View.GONE);
+            snack = Snackbar.make(OccupationalPathwaysActivity.this.findViewById(android.R.id.content), "No internet. Check Network Settings!", Snackbar.LENGTH_LONG).setAction("RETRY", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    snack.dismiss();
+                    startActivity(new Intent(OccupationalPathwaysActivity.this, MainActivity.class));
+                }
+            });
+            View v = snack.getView();
+            v.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            ((TextView) v.findViewById(R.id.snackbar_text)).setTextColor(Color.WHITE);
+            ((TextView) v.findViewById(R.id.snackbar_action)).setTextColor(Color.WHITE);
+            snack.setDuration(Snackbar.LENGTH_INDEFINITE);
+            snack.show();
+        }
+
+
+    }
 
 }

@@ -75,7 +75,7 @@ public class HighLearningInstitutionActivity extends AppCompatActivity {
     MaterialSpinner spinnerRegion;
     MaterialSpinner spinnerDistrict;
 
-    TextView textViewSearchResults, textViewClickToSearch;
+    TextView textViewSearchResults, textViewClickToSearch,textViewClearSearch;
 
     ArrayAdapter<String> adapterSector;
     ArrayAdapter<String> adapterRegion;
@@ -90,6 +90,7 @@ public class HighLearningInstitutionActivity extends AppCompatActivity {
         imageViewCancel = findViewById(R.id.imageViewCancel);
         textViewSearchResults = findViewById(R.id.textViewSearchResults);
         textViewClickToSearch = findViewById(R.id.textViewClickToSearch);
+        textViewClearSearch = findViewById(R.id.textViewClearSearch);
 
         spinnerSector = findViewById(R.id.spinnerSector);
         spinnerRegion = findViewById(R.id.spinnerRegion);
@@ -125,7 +126,7 @@ public class HighLearningInstitutionActivity extends AppCompatActivity {
         spinnerSector.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-//                search_sector = sector_data[position];
+                textViewClearSearch.setVisibility(View.VISIBLE);
                 search_sector = item;
                 new GetFilters().execute();
                 seachByCategory();
@@ -136,7 +137,7 @@ public class HighLearningInstitutionActivity extends AppCompatActivity {
         spinnerRegion.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-//                search_sector = sector_data[position];
+                textViewClearSearch.setVisibility(View.VISIBLE);
                 search_region = item;
                 new GetFilters().execute();
                 seachByCategory();
@@ -146,7 +147,7 @@ public class HighLearningInstitutionActivity extends AppCompatActivity {
         spinnerDistrict.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-//                search_sector = sector_data[position];
+                textViewClearSearch.setVisibility(View.VISIBLE);
                 search_district = item;
                 new GetFilters().execute();
                 seachByCategory();
@@ -615,20 +616,53 @@ public class HighLearningInstitutionActivity extends AppCompatActivity {
     }
 
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.search_menu, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.menuClearSearch:
-//
-//                break;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    public void ClearSearch(View view) {
+        executeStart();
+    }
+
+    private void executeStart() {
+        new GetSectors().execute();
+        new GetRegion().execute();
+        new GetDistrict().execute();
+
+        search_sector = "All";
+        search_region = "All";
+        search_district = "All";
+
+        textViewClearSearch.setVisibility(View.GONE);
+
+        receivedstate = Boolean.toString(haveNetworkConnection());
+        if (receivedstate.equalsIgnoreCase("true")) {
+            accessWebService_LearningInst();
+            textViewSearchResults.setVisibility(View.VISIBLE);
+            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    progressBar.setVisibility(View.VISIBLE);
+                    progressBar.setIndeterminate(true);
+                    accessWebService_LearningInst();
+                    swipeRefreshLayout.setRefreshing(false);
+                }
+            });
+        } else {
+            progressBar.setIndeterminate(false);
+            progressBar.setVisibility(View.GONE);
+            snack = Snackbar.make(HighLearningInstitutionActivity.this.findViewById(android.R.id.content), "No internet. Check Network Settings!", Snackbar.LENGTH_LONG).setAction("RETRY", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    snack.dismiss();
+                    startActivity(new Intent(HighLearningInstitutionActivity.this, MainActivity.class));
+                }
+            });
+            View v = snack.getView();
+            v.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            ((TextView) v.findViewById(R.id.snackbar_text)).setTextColor(Color.WHITE);
+            ((TextView) v.findViewById(R.id.snackbar_action)).setTextColor(Color.WHITE);
+            snack.setDuration(Snackbar.LENGTH_INDEFINITE);
+            snack.show();
+        }
+
+    }
+
 
 }
