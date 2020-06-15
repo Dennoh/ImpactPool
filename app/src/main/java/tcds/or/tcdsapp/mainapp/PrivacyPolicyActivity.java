@@ -17,8 +17,7 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
         findViewById(R.id.textviewExpore).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://angazadirectory.com/Angaza%20Directory%20Privacy%20Policy.pdf")));
-
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://mbinitiative.com/impactpoolMobile/privacypolicy.pdf")));
             }
         });
     }

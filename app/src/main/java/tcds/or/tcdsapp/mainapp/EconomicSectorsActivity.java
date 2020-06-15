@@ -93,7 +93,6 @@ public class EconomicSectorsActivity extends AppCompatActivity {
         spinnerSubMainSector = findViewById(R.id.spinnerRegion);
         spinnerSubSector = findViewById(R.id.spinnerDistrict);
 
-
         progressBar = (ProgressBar) findViewById(R.id.my_progressBar);
         progressBar.setVisibility(View.VISIBLE);
 

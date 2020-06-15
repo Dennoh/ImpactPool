@@ -92,6 +92,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="TextView"
+        android:visibility="gone"
         android:textColor="@color/colorPrimaryDark" />
 
     <TextView
