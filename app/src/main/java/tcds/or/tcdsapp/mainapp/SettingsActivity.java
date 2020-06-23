@@ -47,7 +47,7 @@ public class SettingsActivity extends AppCompatActivity {
             case R.id.buttonInvite:
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, "Hey am using TCDS App for my career issues. Download it today \n\nhttps://play.google.com/store/apps/details?id=com.angazadirectory.www.angazadirectory&hl=en");
+                intent.putExtra(Intent.EXTRA_TEXT, "Hey am using TCDS App for my career issues. Download it today \n\nhttps://play.google.com/store/apps/details?id=tcds.or.tcdsapp");
                 startActivity(Intent.createChooser(intent, "Invite Friends"));
                 break;
             case R.id.buttonAbout:
@@ -120,7 +120,7 @@ public class SettingsActivity extends AppCompatActivity {
             // TODO Auto-generated method stub
             try {
                 DefaultHttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("http://angazadirectory.com/angazamobile/problem.php");
+                HttpPost httppost = new HttpPost("http://mbinitiative.com/impactpoolMobile/problem.php");
                 // Add your data
                 ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
 

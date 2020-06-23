@@ -1,6 +1,8 @@
 package tcds.or.tcdsapp.mainapp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,8 +37,24 @@ public class RecyclerViewAdapter_Occupational extends RecyclerView.Adapter<Recyc
 
     public void onBindViewHolder(final StockViewHolder paramStockViewHolder, final int paramInt) {
         paramStockViewHolder.tvunit_label.setText(paramInt + 1 + ". " + productGetters.get(paramInt).getUnit_label());
-        paramStockViewHolder.tvDescriptionsofUnits.setText(productGetters.get(paramInt).getUnit_label() + "\n" + productGetters.get(paramInt).getDescriptionsofUnits());
-        Log.e("here2323", productGetters.get(paramInt).getDescriptionsofUnits() + "");
+        paramStockViewHolder.tvMajor.setText("  " + productGetters.get(paramInt).getMajor_occupation());
+        paramStockViewHolder.tvSubMajor.setText("  " + productGetters.get(paramInt).getSub_major_occupation());
+        paramStockViewHolder.tvMinor.setText("  " + productGetters.get(paramInt).getMinor_occupation());
+
+        paramStockViewHolder.cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, OccupationalDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("getMajor_occupation", productGetters.get(paramInt).getMajor_occupation() + "");
+                bundle.putString("getSub_major_occupation", productGetters.get(paramInt).getSub_major_occupation() + "");
+                bundle.putString("getMinor_occupation", productGetters.get(paramInt).getMinor_occupation() + "");
+                bundle.putString("getUnit_label", productGetters.get(paramInt).getUnit_label() + "");
+                bundle.putString("getDescriptionsofUnits", productGetters.get(paramInt).getDescriptionsofUnits() + "");
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
     }
 
     public StockViewHolder onCreateViewHolder(ViewGroup paramViewGroup, int paramInt) {
@@ -47,12 +65,17 @@ public class RecyclerViewAdapter_Occupational extends RecyclerView.Adapter<Recyc
         CardView cv;
         TextView tvunit_label;
         TextView tvDescriptionsofUnits;
+        TextView tvMajor;
+        TextView tvSubMajor;
+        TextView tvMinor;
 
         StockViewHolder(View paramView) {
             super(paramView);
             cv = ((CardView) paramView.findViewById(R.id.c_view));
             tvunit_label = ((TextView) paramView.findViewById(R.id.tvunit_label));
-            tvDescriptionsofUnits = ((TextView) paramView.findViewById(R.id.tvDescriptionsofUnits));
+            tvMajor = ((TextView) paramView.findViewById(R.id.tvMajor));
+            tvSubMajor = ((TextView) paramView.findViewById(R.id.tvSubMajor));
+            tvMinor = ((TextView) paramView.findViewById(R.id.tvMinor));
         }
     }
 }

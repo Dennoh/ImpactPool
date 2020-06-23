@@ -14,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".mainapp.OccupationalDetailsActivity"
+            android:label="Details"
+            android:parentActivityName=".mainapp.OccupationalPathwaysActivity"></activity>
         <activity android:name=".ThankYouAccessActivity" />
         <activity
             android:name=".NewsDetailsActivity"

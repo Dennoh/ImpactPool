@@ -114,12 +114,11 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
         if (sharedpreferences_AccessPayment.contains("startDate")) {
             SharedPreferences sharedpreferences = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
             startdatetime = sharedpreferences.getString("startDate", null);
-//            startdatetime = "2020-5-26 11:12:45";
+
             try {
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 Date past = format.parse(startdatetime);
@@ -166,9 +165,26 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
 
         receivedstate = Boolean.toString(haveNetworkConnection());
         if (receivedstate.equalsIgnoreCase("true")) {
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setIndeterminate(true);
             accessWebService_news();
         } else {
+            progressBar.setIndeterminate(false);
+            progressBar.setVisibility(View.GONE);
 
+            snack = Snackbar.make(MainActivity.this.findViewById(android.R.id.content), "No internet. Check Network Settings!", Snackbar.LENGTH_LONG).setAction("RETRY", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    snack.dismiss();
+                    startActivity(new Intent(MainActivity.this, MainActivity.class));
+                }
+            });
+            View v = snack.getView();
+            v.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            ((TextView) v.findViewById(R.id.snackbar_text)).setTextColor(Color.WHITE);
+            ((TextView) v.findViewById(R.id.snackbar_action)).setTextColor(Color.WHITE);
+            snack.setDuration(Snackbar.LENGTH_INDEFINITE);
+            snack.show();
         }
     }
 
@@ -178,7 +194,6 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -373,225 +388,232 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
         switch (view.getId()) {
             case R.id.cardViewHighLearning:
 
-                sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
-                if (sharedpreferences_AccessPayment.contains("startDate")) {
-                    SharedPreferences sharedpreferences = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
-                    startdatetime = sharedpreferences.getString("startDate", null);
-//                    startdatetime = "2020-5-26 11:12:45";
-                    try {
-                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                        Date past = format.parse(startdatetime);
-                        Date now = new Date();
-                        totalDays = TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime());
-                    } catch (Exception j) {
-                        j.printStackTrace();
-                    }
+//                sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
+//                if (sharedpreferences_AccessPayment.contains("startDate")) {
+//                    SharedPreferences sharedpreferences = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
+//                    startdatetime = sharedpreferences.getString("startDate", null);
+////                    startdatetime = "2020-5-26 11:12:45";
+//                    try {
+//                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//                        Date past = format.parse(startdatetime);
+//                        Date now = new Date();
+//                        totalDays = TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime());
+//                    } catch (Exception j) {
+//                        j.printStackTrace();
+//                    }
+//
+//                    if (totalDays >= 7) {
+//                        accessDialog = new Dialog(MainActivity.this);
+//                        accessDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                        accessDialog.setContentView(R.layout.charges_dialog);
+//                        accessDialog.getWindow().setLayout(android.app.ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+//                        TextView textviewOKAY = accessDialog.findViewById(R.id.textviewOKAY);
+//                        LinearLayout linearPay = accessDialog.findViewById(R.id.linearPay);
+//                        textviewOKAY.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
+//                                finish();
+//                            }
+//                        });
+//                        linearPay.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
+//                                finish();
+//                            }
+//                        });
+//                        accessDialog.show();
+//                    } else {
+//                        startActivity(new Intent(getApplicationContext(), HighLearningInstitutionActivity.class));
+//                    }
+//
+//                } else {
+//                    DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//                    String startdate = dateFormat2.format(new Date()).toString();
+//                    sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Activity.MODE_PRIVATE);
+//                    editor = sharedpreferences_AccessPayment.edit();
+//                    editor.putString("startDate", startdate);
+//                    editor.commit();
+//                    startActivity(new Intent(getApplicationContext(), HighLearningInstitutionActivity.class));
+//
+//                }
 
-                    if (totalDays >= 7) {
-                        accessDialog = new Dialog(MainActivity.this);
-                        accessDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        accessDialog.setContentView(R.layout.charges_dialog);
-                        accessDialog.getWindow().setLayout(android.app.ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
-                        TextView textviewOKAY = accessDialog.findViewById(R.id.textviewOKAY);
-                        LinearLayout linearPay = accessDialog.findViewById(R.id.linearPay);
-                        textviewOKAY.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
-                                finish();
-                            }
-                        });
-                        linearPay.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
-                                finish();
-                            }
-                        });
-                        accessDialog.show();
-                    } else {
-                        startActivity(new Intent(getApplicationContext(), HighLearningInstitutionActivity.class));
-                    }
-
-                } else {
-                    DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                    String startdate = dateFormat2.format(new Date()).toString();
-                    sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Activity.MODE_PRIVATE);
-                    editor = sharedpreferences_AccessPayment.edit();
-                    editor.putString("startDate", startdate);
-                    editor.commit();
-                    startActivity(new Intent(getApplicationContext(), HighLearningInstitutionActivity.class));
-
-                }
-
+                startActivity(new Intent(getApplicationContext(), HighLearningInstitutionActivity.class));
 
                 break;
             case R.id.cardViewOccupational:
 
-                sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
-                if (sharedpreferences_AccessPayment.contains("startDate")) {
-                    SharedPreferences sharedpreferences = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
-                    startdatetime = sharedpreferences.getString("startDate", null);
-//                    startdatetime = "2020-5-26 11:12:45";
-                    try {
-                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                        Date past = format.parse(startdatetime);
-                        Date now = new Date();
-                        totalDays = TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime());
-                    } catch (Exception j) {
-                        j.printStackTrace();
-                    }
-
-                    if (totalDays >= 7) {
-                        accessDialog = new Dialog(MainActivity.this);
-                        accessDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        accessDialog.setContentView(R.layout.charges_dialog);
-                        accessDialog.getWindow().setLayout(android.app.ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
-                        TextView textviewOKAY = accessDialog.findViewById(R.id.textviewOKAY);
-                        LinearLayout linearPay = accessDialog.findViewById(R.id.linearPay);
-                        textviewOKAY.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
-                                finish();
-                            }
-                        });
-                        linearPay.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
-                                finish();
-                            }
-                        });
-                        accessDialog.show();
-                    } else {
-                        startActivity(new Intent(getApplicationContext(), OccupationalPathwaysActivity.class));
-
-                        Log.e("mdaaaaaa", totalDays + " continue using");
-                    }
-
-                } else {
-                    DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                    String startdate = dateFormat2.format(new Date()).toString();
-                    sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Activity.MODE_PRIVATE);
-                    editor = sharedpreferences_AccessPayment.edit();
-                    editor.putString("startDate", startdate);
-                    editor.commit();
-                    startActivity(new Intent(getApplicationContext(), OccupationalPathwaysActivity.class));
-
-                }
+//                sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
+//                if (sharedpreferences_AccessPayment.contains("startDate")) {
+//                    SharedPreferences sharedpreferences = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
+//                    startdatetime = sharedpreferences.getString("startDate", null);
+////                    startdatetime = "2020-5-26 11:12:45";
+//                    try {
+//                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//                        Date past = format.parse(startdatetime);
+//                        Date now = new Date();
+//                        totalDays = TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime());
+//                    } catch (Exception j) {
+//                        j.printStackTrace();
+//                    }
+//
+//                    if (totalDays >= 7) {
+//                        accessDialog = new Dialog(MainActivity.this);
+//                        accessDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                        accessDialog.setContentView(R.layout.charges_dialog);
+//                        accessDialog.getWindow().setLayout(android.app.ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+//                        TextView textviewOKAY = accessDialog.findViewById(R.id.textviewOKAY);
+//                        LinearLayout linearPay = accessDialog.findViewById(R.id.linearPay);
+//                        textviewOKAY.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
+//                                finish();
+//                            }
+//                        });
+//                        linearPay.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
+//                                finish();
+//                            }
+//                        });
+//                        accessDialog.show();
+//                    } else {
+//                        startActivity(new Intent(getApplicationContext(), OccupationalPathwaysActivity.class));
+//
+//                        Log.e("mdaaaaaa", totalDays + " continue using");
+//                    }
+//
+//                } else {
+//                    DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//                    String startdate = dateFormat2.format(new Date()).toString();
+//                    sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Activity.MODE_PRIVATE);
+//                    editor = sharedpreferences_AccessPayment.edit();
+//                    editor.putString("startDate", startdate);
+//                    editor.commit();
+//                    startActivity(new Intent(getApplicationContext(), OccupationalPathwaysActivity.class));
+//
+//                }
+                startActivity(new Intent(getApplicationContext(), OccupationalPathwaysActivity.class));
 
 
                 break;
             case R.id.cardViewUndergraduate:
 
-                sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
-                if (sharedpreferences_AccessPayment.contains("startDate")) {
-                    SharedPreferences sharedpreferences = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
-                    startdatetime = sharedpreferences.getString("startDate", null);
-//                    startdatetime = "2020-5-26 11:12:45";
-                    try {
-                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                        Date past = format.parse(startdatetime);
-                        Date now = new Date();
-                        totalDays = TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime());
-                    } catch (Exception j) {
-                        j.printStackTrace();
-                    }
+//                sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
+//                if (sharedpreferences_AccessPayment.contains("startDate")) {
+//                    SharedPreferences sharedpreferences = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
+//                    startdatetime = sharedpreferences.getString("startDate", null);
+////                    startdatetime = "2020-5-26 11:12:45";
+//                    try {
+//                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//                        Date past = format.parse(startdatetime);
+//                        Date now = new Date();
+//                        totalDays = TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime());
+//                    } catch (Exception j) {
+//                        j.printStackTrace();
+//                    }
+//
+//                    if (totalDays >= 7) {
+//                        accessDialog = new Dialog(MainActivity.this);
+//                        accessDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                        accessDialog.setContentView(R.layout.charges_dialog);
+//                        accessDialog.getWindow().setLayout(android.app.ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+//                        TextView textviewOKAY = accessDialog.findViewById(R.id.textviewOKAY);
+//                        LinearLayout linearPay = accessDialog.findViewById(R.id.linearPay);
+//                        textviewOKAY.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
+//                                finish();
+//                            }
+//                        });
+//                        linearPay.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
+//                                finish();
+//                            }
+//                        });
+//                        accessDialog.show();
+//                    } else {
+//                        startActivity(new Intent(getApplicationContext(), UndergraduateProgrammeActivity.class));
+//
+//                        Log.e("mdaaaaaa", totalDays + " continue using");
+//                    }
+//
+//                } else {
+//                    DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//                    String startdate = dateFormat2.format(new Date()).toString();
+//                    sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Activity.MODE_PRIVATE);
+//                    editor = sharedpreferences_AccessPayment.edit();
+//                    editor.putString("startDate", startdate);
+//                    editor.commit();
+//                    startActivity(new Intent(getApplicationContext(), UndergraduateProgrammeActivity.class));
+//
+//                }
 
-                    if (totalDays >= 7) {
-                        accessDialog = new Dialog(MainActivity.this);
-                        accessDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        accessDialog.setContentView(R.layout.charges_dialog);
-                        accessDialog.getWindow().setLayout(android.app.ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
-                        TextView textviewOKAY = accessDialog.findViewById(R.id.textviewOKAY);
-                        LinearLayout linearPay = accessDialog.findViewById(R.id.linearPay);
-                        textviewOKAY.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
-                                finish();
-                            }
-                        });
-                        linearPay.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
-                                finish();
-                            }
-                        });
-                        accessDialog.show();
-                    } else {
-                        startActivity(new Intent(getApplicationContext(), UndergraduateProgrammeActivity.class));
-
-                        Log.e("mdaaaaaa", totalDays + " continue using");
-                    }
-
-                } else {
-                    DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                    String startdate = dateFormat2.format(new Date()).toString();
-                    sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Activity.MODE_PRIVATE);
-                    editor = sharedpreferences_AccessPayment.edit();
-                    editor.putString("startDate", startdate);
-                    editor.commit();
-                    startActivity(new Intent(getApplicationContext(), UndergraduateProgrammeActivity.class));
-
-                }
-
+                startActivity(new Intent(getApplicationContext(), UndergraduateProgrammeActivity.class));
 
                 break;
             case R.id.cardViewEconomicSector:
 
-                sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
-                if (sharedpreferences_AccessPayment.contains("startDate")) {
-                    SharedPreferences sharedpreferences = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
-                    startdatetime = sharedpreferences.getString("startDate", null);
-//                    startdatetime = "2020-5-26 11:12:45";
-                    try {
-                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                        Date past = format.parse(startdatetime);
-                        Date now = new Date();
-                        totalDays = TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime());
-                    } catch (Exception j) {
-                        j.printStackTrace();
-                    }
+//                sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
+//                if (sharedpreferences_AccessPayment.contains("startDate")) {
+//                    SharedPreferences sharedpreferences = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
+//                    startdatetime = sharedpreferences.getString("startDate", null);
+////                    startdatetime = "2020-5-26 11:12:45";
+//                    try {
+//                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//                        Date past = format.parse(startdatetime);
+//                        Date now = new Date();
+//                        totalDays = TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime());
+//                    } catch (Exception j) {
+//                        j.printStackTrace();
+//                    }
+//
+//                    if (totalDays >= 7) {
+//                        accessDialog = new Dialog(MainActivity.this);
+//                        accessDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                        accessDialog.setContentView(R.layout.charges_dialog);
+//                        accessDialog.getWindow().setLayout(android.app.ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+//                        TextView textviewOKAY = accessDialog.findViewById(R.id.textviewOKAY);
+//                        LinearLayout linearPay = accessDialog.findViewById(R.id.linearPay);
+//                        textviewOKAY.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
+//                                finish();
+//                            }
+//                        });
+//                        linearPay.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
+//                                finish();
+//                            }
+//                        });
+//                        accessDialog.show();
+//                    } else {
+//                        startActivity(new Intent(getApplicationContext(), EconomicSectorsActivity.class));
+//                        Log.e("mdaaaaaa", totalDays + " continue using");
+//                    }
+//
+//                } else {
+//                    DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//                    String startdate = dateFormat2.format(new Date()).toString();
+//                    sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Activity.MODE_PRIVATE);
+//                    editor = sharedpreferences_AccessPayment.edit();
+//                    editor.putString("startDate", startdate);
+//                    editor.commit();
+//                    startActivity(new Intent(getApplicationContext(), EconomicSectorsActivity.class));
+//                }
+                //                    startActivity(new Intent(getApplicationContext(), EconomicSectorsActivity.class));
 
-                    if (totalDays >= 7) {
-                        accessDialog = new Dialog(MainActivity.this);
-                        accessDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        accessDialog.setContentView(R.layout.charges_dialog);
-                        accessDialog.getWindow().setLayout(android.app.ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
-                        TextView textviewOKAY = accessDialog.findViewById(R.id.textviewOKAY);
-                        LinearLayout linearPay = accessDialog.findViewById(R.id.linearPay);
-                        textviewOKAY.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
-                                finish();
-                            }
-                        });
-                        linearPay.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
-                                finish();
-                            }
-                        });
-                        accessDialog.show();
-                    } else {
-                        startActivity(new Intent(getApplicationContext(), EconomicSectorsActivity.class));
-                        Log.e("mdaaaaaa", totalDays + " continue using");
-                    }
+                startActivity(new Intent(getApplicationContext(), EconomicSectorsActivity.class));
 
-                } else {
-                    DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                    String startdate = dateFormat2.format(new Date()).toString();
-                    sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Activity.MODE_PRIVATE);
-                    editor = sharedpreferences_AccessPayment.edit();
-                    editor.putString("startDate", startdate);
-                    editor.commit();
-                    startActivity(new Intent(getApplicationContext(), EconomicSectorsActivity.class));
-                }
                 break;
         }
     }
