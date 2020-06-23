@@ -3,6 +3,7 @@ package tcds.or.tcdsapp;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import de.mateware.snacky.Snacky;
+import es.dmoral.toasty.Toasty;
 import tcds.or.tcdsapp.Database.ModelDB.Cart;
 import tcds.or.tcdsapp.Utils.Common;
 
@@ -273,7 +274,13 @@ public class BookDetailsActivity extends AppCompatActivity {
 
                 } catch (Exception ex) {
                     Log.d("LOGRESTFOOD", ex.getMessage());
-                    Toast.makeText(BookDetailsActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
+                    if (ex.getMessage().startsWith("UNIQUE constraint failed:")){
+//                        Toast.makeText(BookDetailsActivity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
+                        Toasty.warning(BookDetailsActivity.this, "Already Added to Cart", Toast.LENGTH_LONG, true).show();
+
+                    }else {
+
+                    }
                 }
 
 
