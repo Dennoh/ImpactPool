@@ -27,6 +27,7 @@
             android:name=".mainapp.BrowserActivity"
             android:label="eBooks Service"
             android:parentActivityName=".MainOnlineShopActivity" />
+
         <activity android:name=".ThankYouActivity" />
         <activity
             android:name=".OrderDetailActivity"

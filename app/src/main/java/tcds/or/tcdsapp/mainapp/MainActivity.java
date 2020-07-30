@@ -76,10 +76,8 @@ import tcds.or.tcdsapp.UndergraduateProgrammeActivity;
 
 public class MainActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener {
     SliderLayout sliderLayout;
-
     private static String URL_BANNERS = "http://mbinitiative.com/impactpoolMobile/getbanner.php";
     private List<GetterBanner> customList_banner;
-
     private java.net.URL url;
     private HttpURLConnection urlConnection;
     private MyTask_Banners taskBanners;
@@ -106,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
     Dialog accessDialog;
     String startdatetime;
     public static final String MYPREFERENCES_ACCESSPAYMENT = "MyPreferences_ACCESSPAYMENT";
-    SharedPreferences sharedpreferences_AccessPayment;
+//    SharedPreferences sharedpreferences_AccessPayment;
     long totalDays;
 
     @Override
@@ -114,36 +112,36 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
-        if (sharedpreferences_AccessPayment.contains("startDate")) {
-            SharedPreferences sharedpreferences = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
-            startdatetime = sharedpreferences.getString("startDate", null);
-
-            try {
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                Date past = format.parse(startdatetime);
-                Date now = new Date();
-                totalDays = TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime());
-            } catch (Exception j) {
-                j.printStackTrace();
-            }
-
-            if (totalDays >= 7) {
-                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
-                finish();
-                Log.e("mdaaaaaa", totalDays + " start charge");
-            } else {
-                Log.e("mdaaaaaa", totalDays + " continue using");
-            }
-
-        } else {
-            DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            String startdate = dateFormat2.format(new Date()).toString();
-            sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Activity.MODE_PRIVATE);
-            editor = sharedpreferences_AccessPayment.edit();
-            editor.putString("startDate", startdate);
-            editor.commit();
-        }
+//        sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
+//        if (sharedpreferences_AccessPayment.contains("startDate")) {
+//            SharedPreferences sharedpreferences = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Context.MODE_PRIVATE);
+//            startdatetime = sharedpreferences.getString("startDate", null);
+//
+//            try {
+//                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//                Date past = format.parse(startdatetime);
+//                Date now = new Date();
+//                totalDays = TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime());
+//            } catch (Exception j) {
+//                j.printStackTrace();
+//            }
+//
+//            if (totalDays >= 7) {
+//                startActivity(new Intent(MainActivity.this, ThankYouAccessActivity.class));
+//                finish();
+//                Log.e("mdaaaaaa", totalDays + " start charge");
+//            } else {
+//                Log.e("mdaaaaaa", totalDays + " continue using");
+//            }
+//
+//        } else {
+//            DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//            String startdate = dateFormat2.format(new Date()).toString();
+//            sharedpreferences_AccessPayment = getSharedPreferences(MYPREFERENCES_ACCESSPAYMENT, Activity.MODE_PRIVATE);
+//            editor = sharedpreferences_AccessPayment.edit();
+//            editor.putString("startDate", startdate);
+//            editor.commit();
+//        }
 
 
         sliderLayout = findViewById(R.id.slider);

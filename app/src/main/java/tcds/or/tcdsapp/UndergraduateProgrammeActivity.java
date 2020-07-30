@@ -602,6 +602,11 @@ public class UndergraduateProgrammeActivity extends AppCompatActivity {
     class GetFilters extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... strings) {
+
+            Log.e("yeeee3434", "search_sector " + search_sector);
+            Log.e("yeeee3434", "search_region " + search_region);
+            Log.e("yeeee3434", "search_institution " + search_institution);
+
             try {
 
                 /* seting up the connection and send data with url */
