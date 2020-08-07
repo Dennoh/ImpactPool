@@ -129,7 +129,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'ir.farshid_roohi:customAdapterRecycleView:1.0.5'
     implementation 'com.jaredrummler:material-spinner:1.3.1'
-    implementation 'com.hover:android-sdk:1.5.3-noSMS'
+    implementation 'com.hover:android-sdk:1.5.1-noSMS'
     implementation 'com.jaredrummler:material-spinner:1.3.1'
     implementation 'com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1'
 

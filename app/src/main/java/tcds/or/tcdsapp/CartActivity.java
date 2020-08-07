@@ -68,18 +68,10 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnNot
 //        }
 //
 //
-
-
-
         if (Common.cartRepository.countCartItems()==0)
             txt_PlaceOrder.setVisibility(View.INVISIBLE);
-
-
-
         else{
             txt_PlaceOrder.setVisibility(View.VISIBLE);
-
-
         }
 
 

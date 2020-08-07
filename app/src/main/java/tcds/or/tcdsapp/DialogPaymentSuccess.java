@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.hover.sdk.api.Hover;
 import com.hover.sdk.api.HoverParameters;
 
 import java.text.DecimalFormat;
@@ -46,6 +47,7 @@ public class DialogPaymentSuccess extends DialogFragment {
     String accessCharges;
     TextView textViewMobilePayment;
     CardView cardMobilePay2, cardMobilePay1;
+    // Hover.initialize(this);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
