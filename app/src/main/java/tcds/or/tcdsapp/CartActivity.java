@@ -11,8 +11,10 @@ import tcds.or.tcdsapp.Adapter.CartAdapter;
 import tcds.or.tcdsapp.Database.ModelDB.Cart;
 import tcds.or.tcdsapp.Retrofit.TcdsAPI;
 import tcds.or.tcdsapp.Utils.Common;
+import tcds.or.tcdsapp.mainapp.PhoneVerificationActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -25,6 +27,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.shashank.sony.fancydialoglib.FancyAlertDialog;
+import com.shashank.sony.fancydialoglib.FancyAlertDialogListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +72,9 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnNot
 //        }
 //
 //
+        loardCartItems();
+
+
         if (Common.cartRepository.countCartItems()==0)
             txt_PlaceOrder.setVisibility(View.INVISIBLE);
         else{
@@ -90,10 +97,10 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnNot
             public void onClick(View view) {
 
 
-                // checkifUserVerified();
+                 checkifUserVerified();
 
-                Intent intent = new Intent(CartActivity.this, PlaceOrderActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(CartActivity.this, PlaceOrderActivity.class);
+//                startActivity(intent);
 
 
 
@@ -107,7 +114,6 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnNot
         recycler_cart=findViewById(R.id.recyclerview_cart);
         recycler_cart.setLayoutManager(new LinearLayoutManager(this));
         recycler_cart.setHasFixedSize(true);
-        loardCartItems();
     }
 
     public void loardCartItems() {
@@ -212,47 +218,50 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnNot
 
     }
 
-//    public  void checkifUserVerified() {
-//
-//
-//        mySharedPreferences = getSharedPreferences(SUCCESSUSER_PREFERENCES, Context.MODE_PRIVATE);
-//
-//        if (mySharedPreferences.contains("verifiedphone")) {
-//            mySharedPreferences = getSharedPreferences(SUCCESSUSER_PREFERENCES, 0);
-//            Intent intent = new Intent(CartActivity.this, PlaceOrderActivity.class);
-//            startActivity(intent);
-//        }else {
-//
-//            new FancyAlertDialog.Builder(CartActivity.this)
-//                    .setTitle("NOT LOGIN?")
-//                    .setBackgroundColor(Color.parseColor("#101731"))  //Don't pass R.color.colorvalue
-//                    .setMessage("Please Login or Register to Submit order?")
-//                    .setNegativeBtnText("No")
-//                    .setPositiveBtnBackground(Color.parseColor("#101731"))  //Don't pass R.color.colorvalue
-//                    .setPositiveBtnText("Yes")
-//                    .setNegativeBtnBackground(Color.parseColor("#101731"))  //Don't pass R.color.colorvalue
-//                    .isCancellable(true)
-//
-//                    .OnPositiveClicked(new FancyAlertDialogListener() {
-//                        @Override
-//                        public void OnClick() {
-//                            startActivity(new Intent(CartActivity.this, PhoneVerificationActivity.class));
-//                            finish();
-//                            // Toast.makeText(CartActivity.this, "Ok Register ME", Toast.LENGTH_SHORT).show();
-//                        }
-//                    })
-//                    .OnNegativeClicked(new FancyAlertDialogListener() {
-//                        @Override
-//                        public void OnClick() {
-//
-//                        }
-//                    })
-//                    .build();
-//        }
-//
-//
-//
-//
-//    }
+
+    public static final String MyPREFERENCES = "NumberVerificationPrefs";
+
+    public  void checkifUserVerified() {
+
+
+        mySharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
+        if (mySharedPreferences.contains("verifiedphone")) {
+            mySharedPreferences = getSharedPreferences(MyPREFERENCES, 0);
+            Intent intent = new Intent(CartActivity.this, PlaceOrderActivity.class);
+            startActivity(intent);
+        }else {
+
+            new FancyAlertDialog.Builder(CartActivity.this)
+                    .setTitle("NOT LOGIN?")
+                    .setBackgroundColor(Color.parseColor("#101731"))  //Don't pass R.color.colorvalue
+                    .setMessage("Please Login or Register to Submit your order?")
+                    .setNegativeBtnText("No")
+                    .setPositiveBtnBackground(Color.parseColor("#101731"))  //Don't pass R.color.colorvalue
+                    .setPositiveBtnText("Yes")
+                    .setNegativeBtnBackground(Color.parseColor("#101731"))  //Don't pass R.color.colorvalue
+                    .isCancellable(true)
+
+                    .OnPositiveClicked(new FancyAlertDialogListener() {
+                        @Override
+                        public void OnClick() {
+                            startActivity(new Intent(CartActivity.this, PhoneVerificationActivity.class));
+                            finish();
+                            // Toast.makeText(CartActivity.this, "Ok Register ME", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .OnNegativeClicked(new FancyAlertDialogListener() {
+                        @Override
+                        public void OnClick() {
+
+                        }
+                    })
+                    .build();
+        }
+
+
+
+
+    }
 
 }

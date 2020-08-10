@@ -289,16 +289,14 @@ public class PlaceOrderActivity extends AppCompatActivity {
 //            for(Cart c : carts){
 //                Log.e("natsahaaaaaa","vendorname: "+c.vendorname);
 //                Log.e("natsahaaaaaa","vendorId: "+c.vendorId);
-//                Log.e("natsahaaaaaa","vendorphone: "+c.vendorphone);
 //            }
 
-            SharedPreferences preferences = getApplicationContext().getSharedPreferences(MyPREFERENCES,
-                    Context.MODE_PRIVATE);
+            SharedPreferences preferences = getApplicationContext().getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
             String usernumberverified = preferences.getString("verifiedphone", null);
+            Log.e("natsahaaaaaa", "usernumberverified: " + usernumberverified);
 
 
-            orderpay_sharedpreferences = getSharedPreferences(OrderPAY_PREFERENCES,
-                    Activity.MODE_PRIVATE);
+            orderpay_sharedpreferences = getSharedPreferences(OrderPAY_PREFERENCES, Activity.MODE_PRIVATE);
             orderPay_editor = orderpay_sharedpreferences.edit();
             orderPay_editor.putString("verifiedphone", usernumberverified);
             orderPay_editor.putString("orderDate", orderDate);
@@ -311,7 +309,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
 
             mService.submitOrder(orderDate, Float.parseFloat(net_tt + ""), orderDetail, edittxt_comment.getText()
-                            .toString().trim(), "Delivery Option Selected " + deliveryOption + " " + txtview_address.getText().toString(), "+255673444029",
+                            .toString().trim(), "Delivery Option Selected " + deliveryOption + " " + txtview_address.getText().toString(), usernumberverified,
                     "COD", "No Vendor", "No Vendor")
                     .enqueue(new Callback<String>() {
                         @Override
