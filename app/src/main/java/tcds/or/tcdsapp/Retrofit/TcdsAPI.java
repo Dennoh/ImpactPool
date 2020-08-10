@@ -175,6 +175,7 @@ public interface TcdsAPI {
             @Field("price") float orderPrice,
             @Field("orderDetail") String orderDetail,
             @Field("comment") String comment,
+            @Field("email") String softcopyEmail,
             @Field("address") String address,
             @Field("phone") String phone,
             @Field("paymentMethod") String paymentMethod,

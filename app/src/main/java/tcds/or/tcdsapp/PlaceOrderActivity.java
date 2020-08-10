@@ -56,6 +56,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
     TextView txt_subtotal, txt_total;
     EditText txtview_address;
     MaterialEditText edittxt_comment;
+    MaterialEditText edittxt_softcopyEmail;
     String usercomment;
     String orderDate;
     TextView btn_orderNow;
@@ -91,6 +92,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
         txt_total = findViewById(R.id.txt_total);
         txtview_address = findViewById(R.id.txtview_address);
         edittxt_comment = findViewById(R.id.edittxt_comment);
+        edittxt_softcopyEmail = findViewById(R.id.edittxt_softcopyEmail);
         delievrycosts = findViewById(R.id.delievrycosts);
         textviewNetPay = findViewById(R.id.textviewNetPay);
         btn_orderNow = findViewById(R.id.btn_orderNow);
@@ -309,6 +311,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
 
             mService.submitOrder(orderDate, Float.parseFloat(net_tt + ""), orderDetail, edittxt_comment.getText()
+                            .toString().trim(),edittxt_softcopyEmail.getText()
                             .toString().trim(), "Delivery Option Selected " + deliveryOption + " " + txtview_address.getText().toString(), usernumberverified,
                     "COD", "No Vendor", "No Vendor")
                     .enqueue(new Callback<String>() {
