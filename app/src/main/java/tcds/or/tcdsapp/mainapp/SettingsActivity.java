@@ -10,14 +10,19 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -27,8 +32,10 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -109,10 +116,43 @@ public class SettingsActivity extends AppCompatActivity {
             case R.id.buttonLogout:
 
                 break;
+            case R.id.buttonActivatePayment:
+                final Dialog paymentDialog = new Dialog(view.getContext());
+                paymentDialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
+                paymentDialog.setContentView(R.layout.payment_dialog);
+                paymentDialog.getWindow().setLayout(android.app.ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+
+                String videolink = "http://mbinitiative.com/impactpoolMobile/video/HoverPaymentProject.mp4";
+                VideoView videoView = paymentDialog.findViewById(R.id.videoView);
+                TextView textviewSkip = paymentDialog.findViewById(R.id.textviewSkip);
+                ImageView imageViewSkip = paymentDialog.findViewById(R.id.imageViewSkip);
+                TextView textViewSettings = paymentDialog.findViewById(R.id.textViewSettings);
+                textViewSettings.setText("PERMISSION ACTIVATION");
+                textviewSkip.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        paymentDialog.dismiss();
+                    }
+                });
+                imageViewSkip.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        paymentDialog.dismiss();
+                    }
+                });
+                MediaController controller = new MediaController(this);
+                controller.setMediaPlayer(videoView);
+                videoView.setMediaController(controller);
+                videoView.setVideoPath(videolink);
+                videoView.start();
+                paymentDialog.show();
+                break;
 
         }
     }
+
     String myresult;
+
     class ReportAProblem extends AsyncTask<String, Void, String> {
 
         @Override

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_gravity="center" />
+
+    <LinearLayout
+        android:id="@+id/linearWatchFullScreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical|right"
+            app:srcCompat="@drawable/ic_settings_black_24dp" />
+
+        <TextView
+            android:id="@+id/textViewSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/sfuitext_light"
+            android:gravity="center_vertical"
+            android:text="yuyuyu"
+            android:textAllCaps="true"
+            android:textColor="@color/myBlack"
+            android:textSize="11dp" />
+
+
+        <TextView
+            android:id="@+id/textviewSkip"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/sfuitext_regular"
+            android:gravity="center_vertical"
+            android:text="Skip Video"
+            android:textAllCaps="true"
+            android:textColor="@color/myBlack" />
+
+        <ImageView
+            android:id="@+id/imageViewSkip"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="5dp"
+            app:srcCompat="@drawable/iconfinder_next_293269" />
+
+    </LinearLayout>
+
+</LinearLayout>

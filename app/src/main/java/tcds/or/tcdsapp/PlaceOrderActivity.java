@@ -1,5 +1,6 @@
 package tcds.or.tcdsapp;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,9 +16,9 @@ import tcds.or.tcdsapp.Adapter.MyOrderNowCartAdapter;
 import tcds.or.tcdsapp.Database.ModelDB.Cart;
 import tcds.or.tcdsapp.Retrofit.TcdsAPI;
 import tcds.or.tcdsapp.Utils.Common;
-import tcds.or.tcdsapp.mainapp.MainActivity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -25,12 +26,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.google.gson.Gson;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -83,10 +88,23 @@ public class PlaceOrderActivity extends AppCompatActivity {
     int net_tt;
     String deliverystatus = "notselected";
 
+    public static final String VIDEO_PREFERENCES = "PAYMENTVIDEO";
+    SharedPreferences.Editor video_editor;
+    SharedPreferences sharedpreferences_PaymentDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_order);
+
+        SharedPreferences prefs = getSharedPreferences(VIDEO_PREFERENCES, Context.MODE_PRIVATE);
+        if (prefs.contains("isdisplayed")) {
+
+        } else {
+            showPaymentDialog();
+        }
+
+//        showPaymentDialog();
 
         txt_subtotal = findViewById(R.id.txt_subtotal);
         txt_total = findViewById(R.id.txt_total);
@@ -203,6 +221,49 @@ public class PlaceOrderActivity extends AppCompatActivity {
     }
 
 
+    private void showPaymentDialog() {
+
+        sharedpreferences_PaymentDialog = getSharedPreferences(VIDEO_PREFERENCES, Activity.MODE_PRIVATE);
+        video_editor = sharedpreferences_PaymentDialog.edit();
+        video_editor.putString("isdisplayed", "yes");
+        video_editor.apply();
+
+        final Dialog paymentDialog = new Dialog(PlaceOrderActivity.this);
+        paymentDialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
+        paymentDialog.setContentView(R.layout.payment_dialog);
+        paymentDialog.getWindow().setLayout(android.app.ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+
+        String videolink = "http://mbinitiative.com/impactpoolMobile/video/HoverPaymentProject.mp4";
+        VideoView videoView = paymentDialog.findViewById(R.id.videoView);
+        TextView textviewSkip = paymentDialog.findViewById(R.id.textviewSkip);
+        TextView textViewSettings = paymentDialog.findViewById(R.id.textViewSettings);
+        textViewSettings.setText("Watch again from Settings");
+
+        ImageView imageViewSkip = paymentDialog.findViewById(R.id.imageViewSkip);
+        textviewSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                paymentDialog.dismiss();
+
+            }
+        });
+        imageViewSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                paymentDialog.dismiss();
+
+            }
+        });
+        MediaController controller = new MediaController(this);
+        controller.setMediaPlayer(videoView);
+        videoView.setMediaController(controller);
+        videoView.setVideoPath(videolink);
+        videoView.start();
+        paymentDialog.show();
+
+    }
+
+
     private void loardCartItems() {
         compositeDisposable.add(
                 Common.cartRepository.getCartItems()
@@ -266,7 +327,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
                             @Override
                             public void accept(Throwable throwable) throws Exception {
                                 Log.d(TAG, "ERRORRRRR333: " + throwable.getMessage());
-                                Toasty.error(getApplicationContext(), "Errorr: " + throwable.getMessage(), Toast.LENGTH_LONG, true).show();
+                                //Toasty.error(getApplicationContext(), "Errorr: " + throwable.getMessage(), Toast.LENGTH_LONG, true).show();
                             }
                         })
         );
@@ -311,7 +372,7 @@ public class PlaceOrderActivity extends AppCompatActivity {
 
 
             mService.submitOrder(orderDate, Float.parseFloat(net_tt + ""), orderDetail, edittxt_comment.getText()
-                            .toString().trim(),edittxt_softcopyEmail.getText()
+                            .toString().trim(), edittxt_softcopyEmail.getText()
                             .toString().trim(), "Delivery Option Selected " + deliveryOption + " " + txtview_address.getText().toString(), usernumberverified,
                     "COD", "No Vendor", "No Vendor")
                     .enqueue(new Callback<String>() {

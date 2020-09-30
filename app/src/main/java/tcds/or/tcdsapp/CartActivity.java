@@ -35,16 +35,16 @@ import java.util.List;
 
 public class CartActivity extends AppCompatActivity implements CartAdapter.OnNoteListener {
 
-    private static final String TAG ="CartActivity" ;
+    private static final String TAG = "CartActivity";
     RecyclerView recycler_cart;
     TcdsAPI mService;
     CartAdapter cartAdapter;
-    List<Cart> cartList=new ArrayList<>();
+    List<Cart> cartList = new ArrayList<>();
     CompositeDisposable compositeDisposable;
     LinearLayout rootLayout;
     ProgressDialog dialog;
     TextView textViewnothinOnCart;
-    TextView txt_PlaceOrder,nothingacarttextview;
+    TextView txt_PlaceOrder, nothingacarttextview;
     ProgressBar progressBar;
 
     SharedPreferences mySharedPreferences;
@@ -55,14 +55,14 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnNot
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         progressBar = findViewById(R.id.progressBar);
-        mService= Common.getAPI();
+        mService = Common.getAPI();
 
-        compositeDisposable= new CompositeDisposable();
+        compositeDisposable = new CompositeDisposable();
 
-        rootLayout=findViewById(R.id.rootLayout);
+        rootLayout = findViewById(R.id.rootLayout);
 
-        txt_PlaceOrder=findViewById(R.id.txt_PlaceOrder);
-        nothingacarttextview=findViewById(R.id.nothingacarttextview);
+        txt_PlaceOrder = findViewById(R.id.txt_PlaceOrder);
+        nothingacarttextview = findViewById(R.id.nothingacarttextview);
 
 //        Log.d("qqqwwwww","contCartItemS:  "+Common.cartRepository.countCartItems());
 
@@ -75,19 +75,19 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnNot
         loardCartItems();
 
 
-        if (Common.cartRepository.countCartItems()==0)
+        if (Common.cartRepository.countCartItems() == 0)
             txt_PlaceOrder.setVisibility(View.INVISIBLE);
-        else{
+        else {
             txt_PlaceOrder.setVisibility(View.VISIBLE);
         }
 
 
-        if (Common.cartRepository.countCartItems()==0)
+        if (Common.cartRepository.countCartItems() == 0)
 
             nothingacarttextview.setVisibility(View.VISIBLE);
 
 
-        else{
+        else {
 
             nothingacarttextview.setVisibility(View.INVISIBLE);
 
@@ -97,21 +97,17 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnNot
             public void onClick(View view) {
 
 
-                 checkifUserVerified();
+                checkifUserVerified();
 
 //                Intent intent = new Intent(CartActivity.this, PlaceOrderActivity.class);
 //                startActivity(intent);
-
-
 
 
             }
         });
 
 
-
-
-        recycler_cart=findViewById(R.id.recyclerview_cart);
+        recycler_cart = findViewById(R.id.recyclerview_cart);
         recycler_cart.setLayoutManager(new LinearLayoutManager(this));
         recycler_cart.setHasFixedSize(true);
     }
@@ -133,9 +129,9 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnNot
                                    }, new Consumer<Throwable>() {
                                        @Override
                                        public void accept(Throwable throwable) throws Exception {
-                                           Log.d(TAG,"ERRORRR : "+throwable.getMessage());
-                                           Toast.makeText(CartActivity.this, "Error: "
-                                                   +throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                                           Log.d(TAG, "ERRORRR : " + throwable.getMessage());
+//                                           Toast.makeText(CartActivity.this, "Error: "
+//                                                   +throwable.getMessage(), Toast.LENGTH_SHORT).show();
                                        }
                                    }
 
@@ -145,11 +141,10 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnNot
 
 
     private void displayCartItem(List<Cart> carts) {
-        cartList =carts;
-        cartAdapter  = new CartAdapter(this,carts,this);
+        cartList = carts;
+        cartAdapter = new CartAdapter(this, carts, this);
         recycler_cart.setAdapter(cartAdapter);
         //  progressBar.setVisibility(View.GONE);
-
 
 
     }
@@ -183,12 +178,12 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnNot
 //        LoadREstaurantFoodByIdandCategory(Common.currentRestaurant.getId(),Common.currentMenuCategory.getName());
 
 
-        String name=cartList.get(position).name;
-        String jina=cartList.get(position).name;
+        String name = cartList.get(position).name;
+        String jina = cartList.get(position).name;
 
         // backup of removed item for undo purpose
-        final Cart deletedItem=cartList.get(position);
-        final int deletedIndex=position;
+        final Cart deletedItem = cartList.get(position);
+        final int deletedIndex = position;
 
         // remove the item from recycler view
         // favoriteAdapter.removeItem(viewHolder.getAdapterPosition());
@@ -202,12 +197,12 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnNot
         Common.cartRepository.deleteCartItem(deletedItem);
 
         //showing snack bar with Undo option
-        Snackbar snackbar = Snackbar.make(rootLayout,new StringBuilder(name).append("Item Removed From Cart").toString(),
+        Snackbar snackbar = Snackbar.make(rootLayout, new StringBuilder(name).append("Item Removed From Cart").toString(),
                 Snackbar.LENGTH_LONG);
         snackbar.setAction("UNDO", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cartAdapter.restoreItem(deletedItem,deletedIndex);
+                cartAdapter.restoreItem(deletedItem, deletedIndex);
                 Common.cartRepository.insertToCart(deletedItem);
 
             }
@@ -221,7 +216,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnNot
 
     public static final String MyPREFERENCES = "NumberVerificationPrefs";
 
-    public  void checkifUserVerified() {
+    public void checkifUserVerified() {
 
 
         mySharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
@@ -230,7 +225,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnNot
             mySharedPreferences = getSharedPreferences(MyPREFERENCES, 0);
             Intent intent = new Intent(CartActivity.this, PlaceOrderActivity.class);
             startActivity(intent);
-        }else {
+        } else {
 
             new FancyAlertDialog.Builder(CartActivity.this)
                     .setTitle("NOT LOGIN?")
@@ -258,8 +253,6 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnNot
                     })
                     .build();
         }
-
-
 
 
     }

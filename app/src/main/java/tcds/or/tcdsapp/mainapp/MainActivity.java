@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -67,6 +68,7 @@ import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 import de.mateware.snacky.Snacky;
+import es.dmoral.toasty.Toasty;
 import tcds.or.tcdsapp.MainOnlineShopActivity;
 import tcds.or.tcdsapp.PlaceOrderActivity;
 import tcds.or.tcdsapp.R;
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
     Dialog accessDialog;
     String startdatetime;
     public static final String MYPREFERENCES_ACCESSPAYMENT = "MyPreferences_ACCESSPAYMENT";
-//    SharedPreferences sharedpreferences_AccessPayment;
+    //    SharedPreferences sharedpreferences_AccessPayment;
     long totalDays;
 
     @Override
@@ -302,14 +304,12 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
                 break;
-//            case R.id.Coaching_img:
-//                startActivity(new Intent(getApplicationContext(), CoachingActivity.class));
-//
-//                break;
-//            case R.id.Coaching_txt:
-//                startActivity(new Intent(getApplicationContext(), CoachingActivity.class));
-//
-//                break;
+            case R.id.settings_chat:
+                chatNow();
+                break;
+            case R.id.settings_chatnow:
+                chatNow();
+                break;
             case R.id.Connect_img:
                 startActivity(new Intent(getApplicationContext(), ConnectActivity.class));
 
@@ -332,6 +332,22 @@ public class MainActivity extends AppCompatActivity implements BaseSliderView.On
             case R.id.textViewLatestNews:
                 startActivity(new Intent(getApplicationContext(), NewsActivity.class));
                 break;
+        }
+    }
+
+
+    public void chatNow() {
+        String contact = "+255656409011"; // use country code with your phone number
+        String url = "https://api.whatsapp.com/send?phone=" + contact;
+        try {
+            PackageManager pm = MainActivity.this.getPackageManager();
+            pm.getPackageInfo("com.whatsapp", PackageManager.GET_ACTIVITIES);
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
+        } catch (PackageManager.NameNotFoundException e) {
+            Toasty.warning(MainActivity.this, "WhatsApp not installed in your phone", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
         }
     }
 

@@ -89,9 +89,6 @@ public class MyOrdersActivity extends AppCompatActivity {
                 })
 
         );
-
-
-
     }
 
     private void displayOrderList(List<Order> orders) {

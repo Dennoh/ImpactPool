@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Home"
+    <item
         android:id="@+id/bottomHome"
-        android:icon="@drawable/iconmonstr_home_7_240"/>
+        android:icon="@drawable/iconmonstr_home_7_240"
+        android:title="Home" />
 
-    <item android:title="My Cart"
+    <item
         android:id="@+id/bottomCart"
-        android:icon="@drawable/iconmonstr_shopping_cart_5_240"/>
+        android:icon="@drawable/iconmonstr_shopping_cart_5_240"
+        android:title="My Cart" />
 
-    <item android:title="My Orders"
+    <item
         android:id="@+id/bottomOrders"
-        android:icon="@drawable/iconmonstr_shopping_bag_4_240"/>
+        android:icon="@drawable/iconmonstr_shopping_bag_4_240"
+        android:title="My Orders" />
+
 
 </menu>

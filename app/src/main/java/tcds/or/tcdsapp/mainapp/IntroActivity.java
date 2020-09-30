@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,16 +15,12 @@ import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 import tcds.or.tcdsapp.R;
-import tcds.or.tcdsapp.ThankYouAccessActivity;
 
 public class IntroActivity extends AppCompatActivity {
     private ViewPager screenPager;

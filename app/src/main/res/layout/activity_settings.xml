@@ -24,6 +24,7 @@
                 android:text="INVITE FRIENDS"
                 android:textStyle="bold" />
 
+
             <Button
                 android:id="@+id/buttonInvite"
                 android:layout_width="match_parent"
@@ -108,6 +109,22 @@
                 android:paddingRight="20dp"
                 android:paddingBottom="5dp"
                 android:text="Privacy Policy"
+                android:textAllCaps="false"
+                android:textAppearance="?android:textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/buttonActivatePayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:onClick="settingsClicked"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="5dp"
+                android:text="Activating Mobile Payment"
                 android:textAllCaps="false"
                 android:textAppearance="?android:textAppearanceSmall" />
 

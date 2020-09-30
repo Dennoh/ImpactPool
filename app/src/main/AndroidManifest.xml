@@ -17,7 +17,7 @@
         <activity
             android:name=".mainapp.OccupationalDetailsActivity"
             android:label="Details"
-            android:parentActivityName=".mainapp.OccupationalPathwaysActivity"></activity>
+            android:parentActivityName=".mainapp.OccupationalPathwaysActivity" />
         <activity android:name=".ThankYouAccessActivity" />
         <activity
             android:name=".NewsDetailsActivity"
@@ -27,7 +27,6 @@
             android:name=".mainapp.BrowserActivity"
             android:label="eBooks Service"
             android:parentActivityName=".MainOnlineShopActivity" />
-
         <activity android:name=".ThankYouActivity" />
         <activity
             android:name=".OrderDetailActivity"
@@ -54,7 +53,6 @@
         <activity
             android:name=".mainapp.OccupationalPathwaysActivity"
             android:configChanges="orientation|screenSize"
-
             android:label="Occupational Pathways"
             android:parentActivityName=".mainapp.MainActivity" />
         <activity
@@ -81,9 +79,8 @@
             android:parentActivityName=".mainapp.HighLearningInstitutionActivity" />
         <activity
             android:name=".mainapp.HighLearningInstitutionActivity"
-            android:label="High Learning Institutions"
             android:configChanges="orientation|screenSize"
-
+            android:label="High Learning Institutions"
             android:parentActivityName=".mainapp.MainActivity" />
         <activity
             android:name=".mainapp.TermsAndConditionsActivity"
